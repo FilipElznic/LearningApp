@@ -10,6 +10,9 @@ import LoginPage from "./pages/LoginPage";
 import SignupForm from "./Components/SignupForm";
 import Profile from "./Components/Profile";
 import { useAuth } from "./AuthContext";
+import MainPage from "./pages/MainPage";
+import Navbar from "./Components/Navbar";
+import Footer from "./Components/Footer";
 
 // Correct implementation of ProtectedRoute for React Router v6
 const ProtectedRoute = () => {
@@ -53,25 +56,42 @@ const AuthRoute = () => {
   return <Outlet />;
 };
 
+// Layout component to wrap all pages with Navbar and Footer
+const Layout = () => {
+  return (
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+      <main className="flex-grow">
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          {/* Auth routes - redirect to profile if already logged in */}
-          <Route element={<AuthRoute />}>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignupForm />} />
-          </Route>
+          {/* Wrap all routes with the Layout component */}
+          <Route element={<Layout />}>
+            {/* Auth routes - redirect to profile if already logged in */}
+            <Route element={<AuthRoute />}>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignupForm />} />
+              <Route path="/" element={<MainPage />} />
+            </Route>
 
-          {/* Protected routes - require authentication */}
-          <Route element={<ProtectedRoute />}>
-            <Route path="/profile" element={<Profile />} />
-            {/* Add more protected routes here */}
-          </Route>
+            {/* Protected routes - require authentication */}
+            <Route element={<ProtectedRoute />}>
+              <Route path="/profile" element={<Profile />} />
+              {/* Add more protected routes here */}
+            </Route>
 
-          {/* Default redirect */}
-          <Route path="*" element={<Navigate to="/login" replace />} />
+            {/* Default redirect */}
+            <Route path="*" element={<Navigate to="/login" replace />} />
+          </Route>
         </Routes>
       </AuthProvider>
     </BrowserRouter>
