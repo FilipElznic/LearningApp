@@ -86,6 +86,7 @@ function App() {
             {/* Protected routes - require authentication */}
             <Route element={<ProtectedRoute />}>
               <Route path="/profile" element={<Profile />} />
+              <Route path="/main" element={<MainPage />} />
               {/* Add more protected routes here */}
             </Route>
 

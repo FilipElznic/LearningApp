@@ -1,19 +1,19 @@
 import { Link } from "react-router-dom";
-import { Github, Twitter, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t bg-black px-4 py-6 w-full mt-auto">
+    <footer className="border-t bg-transparent px-4 py-6 w-full mt-auto">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Company Info */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-white">
+            <h3 className="text-lg font-semibold mb-4 text-black">
               Learning App
             </h3>
-            <p className="text-white max-w-xs">
+            <p className="text-black max-w-xs">
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio
               nihil.
             </p>
@@ -26,7 +26,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/"
-                  className="text-white hover:text-blue-600 transition duration-200"
+                  className="text-black hover:text-blue-600 transition duration-200"
                 >
                   Home
                 </Link>
@@ -34,7 +34,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/login"
-                  className="text-white hover:text-blue-600 transition duration-200"
+                  className="text-black hover:text-blue-600 transition duration-200"
                 >
                   Login
                 </Link>
@@ -42,7 +42,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/signup"
-                  className="text-white hover:text-blue-600 transition duration-200"
+                  className="text-black hover:text-blue-600 transition duration-200"
                 >
                   Sign Up
                 </Link>
@@ -50,7 +50,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/profile"
-                  className="text-white hover:text-blue-600 transition duration-200"
+                  className="text-black hover:text-blue-600 transition duration-200"
                 >
                   Profile
                 </Link>
@@ -65,7 +65,7 @@ const Footer = () => {
               <a
                 href="https://github.com/FilipElznic"
                 aria-label="GitHub"
-                className="text-white hover:text-gray-900"
+                className="text-black hover:text-gray-900"
               >
                 <Github className="h-5 w-5" />
               </a>
@@ -73,14 +73,14 @@ const Footer = () => {
               <a
                 href="https://www.linkedin.com/in/filip-elznic/"
                 aria-label="LinkedIn"
-                className="text-white hover:text-gray-900"
+                className="text-black hover:text-gray-900"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
               <a
                 href="elznicfilip@gmail.com"
                 aria-label="Email"
-                className="text-white hover:text-gray-900"
+                className="text-black hover:text-gray-900"
               >
                 <Mail className="h-5 w-5" />
               </a>
@@ -89,7 +89,7 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <div className="mt-8 pt-4 border-t border-gray-200 text-center text-white text-sm">
+        <div className="mt-8 pt-4 border-t border-gray-200 text-center text-black text-sm">
           © {currentYear} Learning App. All rights reserved.
         </div>
       </div>

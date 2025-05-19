@@ -5,7 +5,7 @@ import { Menu, X, BookOpen } from "lucide-react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user, logout } = useAuth();
+  const { user, signOut } = useAuth(); // Changed from logout to signOut
   const location = useLocation();
 
   const toggleMenu = () => {
@@ -18,7 +18,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      await logout();
+      await signOut(); // Use signOut from AuthContext
       closeMenu();
     } catch (error) {
       console.error("Logout failed:", error);
@@ -31,12 +31,12 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="bg-zinc-900 p-4 w-full h-16 flex justify-between items-center">
+      <nav className="bg-transparent p-4 w-full h-16 flex justify-between items-center">
         {/* Left section - Logo */}
         <div className="w-1/3 h-full flex items-center">
-          <Link to="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold text-white flex items-center">
-              <BookOpen className="h-6 w-6 mr-2 text-white" />
+          <Link to="/" className="flex items-center space-x-2  text-black">
+            <span className="text-2xl font-bold flex items-center">
+              <BookOpen className="h-6 w-6 mr-2" />
               <span>LearningApp</span>
             </span>
           </Link>
@@ -50,7 +50,7 @@ const Navbar = () => {
               "/"
             )}`}
           >
-            <button className="group relative inline-flex h-12 items-center justify-center overflow-hidden bg-neutral-950 px-6 font-medium text-neutral-200 rounded-full">
+            <button className="group relative inline-flex h-10 items-center justify-center overflow-hidden bg-neutral-950 px-6 font-medium text-neutral-200 rounded-full">
               <span>Home</span>
               <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-100%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(100%)]">
                 <div className="relative h-full w-8 bg-white/20"></div>
@@ -63,7 +63,7 @@ const Navbar = () => {
               "/profile"
             )}`}
           >
-            <button className="group relative inline-flex h-12 items-center justify-center overflow-hidden bg-neutral-950 px-6 font-medium text-neutral-200 rounded-full">
+            <button className="group relative inline-flex h-10 items-center justify-center overflow-hidden bg-neutral-950 px-6 font-medium text-neutral-200 rounded-full">
               <span>Profile</span>
               <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-100%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(100%)]">
                 <div className="relative h-full w-8 bg-white/20"></div>
@@ -80,7 +80,7 @@ const Navbar = () => {
               className="group border-2 relative inline-flex h-12 items-center justify-center rounded-full bg-neutral-950 py-1 pl-6 pr-14 font-medium text-neutral-50"
             >
               <span className="z-10 pr-2">Sign out</span>
-              <div className="absolute right-1 inline-flex h-12 w-12 items-center justify-end rounded-full bg-red-0 transition-[width] group-hover:w-[calc(100%-8px)]">
+              <div className="absolute right-1 inline-flex h-10 w-12 items-center justify-end rounded-full bg-red-900 transition-[width] group-hover:w-[calc(100%-8px)]">
                 <div className="mr-3.5 flex items-center justify-center">
                   <svg
                     width="15"
