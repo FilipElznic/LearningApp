@@ -34,7 +34,7 @@ const Navbar = () => {
       <nav className="bg-transparent p-4 w-full h-16 flex justify-between items-center">
         {/* Left section - Logo */}
         <div className="w-1/3 h-full flex items-center">
-          <Link to="/" className="flex items-center space-x-2  text-black">
+          <Link to="/" className="flex items-center space-x-2  text-white">
             <span className="text-2xl font-bold flex items-center">
               <BookOpen className="h-6 w-6 mr-2" />
               <span>LearningApp</span>
