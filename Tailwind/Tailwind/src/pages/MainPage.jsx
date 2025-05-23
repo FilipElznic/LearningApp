@@ -36,29 +36,30 @@ function MainPage() {
           </button>
         </div>
       </div>
-      <div className="min-h-screen w-full bg-black flex flex-col">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl text-center text-white my-8 sm:my-12 md:my-16 lg:my-20 xl:my-28 px-4 font-semibold">
-          Welcome to space{dots}
-        </h2>
+      <div className="w-full h-[30vh]"></div>
 
-        {/* First row of cards */}
-        <div className="flex flex-col sm:flex-row w-full mt-4 sm:mt-6 md:mt-8 justify-center items-center gap-4 sm:gap-6 md:gap-8 px-4 sm:px-6 md:px-8">
-          <div className="w-full sm:w-1/2 md:w-2/5 lg:w-1/3 h-48 sm:h-64 md:h-80 lg:h-96 blackgradient rounded-2xl sm:rounded-3xl"></div>
-          <div className="w-full sm:w-1/2 md:w-2/5 lg:w-1/3 h-48 sm:h-64 md:h-80 lg:h-96 blackgradient rounded-2xl sm:rounded-3xl"></div>
+      <div className="min-h-screen bg-white flex justify-center items-center ">
+        <div className="w-2/3 h-full  mt-48">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold">
+            Unmatched expirience
+          </h2>
+          <p className="text-2xl w-1/2 mt-8 font-extralight text-gray-900">
+            This learning platform is designed to provide an unmatched
+            experience for learning about space for every generation.
+          </p>
+          <div className="w-full h-full mt-10   flex flex-col gap-4">
+            <div className="w-full flex flex-row gap-4">
+              <div className="w-1/3 h-[40vh] rounded-3xl blackgradient"></div>
+              <div className="w-2/3 h-[40vh] rounded-3xl blackgradient"></div>
+            </div>
+            <div className="w-full flex flex-row gap-4">
+              <div className="w-2/3 h-[40vh] rounded-3xl blackgradient"></div>
+              <div className="w-1/3 h-[40vh] rounded-3xl blackgradient"></div>
+            </div>
+          </div>
         </div>
-
-        {/* Second row of cards */}
-        <div className="flex flex-col sm:flex-row w-full my-4 sm:my-6 md:my-8 justify-center items-center gap-4 sm:gap-6 md:gap-8 px-4 sm:px-6 md:px-8">
-          <div className="w-full sm:w-1/2 md:w-2/5 lg:w-1/3 h-48 sm:h-64 md:h-80 lg:h-96 blackgradient rounded-2xl sm:rounded-3xl"></div>
-          <div className="w-full sm:w-1/2 md:w-2/5 lg:w-1/3 h-48 sm:h-64 md:h-80 lg:h-96 blackgradient rounded-2xl sm:rounded-3xl"></div>
-        </div>
-
-        {/* Bottom spacer */}
-        <div className="w-full bg-black h-16 sm:h-20 md:h-24 lg:h-32 xl:h-48"></div>
       </div>
-
-      <div className="h-screen bg-white"></div>
-      <div className="h-screen bg-white"></div>
+      <div className="w-full h-screen bg-white"></div>
     </div>
   );
 }
