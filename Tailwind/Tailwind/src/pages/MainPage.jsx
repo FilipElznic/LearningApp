@@ -59,7 +59,21 @@ function MainPage() {
           </div>
         </div>
       </div>
-      <div className="w-full h-screen bg-white"></div>
+      <div className="w-full h-[20vh] bg-white"></div>
+      <div className="w-full h-screen bg-slate-50 flex flex-col items-center justify-center pt-20">
+        <div className="w-2/3 h-full flex  items-center flex-col">
+          <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-start">
+            Unmatched expirience.
+          </h2>
+          <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-6xl  font-bold text-start">
+            Unmatched expirience.
+          </h2>
+          <p className="text-2xl w-1/2 mt-2 font-light text-gray-900">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deserunt
+            accusantium dolor minus tenetur eligendi!
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

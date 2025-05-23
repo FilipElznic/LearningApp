@@ -13,7 +13,6 @@ import { useAuth } from "./AuthContext";
 import MainPage from "./pages/MainPage";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
-
 // Correct implementation of ProtectedRoute for React Router v6
 const ProtectedRoute = () => {
   const { user, loading } = useAuth();
@@ -87,6 +86,7 @@ function App() {
             <Route element={<ProtectedRoute />}>
               <Route path="/profile" element={<Profile />} />
               <Route path="/main" element={<MainPage />} />
+
               {/* Add more protected routes here */}
             </Route>
 
