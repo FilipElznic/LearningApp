@@ -74,6 +74,13 @@ function MainPage() {
           </p>
         </div>
       </div>
+      <div className="h-screen">
+        <div className="bg-black w-full h-full flex flex-row items-center justify-center mt-10 gap-2">
+          <div className="w-1/3 h-4/6 bg-zinc-800"></div>
+          <div className="w-1/3 h-full bg-zinc-800"></div>
+          <div className="w-1/3 h-4/6 bg-zinc-800"></div>
+        </div>
+      </div>
     </div>
   );
 }
