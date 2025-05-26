@@ -2,6 +2,8 @@ import "../App.css";
 import Spline from "@splinetool/react-spline";
 import { useState, useEffect, useRef } from "react";
 
+import { ChevronLeft, ChevronRight, Circle } from "lucide-react";
+
 function MainPage() {
   const [scrollY, setScrollY] = useState(0);
   const splineRef = useRef(null);
@@ -19,8 +21,8 @@ function MainPage() {
   // Calculate transform values based on scroll position
   const getSplineTransform = () => {
     const firstPhaseScroll = window.innerHeight * 1.5; // First animation completes
-    const secondPhaseStart = window.innerHeight * 2; // When second animation starts
-    const secondPhaseEnd = window.innerHeight * 3; // When second animation completes
+    const secondPhaseStart = window.innerHeight * 2.5; // When second animation starts
+    const secondPhaseEnd = window.innerHeight * 4; // When second animation completes
 
     const firstProgress = Math.min(scrollY / firstPhaseScroll, 1);
     const secondProgress = Math.max(
@@ -122,8 +124,8 @@ function MainPage() {
           <div
             className="absolute bg-blue-500/80 backdrop-blur-sm rounded-lg px-4 py-2 text-white text-sm font-medium"
             style={{
-              top: "20%",
-              left: "10%",
+              top: "50%",
+              left: "50%",
               transform: `translateY(${
                 scrollY < window.innerHeight * 1.5
                   ? scrollY * 0.1
@@ -164,7 +166,22 @@ function MainPage() {
       </div>
 
       {/* Spacer to allow scrolling */}
-      <div className="w-full h-[30vh]"></div>
+      <div className="w-full h-screen flex items-end">
+        <div className="w-1/2  h-full"></div>
+        <div className="w-1/2  h-full flex items-center justify-center ">
+          <div className=" w-3/4 blackgradient p-12 rounded-xl">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl   leading-tight drop-shadow-lg text-white">
+              Hello, my name is Orbi🪐
+            </h2>
+            <p className="text-2xl text-white mt-4">
+              I and today and in the future, I will be your guide through the
+              universe. I will help you learn about space, planets, and the
+              solar system we live in.
+            </p>
+          </div>
+        </div>
+      </div>
+      {/* add sliding cards for more info */}
 
       {/* Second section with animated appearance */}
       <div
@@ -208,9 +225,9 @@ function MainPage() {
             accusantium dolor minus tenetur eligendi!
           </p>
           <div className=" w-full h-full flex flex-row items-center justify-center mt-10 gap-2">
-            <div className="w-1/3 h-4/6 bg-zinc-800 transform hover:h-5/6 transition-all duration-500 ease-out"></div>
+            <div className="w-1/3 h-4/6 bg-zinc-800  "></div>
             <div className="w-1/3 h-full bg-zinc-800"></div>
-            <div className="w-1/3 h-4/6 bg-zinc-800 transform hover:h-5/6 transition-all duration-500 ease-out"></div>
+            <div className="w-1/3 h-4/6 bg-zinc-800  "></div>
           </div>
         </div>
       </div>
