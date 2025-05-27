@@ -4,6 +4,9 @@ import { useState, useEffect, useRef } from "react";
 
 import { ChevronLeft, ChevronRight, Circle } from "lucide-react";
 
+import IntroText from "../Components/IntroText";
+import Layout from "../Components/Layout";
+
 function MainPage() {
   const [scrollY, setScrollY] = useState(0);
   const splineRef = useRef(null);
@@ -122,7 +125,7 @@ function MainPage() {
 
           {/* First Animation Guidance Div */}
           <div
-            className="absolute bg-blue-500/80 backdrop-blur-sm rounded-lg px-4 py-2 text-white text-sm font-medium"
+            className="absolute  rounded-lg px-4 py-2 text-white text-sm font-medium w-1/2 h-1/2"
             style={{
               top: "50%",
               left: "50%",
@@ -135,7 +138,7 @@ function MainPage() {
               transition: "opacity 0.3s ease-out",
             }}
           >
-            ↓ Scroll to explore
+            <div className="w-20 bg-blue-700 h-10"></div>
           </div>
 
           {/* Second Animation Guidance Div */}
@@ -169,50 +172,22 @@ function MainPage() {
       <div className="w-full h-screen flex items-end">
         <div className="w-1/2  h-full"></div>
         <div className="w-1/2  h-full flex items-center justify-center ">
-          <div className=" w-3/4 blackgradient p-12 rounded-xl">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl   leading-tight drop-shadow-lg text-white">
-              Hello, my name is Orbi🪐
-            </h2>
-            <p className="text-2xl text-white mt-4">
-              I and today and in the future, I will be your guide through the
-              universe. I will help you learn about space, planets, and the
-              solar system we live in.
-            </p>
-          </div>
+          <IntroText />
         </div>
       </div>
       {/* add sliding cards for more info */}
 
       {/* Second section with animated appearance */}
       <div
-        className="min-h-screen bg-white flex justify-center items-center relative z-10 flex-col"
+        className="min-h-screen bg-black flex justify-center items-center relative z-10 flex-col"
         style={getSecondSectionStyle()}
       >
-        <div className="w-2/3 h-full mt-48">
-          <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold">
-            Unmatched experience
-          </h2>
-          <p className="text-2xl w-1/2 mt-8 font-extralight text-gray-900">
-            This learning platform is designed to provide an unmatched
-            experience for learning about space for every generation.
-          </p>
-          <div className="w-full h-full mt-10 flex flex-col gap-4">
-            <div className="w-full flex flex-row gap-4">
-              <div className="w-1/3 h-[40vh] rounded-3xl blackgradient  relative z-10"></div>
-              <div className="w-2/3 h-[40vh] rounded-3xl blackgradient   relative z-10"></div>
-            </div>
-            <div className="w-full flex flex-row gap-4">
-              <div className="w-2/3 h-[40vh] rounded-3xl blackgradient  relative z-10"></div>
-              <div className="w-1/3 h-[40vh] rounded-3xl blackgradient  relative z-10"></div>
-            </div>
-          </div>
-        </div>
-        <div className="w-full h-[20vh] bg-white"></div>
+        <Layout />
       </div>
 
-      <div className="w-full h-[20vh] bg-white"></div>
+      <div className="w-full h-[20vh] "></div>
 
-      <div className="w-full h-screen bg-slate-50 flex flex-col items-center justify-center pt-20">
+      <div className="w-full h-screen bg-slate-50 flex flex-col items-center justify-center pt-20 z-30 relative">
         <div className="w-2/3 h-full flex items-center flex-col">
           <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-start">
             Unmatched experience.
