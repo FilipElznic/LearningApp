@@ -179,15 +179,15 @@ function MainPage() {
 
       {/* Second section with animated appearance */}
       <div
-        className="min-h-screen bg-black flex justify-center items-center relative z-10 flex-col"
+        className="min-h-screen bg-white flex justify-center items-center relative z-10 flex-col"
         style={getSecondSectionStyle()}
       >
         <Layout />
       </div>
 
-      <div className="w-full h-[20vh] "></div>
+      <div className="w-full h-[20vh] bg-white"></div>
 
-      <div className="w-full h-screen bg-slate-50 flex flex-col items-center justify-center pt-20 z-30 relative">
+      <div className="w-full h-screen bg-slate-50 flex flex-col items-center justify-center pt-20 z-30">
         <div className="w-2/3 h-full flex items-center flex-col">
           <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-start">
             Unmatched experience.
