@@ -2,11 +2,11 @@
 html {
   background-color: #000000;
 }
-.imagebg {
-  background-image: url("assets/moon.jpg");
+.imgbg {
+  background-image: url("./assets/pozad.jpg");
   background-size: contain; /* Make the image cover the whole element */
   background-position: right; /* Center the image */
-  background-repeat: no-repeat; /* Prevent tiling */
+  background-repeat: repeat; /* Prevent tiling */
 }
 .blackgradient {
   background: linear-gradient(60deg, #0e0e0e, #232323);

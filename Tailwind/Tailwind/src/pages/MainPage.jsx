@@ -1,7 +1,7 @@
 import "../App.css";
 import Spline from "@splinetool/react-spline";
 import { useState, useEffect, useRef } from "react";
-
+import bg from "../Assets/bg.jpg";
 import { ChevronLeft, ChevronRight, Circle } from "lucide-react";
 
 import IntroText from "../Components/IntroText";
@@ -206,6 +206,9 @@ function MainPage() {
           </div>
         </div>
       </div>
+      <div className="w-full h-[20vh] bg-slate-50"></div>
+      <div className="min-h-screen imgbg"></div>
+      <div className="w-full h-[40vh] "></div>
     </div>
   );
 }
