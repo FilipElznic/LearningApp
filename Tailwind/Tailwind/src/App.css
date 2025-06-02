@@ -11,3 +11,10 @@ html {
 .blackgradient {
   background: linear-gradient(60deg, #0e0e0e, #232323);
 }
+
+.mask-inverted-border {
+  mask-image: url("/images/inverted-border-mask.svg");
+  -webkit-mask-image: url("/images/inverted-border-mask.svg");
+  mask-size: cover;
+  -webkit-mask-size: cover;
+}

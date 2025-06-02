@@ -11,7 +11,7 @@ import SignupForm from "./Components/SignupForm";
 import Profile from "./Components/Profile";
 import { useAuth } from "./AuthContext";
 import MainPage from "./pages/MainPage";
-import Navbar from "./Components/Navbar";
+
 import Footer from "./Components/Footer";
 // Correct implementation of ProtectedRoute for React Router v6
 const ProtectedRoute = () => {
@@ -59,7 +59,6 @@ const AuthRoute = () => {
 const Layout = () => {
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
       <main className="flex-grow">
         <Outlet />
       </main>

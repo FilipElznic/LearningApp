@@ -30,7 +30,7 @@ const Navbar = () => {
   };
 
   return (
-    <div>
+    <div className="z-40">
       <nav className="bg-transparent p-2 sm:p-4 w-full h-14 sm:h-16 flex justify-between items-center">
         {/* Left section - Logo */}
         <div className="flex items-center flex-shrink-0">

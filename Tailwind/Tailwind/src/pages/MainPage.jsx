@@ -1,11 +1,13 @@
 import "../App.css";
 import Spline from "@splinetool/react-spline";
 import { useState, useEffect, useRef } from "react";
-import bg from "../Assets/bg.jpg";
+import planetImage from "../assets/fullmoon.jpg"; // Adjust the path as necessary
 import { ChevronLeft, ChevronRight, Circle } from "lucide-react";
 
 import IntroText from "../Components/IntroText";
 import Layout from "../Components/Layout";
+import { PlanetMessage, PlanetMessageMirrored } from "../Components/Planets";
+import LandingPage from "./LandingPage";
 
 function MainPage() {
   const [scrollY, setScrollY] = useState(0);
@@ -89,85 +91,18 @@ function MainPage() {
 
   return (
     <div className="min-h-screen bg-transparent" ref={containerRef}>
-      <div className="min-h-screen flex flex-col md:flex-row relative">
-        {/* Text Section - 1/3 width */}
-        <div className="w-full md:w-1/3 flex items-center justify-center p-4 sm:p-6 md:p-8 lg:p-10 z-30 relative">
-          <div className="text-white text-start font-semibold max-w-lg">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight drop-shadow-lg">
-              Are you ready <br className="hidden sm:block" />
-              <span className="sm:hidden"> </span>to explore?
-            </h1>
-            <p className="mt-4 sm:mt-6 md:mt-8 text-sm sm:text-base leading-relaxed drop-shadow-md">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Repellendus illo voluptatem sit reprehenderit perspiciatis
-              possimus ipsum esse illum molestias dolore dicta laudantium
-              accusantium aliquam incidunt expedita, nobis cum. Voluptatem, vel?
-            </p>
-            <button className="group relative inline-flex h-12 sm:h-14 items-center justify-center overflow-hidden bg-cyan-900 px-4 sm:px-6 font-medium text-neutral-200 rounded-full mt-4 sm:mt-6 md:mt-8 text-sm sm:text-base drop-shadow-lg">
-              <span>Get Started</span>
-              <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-100%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(100%)]">
-                <div className="relative h-full w-8 bg-white/20"></div>
-              </div>
-            </button>
-          </div>
-        </div>
-
-        {/* Spline Canvas Section - Always visible with scroll animation */}
-        <div
-          className="w-full md:w-2/3 h-64 md:h-screen fixed top-0 right-0 z-20 flex items-center justify-center overflow-hidden"
-          ref={splineRef}
-          style={getSplineTransform()}
-        >
-          <Spline
-            scene="https://prod.spline.design/1Fe7o7OsJuBQi6Q6/scene.splinecode"
-            className="w-full h-full"
-          />
-
-          {/* First Animation Guidance Div */}
-          <div
-            className="absolute  rounded-lg px-4 py-2 text-white text-sm font-medium w-1/2 h-1/2"
-            style={{
-              top: "50%",
-              left: "50%",
-              transform: `translateY(${
-                scrollY < window.innerHeight * 1.5
-                  ? scrollY * 0.1
-                  : window.innerHeight * 0.15
-              }px)`,
-              opacity: scrollY < window.innerHeight * 2.5 ? 1 : 0,
-              transition: "opacity 0.3s ease-out",
-            }}
-          >
-            <div className="w-20 bg-blue-700 h-10"></div>
-          </div>
-
-          {/* Second Animation Guidance Div */}
-          <div
-            className="absolute bg-green-500/80 backdrop-blur-sm rounded-lg px-4 py-2 text-white text-sm font-medium"
-            style={{
-              bottom: "50%",
-              right: "50%",
-              transform: `rotate(0 deg) scale(${
-                scrollY > window.innerHeight * 2.5
-                  ? 1 + (scrollY - window.innerHeight * 2.5) * 0.0005
-                  : 1
-              })`,
-              opacity:
-                scrollY > window.innerHeight * 2.5
-                  ? Math.min(
-                      (scrollY - window.innerHeight * 2.5) /
-                        (window.innerHeight * 0.5),
-                      1
-                    )
-                  : 0,
-              transition: "opacity 0.3s ease-out",
-            }}
-          >
-            🚀 Ready to launch!
-          </div>
-        </div>
+      <LandingPage />
+      {/* Spline Canvas Section - Always visible with scroll animation */}
+      <div
+        className="w-full md:w-2/3 h-[40vh] md:h-screen fixed top-0 right-0 z-20 flex items-center justify-center overflow-hidden"
+        ref={splineRef}
+        style={getSplineTransform()}
+      >
+        <Spline
+          scene="https://prod.spline.design/1Fe7o7OsJuBQi6Q6/scene.splinecode"
+          className="w-full h-full"
+        />
       </div>
-
       {/* Spacer to allow scrolling */}
       <div className="w-full h-screen flex items-end">
         <div className="w-1/2  h-full"></div>
@@ -176,7 +111,6 @@ function MainPage() {
         </div>
       </div>
       {/* add sliding cards for more info */}
-
       {/* Second section with animated appearance */}
       <div
         className="min-h-screen bg-white flex justify-center items-center relative z-10 flex-col"
@@ -184,9 +118,7 @@ function MainPage() {
       >
         <Layout />
       </div>
-
       <div className="w-full h-[20vh] bg-white"></div>
-
       <div className="w-full h-screen bg-slate-50 flex flex-col items-center justify-center pt-20 z-30">
         <div className="w-2/3 h-full flex items-center flex-col">
           <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-start">
@@ -207,8 +139,19 @@ function MainPage() {
         </div>
       </div>
       <div className="w-full h-[20vh] bg-slate-50"></div>
-      <div className="min-h-screen imgbg"></div>
-      <div className="w-full h-[40vh] "></div>
+      <div className="min-h-screen bg-white ">
+        <PlanetMessage
+          planetImage={planetImage}
+          heading="Your Heading"
+          text="Your descriptive text here..."
+        />
+
+        <PlanetMessageMirrored
+          planetImage={planetImage}
+          heading="Your Heading"
+          text="Your descriptive text here..."
+        />
+      </div>
     </div>
   );
 }
