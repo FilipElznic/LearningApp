@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../AuthContext";
 import { Menu, X, BookOpen } from "lucide-react";
+import img from "../assets/fullmoon.jpg"; // Adjust the path as necessary
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,52 +31,54 @@ const Navbar = () => {
   };
 
   return (
-    <div className="z-40">
-      <nav className="bg-transparent p-2 sm:p-4 w-full h-14 sm:h-16 flex justify-between items-center">
-        {/* Left section - Logo */}
-        <div className="flex items-center flex-shrink-0">
-          <Link to="/" className="flex items-center space-x-2 text-white">
-            <span className="text-lg sm:text-xl md:text-2xl font-bold flex items-center">
-              <BookOpen className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 mr-1 sm:mr-2" />
-              <span className="hidden xs:block sm:block">LearningApp</span>
-              <span className="block xs:hidden sm:hidden">LA</span>
-            </span>
-          </Link>
-        </div>
-
-        {/* Middle section - Navigation Links (Desktop) */}
-        <div className="hidden lg:flex justify-center items-center space-x-4 xl:space-x-6">
-          <Link
-            to="/"
-            className={`text-white text-sm hover:text-blue-400 transition ${isActive(
-              "/"
-            )}`}
+    <nav className=" p-2 sm:p-4 w-full  h-14 sm:h-16 flex justify-between items-center">
+      <div className="flex items-center ">
+        <Link to="/" className="flex items-center space-x-2 text-white">
+          <img
+            src={img}
+            alt="Logo"
+            className="h-20 w-20 rounded-full object-contain"
+          />
+        </Link>
+      </div>
+      <div className="hidden md:flex justify-center w-72 items-center flex-1 max-w-md mx-4 absolute left-1/2 transform -translate-x-1/2 ">
+        <div className="flex items-center w-full h-10 bg-gray-300 rounded-full px-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4 text-black"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
           >
-            <button className="group relative inline-flex h-8 xl:h-10 items-center justify-center overflow-hidden bg-neutral-950 px-4 xl:px-6 font-medium text-neutral-200 rounded-full text-xs xl:text-sm">
-              <span>Home</span>
-              <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-100%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(100%)]">
-                <div className="relative h-full w-8 bg-white/20"></div>
-              </div>
-            </button>
-          </Link>
-          <Link
-            to="/profile"
-            className={`text-white text-sm hover:text-blue-400 transition ${isActive(
-              "/profile"
-            )}`}
-          >
-            <button className="group relative inline-flex h-8 xl:h-10 items-center justify-center overflow-hidden bg-neutral-950 px-4 xl:px-6 font-medium text-neutral-200 rounded-full text-xs xl:text-sm">
-              <span>Profile</span>
-              <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-100%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(100%)]">
-                <div className="relative h-full w-8 bg-white/20"></div>
-              </div>
-            </button>
-          </Link>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1010.5 3a7.5 7.5 0 006.15 13.65z"
+            />
+          </svg>
+          <input
+            type="text"
+            placeholder="Search"
+            className="ml-2 bg-transparent outline-none text-sm w-full text-black placeholder:text-black"
+          />
         </div>
+      </div>
+    </nav>
+  );
+};
 
-        {/* Right section - Auth Buttons & Mobile Menu */}
+export default Navbar;
+
+/*
+ <div className="z-40">
+     
+
+       
+
+    
         <div className="flex justify-end items-center">
-          {/* Desktop Auth Buttons */}
+      
           <div className="hidden md:flex items-center">
             {user ? (
               <button
@@ -143,7 +146,7 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Mobile Menu Button */}
+      
           <div className="md:hidden ml-2 sm:ml-4">
             <button
               onClick={toggleMenu}
@@ -160,7 +163,32 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
+  
+      <div className="md:hidden px-4 pb-2">
+        <div className="flex items-center w-full h-10 bg-gray-300 rounded-full px-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4 text-black"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1010.5 3a7.5 7.5 0 006.15 13.65z"
+            />
+          </svg>
+          <input
+            type="text"
+            placeholder="Search"
+            className="ml-2 bg-transparent outline-none text-sm w-full text-black placeholder:text-black"
+          />
+        </div>
+      </div>
+
+
       {isMenuOpen && (
         <div
           className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
@@ -168,13 +196,12 @@ const Navbar = () => {
         />
       )}
 
-      {/* Mobile Menu Slide-out Panel */}
+     
       <div
         className={`md:hidden fixed top-0 right-0 h-full w-64 sm:w-80 bg-zinc-900 z-50 transform transition-transform duration-300 ease-in-out ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {/* Mobile Menu Header */}
         <div className="flex justify-between items-center p-4 border-b border-zinc-700">
           <span className="text-white font-semibold text-lg">Menu</span>
           <button
@@ -186,9 +213,9 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Menu Content */}
+   
         <div className="p-4 space-y-4">
-          {/* Navigation Links */}
+        
           <div className="space-y-3">
             <Link
               to="/"
@@ -210,10 +237,9 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Divider */}
+   
           <div className="border-t border-zinc-700 my-4"></div>
 
-          {/* Auth Section */}
           <div className="space-y-3">
             {user ? (
               <button
@@ -244,7 +270,4 @@ const Navbar = () => {
         </div>
       </div>
     </div>
-  );
-};
-
-export default Navbar;
+  */

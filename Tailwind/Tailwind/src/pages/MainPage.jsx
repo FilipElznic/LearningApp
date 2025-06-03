@@ -8,6 +8,7 @@ import IntroText from "../Components/IntroText";
 import Layout from "../Components/Layout";
 import { PlanetMessage, PlanetMessageMirrored } from "../Components/Planets";
 import LandingPage from "./LandingPage";
+import Navbar from "../Components/Navbar";
 
 function MainPage() {
   const [scrollY, setScrollY] = useState(0);
@@ -104,14 +105,13 @@ function MainPage() {
         />
       </div>
       {/* Spacer to allow scrolling */}
-      <div className="w-full h-screen flex items-end">
+      <div className="w-full h-screen flex items-end" id="intro">
         <div className="w-1/2  h-full"></div>
         <div className="w-1/2  h-full flex items-center justify-center ">
           <IntroText />
         </div>
       </div>
-      {/* add sliding cards for more info */}
-      {/* Second section with animated appearance */}
+
       <div
         className="min-h-screen bg-white flex justify-center items-center relative z-10 flex-col"
         style={getSecondSectionStyle()}
