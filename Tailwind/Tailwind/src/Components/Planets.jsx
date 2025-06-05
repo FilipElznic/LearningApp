@@ -1,16 +1,13 @@
+import Spline from "@splinetool/react-spline";
 import React from "react";
 
 // Regular component - planet on left, message on right
-const PlanetMessage = ({ planetImage, heading, text }) => {
+const PlanetMessage = ({ planetModel, heading, text }) => {
   return (
     <div className="imgbg w-full h-screen flex flex-col md:flex-row items-center relative overflow-hidden">
       {/* Planet Image - Left Side on desktop, top on mobile */}
       <div className="w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center">
-        <img
-          src={planetImage}
-          alt="Planet"
-          className="w-auto h-full object-contain"
-        />
+        <Spline scene={planetModel} className="w-full h-full" />
       </div>
 
       {/* Message Box - Right Side on desktop, bottom on mobile */}
@@ -29,7 +26,7 @@ const PlanetMessage = ({ planetImage, heading, text }) => {
 };
 
 // Mirrored component - message on left, planet on right
-const PlanetMessageMirrored = ({ planetImage, heading, text }) => {
+const PlanetMessageMirrored = ({ planetModel, heading, text }) => {
   return (
     <div className="imgbg w-full h-screen flex flex-col md:flex-row items-center relative overflow-hidden">
       {/* Message Box - Left Side on desktop, top on mobile */}
@@ -46,11 +43,7 @@ const PlanetMessageMirrored = ({ planetImage, heading, text }) => {
 
       {/* Planet Image - Right Side on desktop, bottom on mobile */}
       <div className="w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center order-1 md:order-2">
-        <img
-          src={planetImage}
-          alt="Planet"
-          className="w-auto h-full object-contain"
-        />
+        <Spline scene={planetModel} className="w-full h-full" />
       </div>
     </div>
   );

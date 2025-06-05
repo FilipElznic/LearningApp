@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useAuth } from "../AuthContext";
+import Spline from "@splinetool/react-spline";
 
 export default function SignupForm() {
   const [email, setEmail] = useState("");
@@ -29,6 +30,7 @@ export default function SignupForm() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow">
+        <Spline scene="https://prod.spline.design/1JKff7iDGmGzgd3y/scene.splinecode" />
         <div className="text-center">
           <h1 className="text-2xl font-bold">Sign Up</h1>
           <p className="mt-2 text-gray-600">Create a new account</p>
