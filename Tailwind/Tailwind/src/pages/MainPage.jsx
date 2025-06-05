@@ -1,14 +1,10 @@
 import "../App.css";
 import Spline from "@splinetool/react-spline";
 import { useState, useEffect, useRef } from "react";
-import planetImage from "../assets/fullmoon.jpg"; // Adjust the path as necessary
-import { ChevronLeft, ChevronRight, Circle } from "lucide-react";
-
+import Planets from "../Components/Planets";
 import IntroText from "../Components/IntroText";
 import Layout from "../Components/Layout";
-import { PlanetMessage, PlanetMessageMirrored } from "../Components/Planets";
 import LandingPage from "./LandingPage";
-import Navbar from "../Components/Navbar";
 
 function MainPage() {
   const [scrollY, setScrollY] = useState(0);
@@ -100,8 +96,8 @@ function MainPage() {
         style={getSplineTransform()}
       >
         <Spline
-          scene="https://prod.spline.design/1Fe7o7OsJuBQi6Q6/scene.splinecode"
-          className="w-full h-full"
+          scene="https://prod.spline.design/1JKff7iDGmGzgd3y/scene.splinecode"
+          className="w-full  h-full bg-transparent"
         />
       </div>
       {/* Spacer to allow scrolling */}
@@ -140,47 +136,7 @@ function MainPage() {
       </div>
       <div className="w-full h-[20vh] bg-slate-50"></div>
       <div className="min-h-screen bg-white ">
-        <PlanetMessage
-          planetModel="https://prod.spline.design/7Vc5k44drKR-Q-m8/scene.splinecode"
-          heading="Your Heading"
-          text="Your descriptive text here..."
-        />
-
-        <PlanetMessageMirrored
-          planetModel="https://prod.spline.design/bUkM4hZh5G-Joh5D/scene.splinecode"
-          heading="Your Heading"
-          text="Your descriptive text here..."
-        />
-        <PlanetMessage
-          planetModel="https://prod.spline.design/yQDRf1UA3BphLTml/scene.splinecode"
-          heading="Your Heading"
-          text="Your descriptive text here..."
-        />
-        <PlanetMessageMirrored
-          planetModel="https://prod.spline.design/1JKff7iDGmGzgd3y/scene.splinecode"
-          heading="Your Heading"
-          text="Your descriptive text here..."
-        />
-        <PlanetMessage
-          planetModel="https://prod.spline.design/qsvoIQ-R1ruz-RMD/scene.splinecode"
-          heading="Your Heading"
-          text="Your descriptive text here..."
-        />
-        <PlanetMessageMirrored
-          planetModel="https://prod.spline.design/Dnm8CT0GWVtlbFCX/scene.splinecode"
-          heading="Your Heading"
-          text="Your descriptive text here..."
-        />
-        <PlanetMessage
-          planetModel="https://prod.spline.design/Z0efpkXVV0becsVc/scene.splinecode"
-          heading="Your Heading"
-          text="Your descriptive text here..."
-        />
-        <PlanetMessageMirrored
-          planetModel="https://prod.spline.design/3II3FSazQK058EQj/scene.splinecode"
-          heading="Your Heading"
-          text="Your descriptive text here..."
-        />
+        <Planets />
       </div>
     </div>
   );
