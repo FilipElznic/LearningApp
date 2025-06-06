@@ -5,52 +5,53 @@ import React, { useState, useRef, useEffect } from "react";
 class WebGLContextManager {
   constructor() {
     this.activeContexts = 0;
-    this.maxContexts = 8; // Conservative limit
-    this.contexts = new Map(); // Track contexts by ID
+    this.maxContexts = 8;
+    this.contexts = new Map();
+    this.mainContextId = 'main-model';
   }
 
-  canCreateContext() {
-    return this.activeContexts < this.maxContexts;
+  canCreateContext(id) {
+    if (id === this.mainContextId) return true;
+    return this.activeContexts < (this.maxContexts - 1);
   }
 
   addContext(id) {
     if (!this.contexts.has(id)) {
       this.activeContexts++;
       this.contexts.set(id, true);
-      console.log(
-        `WebGL Context added for ${id}. Active: ${this.activeContexts}/${this.maxContexts}`
-      );
     }
   }
 
   removeContext(id) {
     if (this.contexts.has(id)) {
-      this.activeContexts = Math.max(0, this.activeContexts - 1);
       this.contexts.delete(id);
-      console.log(
-        `WebGL Context removed for ${id}. Active: ${this.activeContexts}/${this.maxContexts}`
-      );
+      this.activeContexts--;
     }
-  }
-
-  hasContext(id) {
-    return this.contexts.has(id);
   }
 
   getActiveContexts() {
     return this.activeContexts;
   }
 
-  // Force cleanup of oldest contexts if needed
-  forceCleanup(count = 1) {
-    const keys = Array.from(this.contexts.keys());
-    for (let i = 0; i < Math.min(count, keys.length); i++) {
-      this.removeContext(keys[i]);
-    }
+  forceCleanup(keepLast = 2) {
+    // Keep the main context and the specified number of most recent contexts
+    const contextsToKeep = Array.from(this.contexts.keys())
+      .filter(id => id === this.mainContextId)
+      .concat(Array.from(this.contexts.keys())
+        .filter(id => id !== this.mainContextId)
+        .slice(-keepLast));
+
+    // Remove other contexts
+    Array.from(this.contexts.keys())
+      .filter(id => !contextsToKeep.includes(id))
+      .forEach(id => this.removeContext(id));
   }
 }
 
 const webGLManager = new WebGLContextManager();
+
+// Export the webGLManager
+export { webGLManager };
 
 // Loading spinner component
 const LoadingSpinner = ({ message = "Loading 3D model..." }) => (
@@ -167,9 +168,9 @@ const LazySpline = ({
   if (!canRender) {
     return (
       <LoadingSpinner
-        message={`Waiting for WebGL context... (${webGLManager.getActiveContexts()}/${
+        message={`Waiting for WebGL context... (${webGLManager.getActiveContexts()} / ${
           webGLManager.maxContexts
-        } active)`}
+        })`}
       />
     );
   }
@@ -227,16 +228,13 @@ const SmartSpline = ({
   const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
-    if (isVisible && hasIntersected) {
+    if (isVisible && hasIntersected && webGLManager.canCreateContext(contextId)) {
       setShouldRender(true);
-    } else if (hasExited && !isVisible) {
-      // Delay cleanup to prevent flickering
-      const timeout = setTimeout(() => {
-        setShouldRender(false);
-      }, 2000);
-      return () => clearTimeout(timeout);
+    } else if (!isVisible && hasExited) {
+      setShouldRender(false);
+      webGLManager.removeContext(contextId);
     }
-  }, [isVisible, hasIntersected, hasExited]);
+  }, [isVisible, hasIntersected, hasExited, contextId]);
 
   return (
     <div ref={containerRef} className="w-full h-full">
@@ -249,9 +247,11 @@ const SmartSpline = ({
           onContextDestroyed={onContextDestroyed}
         />
       ) : (
-        <LoadingSpinner
-          message={hasIntersected ? "Loading 3D model..." : "Scroll to load..."}
-        />
+        <LoadingSpinner message={
+          !webGLManager.canCreateContext(contextId) 
+            ? "Too many 3D models loaded. Scroll away from other models first."
+            : "Scroll to load..."
+        } />
       )}
     </div>
   );

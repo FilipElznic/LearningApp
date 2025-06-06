@@ -5,6 +5,7 @@ import Planets from "../Components/Planets";
 import IntroText from "../Components/IntroText";
 import Layout from "../Components/Layout";
 import LandingPage from "./LandingPage";
+import { webGLManager } from '../Components/Planet';
 
 function MainPage() {
   const [scrollY, setScrollY] = useState(0);
@@ -22,9 +23,10 @@ function MainPage() {
 
   // Calculate transform values based on scroll position
   const getSplineTransform = () => {
-    const firstPhaseScroll = window.innerHeight * 1.5; // First animation completes
-    const secondPhaseStart = window.innerHeight * 2.5; // When second animation starts
-    const secondPhaseEnd = window.innerHeight * 4; // When second animation completes
+    const firstPhaseScroll = window.innerHeight * 1.5;
+    const secondPhaseStart = window.innerHeight * 2.5;
+    const secondPhaseEnd = window.innerHeight * 3;
+    const planetsStart = window.innerHeight * 5.
 
     const firstProgress = Math.min(scrollY / firstPhaseScroll, 1);
     const secondProgress = Math.max(
@@ -36,36 +38,60 @@ function MainPage() {
     );
 
     // First phase: Move from right to left
-    let translateX = -firstProgress * 60; // Move left by 60%
-    let scale = 1 - firstProgress * 0.1; // Scale down to 90%
+    let translateX = -firstProgress * 60;
+    let scale = 1 - firstProgress * 0.1;
     let opacity = 1;
     let rotateZ = 0;
 
     // Second phase: Fade in and rotate to the right
     if (scrollY > secondPhaseStart) {
-      const pausePoint = 0.8; // When to pause the movement (at 80% progress)
+      const pausePoint = 0.8;
 
       if (secondProgress <= pausePoint) {
-        // Normal animation until 80%
-        translateX = -60 + secondProgress * 120; // Move back to right
-        opacity = secondProgress; // Fade in from 0 to 80%
-        rotateZ = secondProgress * 45; // Rotate 45 degrees clockwise
-        scale = (1 - firstProgress * 0.1) * (1 - secondProgress * 0.3); // Additional scaling
+        translateX = -60 + secondProgress * 120;
+        opacity = secondProgress;
+        rotateZ = secondProgress * 45;
+        scale = (1 - firstProgress * 0.1) * (1 - secondProgress * 0.3);
       } else {
-        // From 80% to 100%: Rotate back to original position
-        const finalPhaseProgress =
-          (secondProgress - pausePoint) / (1 - pausePoint); // 0 to 1 for final 20%
-        translateX = -60 + pausePoint * 120; // Stay at 80% position
-        opacity = 1; // Full opacity
-        rotateZ = pausePoint * 45 * (1 - finalPhaseProgress); // Rotate back to 0 degrees
-        scale = (1 - firstProgress * 0.1) * (1 - pausePoint * 0.3); // Stay at 80% scale
+        const finalPhaseProgress = (secondProgress - pausePoint) / (1 - pausePoint);
+        translateX = -60 + pausePoint * 120;
+        opacity = 1;
+        rotateZ = pausePoint * 45 * (1 - finalPhaseProgress);
+        scale = (1 - firstProgress * 0.1) * (1 - pausePoint * 0.3);
       }
+    }
+
+    // Planets section: Alternating left-right movement
+    if (scrollY > planetsStart) {
+      const sectionHeight = window.innerHeight;
+      const currentSection = Math.floor((scrollY - planetsStart) / sectionHeight);
+      const sectionProgress = ((scrollY - planetsStart) % sectionHeight) / sectionHeight;
+      
+      // Determine if current section is PlanetMessage (even) or PlanetMessageMirrored (odd)
+      const isRightSide = currentSection % 2 === 0;
+      
+      // Adjusted position values - more left, less right
+      const rightPosition = 40; // Reduced from 60 to 40 for less right movement
+      const leftPosition = -80; // Changed from -60 to -80 for more left movement
+      
+      // Calculate smooth transition between positions
+      if (isRightSide) {
+        // Moving from left to right
+        translateX = leftPosition + (rightPosition - leftPosition) * sectionProgress;
+      } else {
+        // Moving from right to left
+        translateX = rightPosition + (leftPosition - rightPosition) * sectionProgress;
+      }
+
+      scale = 0.7; // Keep model slightly smaller in planets section
+      rotateZ = 0; // Reset rotation
+      opacity = 1;
     }
 
     return {
       transform: `translateX(${translateX}%) scale(${scale}) rotateZ(${rotateZ}deg)`,
       opacity: opacity,
-      transition: "transform 0.1s ease-out, opacity 0.1s ease-out",
+      transition: "transform 0.3s ease-out, opacity 0.3s ease-out", // Increased transition time for smoother movement
       zIndex: 5,
     };
   };
@@ -97,7 +123,8 @@ function MainPage() {
       >
         <Spline
           scene="https://prod.spline.design/1JKff7iDGmGzgd3y/scene.splinecode"
-          className="w-full  h-full bg-transparent"
+          className="w-full h-full bg-transparent"
+          onLoad={() => webGLManager.addContext('main-model')}
         />
       </div>
       {/* Spacer to allow scrolling */}
