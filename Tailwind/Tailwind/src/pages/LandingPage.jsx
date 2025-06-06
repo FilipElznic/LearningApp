@@ -27,7 +27,15 @@ function LandingPage() {
                   Little secret, I am not a real person, I am robot created by
                   the guys from Czech republic.
                 </p>
-                <a
+              
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="col-start-1 col-end-2 row-start-5 row-end-6 imgbg h-full">
+          <div className="w-full h-full rounded-tr-[70px] bg-white flex items-end justify-center">
+            <div className="w-4/5 h-3/4 imgbg  rounded-[70px] flex justify-center text-white text-center text-3xl">
+              <a
                   href="#intro"
                   className="group relative inline-flex h-12 sm:h-14 items-center overflow-hidden bg-cyan-900 px-4 sm:px-6 font-medium text-neutral-200 rounded-full mt-4 sm:mt-6 md:mt-8 text-sm sm:text-base drop-shadow-lg"
                 >
@@ -35,18 +43,11 @@ function LandingPage() {
                   <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-100%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(100%)]">
                     <div className="relative h-full w-8 bg-white/20"></div>
                   </div>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-start-1 col-end-2 row-start-5 row-end-6 imgbg h-full">
-          <div className="w-full h-full rounded-tr-[70px] bg-white flex items-end justify-center">
-            <div className="w-4/5 h-3/4 imgbg  rounded-[70px]"></div>
+                </a></div>
           </div>
         </div>
         <div className="col-start-2 col-end-6 row-start-5 row-end-6 imgbg h-full rounded-br-[70px] rounded-bl-[70px]">
-          5
+          
         </div>
       </div>
     

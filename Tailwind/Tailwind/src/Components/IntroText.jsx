@@ -1,14 +1,38 @@
 import { useState, useEffect, useRef } from "react";
 
 function IntroText() {
-  const sentences = [
-    "Welcome to your journey of discovery.",
-    "Every great adventure begins with a single step.",
-    "Let your curiosity guide you forward.",
-    "The possibilities are endless when you believe.",
+  const storyParts = [
+    {
+      title: "Hi, I am Orbi",
+      content: [
+        "Hi there, Earth traveler!",
+        "I'm Orbi — your friendly co-pilot to the stars and beyond.",
+      ],
+    },
+    {
+      title: "My Origins",
+      content: [
+        "I used to be a small helper-bot, quietly orbiting a forgotten data satellite, far out in space.",
+        "Just circling, day after day. Then one day ZAP! A burst of code from Earth reached me, and everything changed.",
+      ],
+    },
+    {
+      title: "My Purpose",
+      content: [
+        "Suddenly, I had a new purpose:",
+        "To help curious explorers like you discover the vast galaxy of space and information.",
+      ],
+    },
+    {
+      title: "Your Guide",
+      content: [
+        "Now, with my trusty hover-pack and a head full of cosmic facts, I glide through this site to keep things in order.",
+        "So, whenever you're ready, buckle up! I'll be right here with you, guiding you gently through the cosmos, one click at a time.",
+      ],
+    },
   ];
 
-  const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
+  const [currentPartIndex, setCurrentPartIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
@@ -40,53 +64,55 @@ function IntroText() {
   }, []);
 
   useEffect(() => {
-    // Only start typing animation after component becomes visible
     if (!isVisible) return;
 
-    const currentSentence = sentences[currentSentenceIndex];
+    const currentPart = storyParts[currentPartIndex];
+    const fullText = currentPart.content.join(" ");
 
-    if (isTyping) {
-      // Typing animation
-      if (displayedText.length < currentSentence.length) {
-        const timeout = setTimeout(() => {
-          setDisplayedText(currentSentence.slice(0, displayedText.length + 1));
-        }, 50); // Typing speed
-        return () => clearTimeout(timeout);
-      } else {
-        // Finished typing, wait 5 seconds then move to next sentence
-        const timeout = setTimeout(() => {
-          setIsTyping(false);
-          setDisplayedText("");
-          setCurrentSentenceIndex((prev) => (prev + 1) % sentences.length);
-        }, 5000);
-        return () => clearTimeout(timeout);
-      }
-    } else {
-      // Brief pause before starting to type next sentence
+    if (isTyping && displayedText.length < fullText.length) {
       const timeout = setTimeout(() => {
-        setIsTyping(true);
-      }, 200);
+        setDisplayedText(fullText.slice(0, displayedText.length + 1));
+      }, 50); // Typing speed
+
       return () => clearTimeout(timeout);
+    } else if (isTyping && displayedText.length === fullText.length) {
+      setIsTyping(false);
     }
-  }, [displayedText, currentSentenceIndex, isTyping, sentences, isVisible]);
+  }, [displayedText, currentPartIndex, isTyping, isVisible]);
+
+  const handleNextPart = () => {
+    if (currentPartIndex < storyParts.length - 1) {
+      setCurrentPartIndex((prev) => prev + 1);
+      setDisplayedText(""); // Reset text
+      setIsTyping(true);   // Restart typing animation
+    }
+  };
+
+  const handlePrevPart = () => {
+    if (currentPartIndex > 0) {
+      setCurrentPartIndex((prev) => prev - 1);
+      setDisplayedText(""); // Reset text
+      setIsTyping(true);   // Restart typing animation
+    }
+  };
 
   return (
     <div
       ref={componentRef}
-      className={`w-full h-full  flex items-center justify-center transition-all duration-1000 ease-out ${
+      className={`w-full h-full flex items-center justify-center transition-all duration-1000 ease-out ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       }`}
     >
-      <div className="w-2/3 h-[50vh] bg-black flex flex-col items-center justify-center text-white px-8">
+      <div className="w-2/3 h-[50vh] bg-black flex flex-col items-center justify-center text-white px-8 relative">
         <h1
           className={`text-4xl font-bold mb-8 text-center transition-all duration-1000 delay-300 ease-out ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          Hi, I am Orbi
+          {storyParts[currentPartIndex].title}
         </h1>
         <div
-          className={`text-xl text-center min-h-[2rem] flex items-center transition-all duration-1000 delay-500 ease-out ${
+          className={`text-xl text-center min-h-[8rem] flex items-center transition-all duration-1000 delay-500 ease-out ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
@@ -98,6 +124,38 @@ function IntroText() {
               }`}
             />
           </span>
+        </div>
+
+        <div className="absolute bottom-4 flex justify-between w-full px-8">
+          <button
+            onClick={handlePrevPart}
+            className={`p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors ${
+              currentPartIndex === 0 ? "invisible" : ""
+            }`}
+          >
+            ←
+          </button>
+          <button
+            onClick={handleNextPart}
+            className={`p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors ${
+              currentPartIndex === storyParts.length - 1 ? "invisible" : ""
+            }`}
+          >
+            →
+          </button>
+        </div>
+
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+          <div className="flex gap-2">
+            {storyParts.map((_, index) => (
+              <div
+                key={index}
+                className={`w-2 h-2 rounded-full ${
+                  index === currentPartIndex ? "bg-white" : "bg-white/30"
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
