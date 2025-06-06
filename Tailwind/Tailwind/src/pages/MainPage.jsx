@@ -5,7 +5,7 @@ import Planets from "../Components/Planets";
 import IntroText from "../Components/IntroText";
 import Layout from "../Components/Layout";
 import LandingPage from "./LandingPage";
-import { webGLManager } from '../Components/Planet';
+import { webGLManager } from "../Components/Planet";
 
 function MainPage() {
   const [scrollY, setScrollY] = useState(0);
@@ -26,7 +26,7 @@ function MainPage() {
     const firstPhaseScroll = window.innerHeight * 1.5;
     const secondPhaseStart = window.innerHeight * 2.5;
     const secondPhaseEnd = window.innerHeight * 3;
-    const planetsStart = window.innerHeight * 5.
+    const planetsStart = window.innerHeight * 5;
 
     const firstProgress = Math.min(scrollY / firstPhaseScroll, 1);
     const secondProgress = Math.max(
@@ -53,7 +53,8 @@ function MainPage() {
         rotateZ = secondProgress * 45;
         scale = (1 - firstProgress * 0.1) * (1 - secondProgress * 0.3);
       } else {
-        const finalPhaseProgress = (secondProgress - pausePoint) / (1 - pausePoint);
+        const finalPhaseProgress =
+          (secondProgress - pausePoint) / (1 - pausePoint);
         translateX = -60 + pausePoint * 120;
         opacity = 1;
         rotateZ = pausePoint * 45 * (1 - finalPhaseProgress);
@@ -64,23 +65,28 @@ function MainPage() {
     // Planets section: Alternating left-right movement
     if (scrollY > planetsStart) {
       const sectionHeight = window.innerHeight;
-      const currentSection = Math.floor((scrollY - planetsStart) / sectionHeight);
-      const sectionProgress = ((scrollY - planetsStart) % sectionHeight) / sectionHeight;
-      
+      const currentSection = Math.floor(
+        (scrollY - planetsStart) / sectionHeight
+      );
+      const sectionProgress =
+        ((scrollY - planetsStart) % sectionHeight) / sectionHeight;
+
       // Determine if current section is PlanetMessage (even) or PlanetMessageMirrored (odd)
       const isRightSide = currentSection % 2 === 0;
-      
+
       // Adjusted position values - more left, less right
       const rightPosition = 40; // Reduced from 60 to 40 for less right movement
       const leftPosition = -80; // Changed from -60 to -80 for more left movement
-      
+
       // Calculate smooth transition between positions
       if (isRightSide) {
         // Moving from left to right
-        translateX = leftPosition + (rightPosition - leftPosition) * sectionProgress;
+        translateX =
+          leftPosition + (rightPosition - leftPosition) * sectionProgress;
       } else {
         // Moving from right to left
-        translateX = rightPosition + (leftPosition - rightPosition) * sectionProgress;
+        translateX =
+          rightPosition + (leftPosition - rightPosition) * sectionProgress;
       }
 
       scale = 0.7; // Keep model slightly smaller in planets section
@@ -122,9 +128,9 @@ function MainPage() {
         style={getSplineTransform()}
       >
         <Spline
-          scene="https://prod.spline.design/1JKff7iDGmGzgd3y/scene.splinecode"
+          scene="https://prod.spline.design/azadXvKhi40FDGgp/scene.splinecode"
           className="w-full h-full bg-transparent"
-          onLoad={() => webGLManager.addContext('main-model')}
+          onLoad={() => webGLManager.addContext("main-model")}
         />
       </div>
       {/* Spacer to allow scrolling */}
