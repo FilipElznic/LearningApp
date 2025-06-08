@@ -37,7 +37,12 @@ function Layout() {
           </Link>
 
           <div className="w-full flex flex-col sm:flex-row gap-3 sm:gap-4">
-            <div className="group/item w-full sm:w-2/3 h-[30vh] sm:h-[35vh] md:h-[40vh] rounded-2xl sm:rounded-3xl blackgradient relative z-10 text-white text-center text-9xl flex items-center justify-center font-bold cursor-pointer transition-all duration-300 group-hover/sections:brightness-50 group-hover/sections:opacity-70 hover:!brightness-100 hover:!opacity-100 hover:scale-105 hover:z-20">
+            <div
+              className="group/item w-full sm:w-2/3 h-[30vh] sm:h-[35vh] md:h-[40vh] rounded-2xl sm:rounded-3xl blackgradient relative z-10 text-white text-center text-9xl flex items-center justify-center font-bold cursor-pointer transition-all duration-300 group-hover/sections:brightness-50 group-hover/sections:opacity-70 hover:!brightness-100 hover:!opacity-100 hover:scale-105 hover:z-20"
+              onClick={() => {
+                window.location.href = "/earth";
+              }}
+            >
               <span className="transition-all duration-300 group-hover/item:scale-110">
                 Earth
               </span>
@@ -47,7 +52,12 @@ function Layout() {
               />
             </div>
 
-            <div className="group/item w-full sm:w-1/3 h-[30vh] sm:h-[35vh] md:h-[40vh] rounded-2xl sm:rounded-3xl blackgradient relative z-10 flex items-center justify-center cursor-pointer transition-all duration-300 group-hover/sections:brightness-50 group-hover/sections:opacity-70 hover:!brightness-100 hover:!opacity-100 hover:scale-105 hover:z-20">
+            <div
+              className="group/item w-full sm:w-1/3 h-[30vh] sm:h-[35vh] md:h-[40vh] rounded-2xl sm:rounded-3xl blackgradient relative z-10 flex items-center justify-center cursor-pointer transition-all duration-300 group-hover/sections:brightness-50 group-hover/sections:opacity-70 hover:!brightness-100 hover:!opacity-100 hover:scale-105 hover:z-20"
+              onClick={() => {
+                window.location.href = "/spacescraft";
+              }}
+            >
               <img
                 src={spaceship}
                 className="object-contain w-full h-full rotate-12 transition-transform duration-300 group-hover/item:rotate-6"

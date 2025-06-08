@@ -136,7 +136,7 @@ function MainPage() {
       {/* Spacer to allow scrolling */}
       <div className="w-full h-screen flex items-end" id="intro">
         <div className="w-1/2  h-full"></div>
-        <div className="w-1/2  h-full flex items-center justify-center ">
+        <div className="w-1/2  h-full flex items-center justify-center z-50">
           <IntroText />
         </div>
       </div>

@@ -1,12 +1,115 @@
 import { Link } from "react-router-dom";
-import astronaut from "../assets/astronaut.png";
+import { useState, useEffect, useRef } from "react";
+import astronaut from "../assets/arrowastronout.png";
 
 function AstronautsPage() {
+  const equipmentParts = [
+    {
+      title: "Helmet",
+      content:
+        "Provides head protection, radio communication, and sun shielding. The gold visor protects against harmful solar radiation.",
+      bgColor: "bg-black",
+      textColor: "text-white",
+    },
+    {
+      title: "Camera & Lights",
+      content:
+        "Cameras and lights mounted on the helmet for visual recording and assisting mission control with visibility.",
+      bgColor: "bg-black",
+      textColor: "text-white",
+    },
+    {
+      title: "Gloves",
+      content:
+        "The gloves are specially designed to allow dexterity while providing protection against vacuum and temperature extremes.",
+      bgColor: "bg-black",
+      textColor: "text-white",
+    },
+    {
+      title: "Support Structure",
+      content:
+        "Contains structural support and attachment points for tools and tethers to prevent floating away.",
+      bgColor: "bg-black",
+      textColor: "text-white",
+    },
+    {
+      title: "Boots",
+      content:
+        "Designed for flexibility in microgravity. Boots have thermal and micrometeoroid protection, and some variants have magnetic soles for spacecraft surface work.",
+      bgColor: "bg-black",
+      textColor: "text-white",
+    },
+  ];
+
+  const [currentPartIndex, setCurrentPartIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState("");
+  const [isTyping, setIsTyping] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
+  const componentRef = useRef(null);
+
+  // Intersection Observer for fade-in animation
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      {
+        threshold: 0.3,
+        rootMargin: "0px 0px -100px 0px",
+      }
+    );
+
+    if (componentRef.current) {
+      observer.observe(componentRef.current);
+    }
+
+    return () => {
+      if (componentRef.current) {
+        observer.unobserve(componentRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    const currentPart = equipmentParts[currentPartIndex];
+    const fullText = currentPart.content;
+
+    if (isTyping && displayedText.length < fullText.length) {
+      const timeout = setTimeout(() => {
+        setDisplayedText(fullText.slice(0, displayedText.length + 1));
+      }, 25);
+
+      return () => clearTimeout(timeout);
+    } else if (isTyping && displayedText.length === fullText.length) {
+      setIsTyping(false);
+    }
+  }, [displayedText, currentPartIndex, isTyping, isVisible]);
+
+  const handleNextPart = () => {
+    if (currentPartIndex < equipmentParts.length - 1) {
+      setCurrentPartIndex((prev) => prev + 1);
+      setDisplayedText("");
+      setIsTyping(true);
+    }
+  };
+
+  const handlePrevPart = () => {
+    if (currentPartIndex > 0) {
+      setCurrentPartIndex((prev) => prev - 1);
+      setDisplayedText("");
+      setIsTyping(true);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-black text-white">
+    <div className="min-h-screen bg-gradient-to-br text-white">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div className="mx-auto px-4 py-4 flex justify-between items-center">
           <Link
             to="/"
             className="text-xl font-bold hover:text-blue-400 transition-colors"
@@ -18,71 +121,93 @@ function AstronautsPage() {
       </nav>
 
       {/* Hero Section */}
-      <div className="pt-20 container mx-auto px-4 py-16">
-        <div className="flex flex-col lg:flex-row items-center gap-12">
-          <div className="lg:w-1/2">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+      <div className="pt-20 mx-auto px-4 py-16">
+        <div className="w-full h-full flex flex-col">
+          <div className="w-full mt-20">
+            <h1 className="text-4xl md:text-6xl lg:text-9xl font-bold text-center mb-8">
               Astronauts
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
-              Discover the brave pioneers who venture into the vast expanse of
-              space, pushing the boundaries of human exploration and scientific
-              discovery.
-            </p>
-            <div className="space-y-4 text-lg text-gray-400">
-              <p>
-                Astronauts are highly trained professionals who travel to space
-                to conduct scientific research, maintain space stations, and
-                explore celestial bodies.
-              </p>
-              <p>
-                From the first human spaceflight by Yuri Gagarin to the current
-                International Space Station missions, astronauts have been at
-                the forefront of humanity's greatest adventure.
-              </p>
+          </div>
+          <div className="flex flex-row h-full w-full items-center justify-center space-x-4">
+            <img src={astronaut} className="w-1/2 h-full" alt="Astronaut"></img>
+
+            <div
+              ref={componentRef}
+              className={`w-1/2 h-full flex items-center justify-center transition-all duration-1000 ease-out bg-black ${
+                isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
+              }`}
+            >
+              <div
+                className={`w-full h-[60vh] ${equipmentParts[currentPartIndex].bgColor} flex flex-col items-center justify-center text-white px-8 relative rounded-lg`}
+              >
+                <h2
+                  className={`text-3xl font-bold  text-center transition-all mb-6 duration-1000 delay-300 ease-out ${
+                    equipmentParts[currentPartIndex].textColor
+                  } ${
+                    isVisible
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-4"
+                  }`}
+                >
+                  {equipmentParts[currentPartIndex].title}
+                </h2>
+
+                <div
+                  className={`text-lg text-center min-h-[8rem] flex items-center transition-all duration-1000 delay-500 ease-out leading-relaxed w-1/2 ${
+                    isVisible
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-4"
+                  }`}
+                >
+                  <span className="inline-block font-medium tracking-wide ">
+                    {displayedText}
+                    <span
+                      className={`inline-block w-1 h-6 bg-white ml-2 ${
+                        isTyping && isVisible ? "animate-pulse" : "opacity-0"
+                      }`}
+                    />
+                  </span>
+                </div>
+
+                <div className="absolute bottom-4 flex justify-between w-full px-8">
+                  <button
+                    onClick={handlePrevPart}
+                    className={`p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors text-white ${
+                      currentPartIndex === 0 ? "invisible" : ""
+                    }`}
+                  >
+                    ←
+                  </button>
+                  <button
+                    onClick={handleNextPart}
+                    className={`p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors text-white ${
+                      currentPartIndex === equipmentParts.length - 1
+                        ? "invisible"
+                        : ""
+                    }`}
+                  >
+                    →
+                  </button>
+                </div>
+
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                  <div className="flex gap-2">
+                    {equipmentParts.map((_, index) => (
+                      <div
+                        key={index}
+                        className={`w-2 h-2 rounded-full ${
+                          index === currentPartIndex
+                            ? "bg-white"
+                            : "bg-white/30"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-
-          <div className="lg:w-1/2 flex justify-center">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full blur-3xl opacity-30 animate-pulse"></div>
-              <img
-                src={astronaut}
-                alt="Astronaut"
-                className="relative z-10 w-80 h-80 md:w-96 md:h-96 object-contain rotate-12 hover:rotate-6 transition-transform duration-500"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Content Sections */}
-        <div className="mt-20 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-300">
-            <h3 className="text-2xl font-bold mb-4 text-blue-400">Training</h3>
-            <p className="text-gray-300">
-              Astronauts undergo years of rigorous training including
-              zero-gravity simulation, survival training, and technical
-              education on spacecraft systems.
-            </p>
-          </div>
-
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-300">
-            <h3 className="text-2xl font-bold mb-4 text-purple-400">
-              Missions
-            </h3>
-            <p className="text-gray-300">
-              From short orbital flights to long-duration stays on the ISS,
-              astronauts participate in various mission types to advance our
-              understanding of space.
-            </p>
-          </div>
-
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-300">
-            <h3 className="text-2xl font-bold mb-4 text-green-400">Future</h3>
-            <p className="text-gray-300">
-              The next generation of astronauts will journey to Mars, establish
-              lunar bases, and explore the outer reaches of our solar system.
-            </p>
           </div>
         </div>
       </div>
