@@ -2,6 +2,7 @@ import planet from "../assets/planetearth.jpg";
 import spaceship from "../assets/rocketship.jpg";
 import astronaut from "../assets/astronaut.png";
 import fullmoon from "../assets/fullmoon.jpg";
+import { Link } from "react-router-dom";
 
 function Layout() {
   return (
@@ -17,21 +18,23 @@ function Layout() {
         </p>
 
         <div className="w-full h-full mt-8 sm:mt-10 flex flex-col gap-3 sm:gap-4 group/sections">
-          <div className="w-full flex flex-col sm:flex-row gap-3 sm:gap-4">
-            <div className="group/item w-full sm:w-1/3 h-[30vh] sm:h-[35vh] md:h-[40vh] rounded-2xl sm:rounded-3xl blackgradient relative z-10 cursor-pointer transition-all duration-300 group-hover/sections:brightness-50 group-hover/sections:opacity-70 hover:!brightness-100 hover:!opacity-100 hover:scale-105 hover:z-20">
-              <img
-                src={astronaut}
-                className="object-contain w-full h-full rotate-12 transition-transform duration-300 group-hover/item:rotate-6"
-              />
-            </div>
+          <Link to="/astronauts">
+            <div className="w-full flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <div className="group/item w-full sm:w-1/3 h-[30vh] sm:h-[35vh] md:h-[40vh] rounded-2xl sm:rounded-3xl blackgradient relative z-10 cursor-pointer transition-all duration-300 group-hover/sections:brightness-50 group-hover/sections:opacity-70 hover:!brightness-100 hover:!opacity-100 hover:scale-105 hover:z-20">
+                <img
+                  src={astronaut}
+                  className="object-contain w-full h-full rotate-12 transition-transform duration-300 group-hover/item:rotate-6"
+                />
+              </div>
 
-            <div className="group/item w-full sm:w-2/3 h-[30vh] sm:h-[35vh] md:h-[40vh] rounded-2xl sm:rounded-3xl blackgradient relative z-10 cursor-pointer transition-all duration-300 group-hover/sections:brightness-50 group-hover/sections:opacity-70 hover:!brightness-100 hover:!opacity-100 hover:scale-105 hover:z-20">
-              <img
-                src={fullmoon}
-                className="object-contain w-full h-full transition-transform duration-300 group-hover/item:scale-110"
-              />
+              <div className="group/item w-full sm:w-2/3 h-[30vh] sm:h-[35vh] md:h-[40vh] rounded-2xl sm:rounded-3xl blackgradient relative z-10 cursor-pointer transition-all duration-300 group-hover/sections:brightness-50 group-hover/sections:opacity-70 hover:!brightness-100 hover:!opacity-100 hover:scale-105 hover:z-20">
+                <img
+                  src={fullmoon}
+                  className="object-contain w-full h-full transition-transform duration-300 group-hover/item:scale-110"
+                />
+              </div>
             </div>
-          </div>
+          </Link>
 
           <div className="w-full flex flex-col sm:flex-row gap-3 sm:gap-4">
             <div className="group/item w-full sm:w-2/3 h-[30vh] sm:h-[35vh] md:h-[40vh] rounded-2xl sm:rounded-3xl blackgradient relative z-10 text-white text-center text-9xl flex items-center justify-center font-bold cursor-pointer transition-all duration-300 group-hover/sections:brightness-50 group-hover/sections:opacity-70 hover:!brightness-100 hover:!opacity-100 hover:scale-105 hover:z-20">

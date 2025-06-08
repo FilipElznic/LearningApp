@@ -11,6 +11,10 @@ import SignupForm from "./Components/SignupForm";
 import Profile from "./Components/Profile";
 import { useAuth } from "./AuthContext";
 import MainPage from "./pages/MainPage";
+import SpacecraftPage from "./pages/SpacecraftPage";
+import AstronautsPage from "./pages/AstronautsPage";
+import MoonPage from "./pages/MoonPage";
+import EarthPage from "./pages/EarthPage";
 
 import Footer from "./Components/Footer";
 // Correct implementation of ProtectedRoute for React Router v6
@@ -80,6 +84,10 @@ function App() {
               <Route path="/signup" element={<SignupForm />} />
               <Route path="/" element={<MainPage />} />
             </Route>
+            <Route path="/astronauts" element={<AstronautsPage />} />
+            <Route path="/moon" element={<MoonPage />} />
+            <Route path="/earth" element={<EarthPage />} />
+            <Route path="/spacecraft" element={<SpacecraftPage />} />
 
             {/* Protected routes - require authentication */}
             <Route element={<ProtectedRoute />}>
