@@ -25,8 +25,7 @@ function MainPage() {
   const getSplineTransform = () => {
     const firstPhaseScroll = window.innerHeight * 1.5;
     const secondPhaseStart = window.innerHeight * 2.5;
-    const secondPhaseEnd = window.innerHeight * 3;
-    const planetsStart = window.innerHeight * 5;
+    const secondPhaseEnd = window.innerHeight * 4;
 
     const firstProgress = Math.min(scrollY / firstPhaseScroll, 1);
     const secondProgress = Math.max(
@@ -62,42 +61,15 @@ function MainPage() {
       }
     }
 
-    // Planets section: Alternating left-right movement
-    if (scrollY > planetsStart) {
-      const sectionHeight = window.innerHeight;
-      const currentSection = Math.floor(
-        (scrollY - planetsStart) / sectionHeight
-      );
-      const sectionProgress =
-        ((scrollY - planetsStart) % sectionHeight) / sectionHeight;
-
-      // Determine if current section is PlanetMessage (even) or PlanetMessageMirrored (odd)
-      const isRightSide = currentSection % 2 === 0;
-
-      // Adjusted position values - more left, less right
-      const rightPosition = 40; // Reduced from 60 to 40 for less right movement
-      const leftPosition = -80; // Changed from -60 to -80 for more left movement
-
-      // Calculate smooth transition between positions
-      if (isRightSide) {
-        // Moving from left to right
-        translateX =
-          leftPosition + (rightPosition - leftPosition) * sectionProgress;
-      } else {
-        // Moving from right to left
-        translateX =
-          rightPosition + (leftPosition - rightPosition) * sectionProgress;
-      }
-
-      scale = 0.7; // Keep model slightly smaller in planets section
-      rotateZ = 0; // Reset rotation
-      opacity = 1;
+    // Hide spline after second animation ends
+    if (scrollY > secondPhaseEnd) {
+      opacity = 0;
     }
 
     return {
       transform: `translateX(${translateX}%) scale(${scale}) rotateZ(${rotateZ}deg)`,
       opacity: opacity,
-      transition: "transform 0.3s ease-out, opacity 0.3s ease-out", // Increased transition time for smoother movement
+      transition: "transform 0.3s ease-out, opacity 0.3s ease-out",
       zIndex: 5,
     };
   };
