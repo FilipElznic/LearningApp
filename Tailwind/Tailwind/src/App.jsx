@@ -85,12 +85,7 @@ function App() {
               <Route path="/signup" element={<SignupForm />} />
               <Route path="/" element={<MainPage />} />
             </Route>
-<<<<<<< Updated upstream
 
-            <Route path="/astronauts" element={<AstronautsPage />} />
-=======
-            <Route path="/astronaut" element={<AstronautsPage />} />
->>>>>>> Stashed changes
             <Route path="/moon" element={<MoonPage />} />
             <Route path="/earth" element={<EarthPage />} />
             <Route path="/spacecraft" element={<SpacecraftPage />} />
