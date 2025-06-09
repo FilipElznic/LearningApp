@@ -18,23 +18,28 @@ function Layout() {
         </p>
 
         <div className="w-full h-full mt-8 sm:mt-10 flex flex-col gap-3 sm:gap-4 group/sections">
-          <Link to="/astronauts">
+         
             <div className="w-full flex flex-col sm:flex-row gap-3 sm:gap-4">
-              <div className="group/item w-full sm:w-1/3 h-[30vh] sm:h-[35vh] md:h-[40vh] rounded-2xl sm:rounded-3xl blackgradient relative z-10 cursor-pointer transition-all duration-300 group-hover/sections:brightness-50 group-hover/sections:opacity-70 hover:!brightness-100 hover:!opacity-100 hover:scale-105 hover:z-20">
+      
+              <div className="group/item w-full sm:w-1/3 h-[30vh] sm:h-[35vh] md:h-[40vh] rounded-2xl sm:rounded-3xl blackgradient relative z-10 cursor-pointer transition-all duration-300 group-hover/sections:brightness-50 group-hover/sections:opacity-70 hover:!brightness-100 hover:!opacity-100 hover:scale-105 hover:z-20" onClick={() => {
+                window.location.href = "/astronaut";
+              }}>
                 <img
                   src={astronaut}
                   className="object-contain w-full h-full rotate-12 transition-transform duration-300 group-hover/item:rotate-6"
                 />
               </div>
 
-              <div className="group/item w-full sm:w-2/3 h-[30vh] sm:h-[35vh] md:h-[40vh] rounded-2xl sm:rounded-3xl blackgradient relative z-10 cursor-pointer transition-all duration-300 group-hover/sections:brightness-50 group-hover/sections:opacity-70 hover:!brightness-100 hover:!opacity-100 hover:scale-105 hover:z-20">
+              <div className="group/item w-full sm:w-2/3 h-[30vh] sm:h-[35vh] md:h-[40vh] rounded-2xl sm:rounded-3xl blackgradient relative z-10 cursor-pointer transition-all duration-300 group-hover/sections:brightness-50 group-hover/sections:opacity-70 hover:!brightness-100 hover:!opacity-100 hover:scale-105 hover:z-20" onClick={() => {
+                window.location.href = "/moon";
+              }}>
                 <img
                   src={fullmoon}
                   className="object-contain w-full h-full transition-transform duration-300 group-hover/item:scale-110"
                 />
               </div>
             </div>
-          </Link>
+       
 
           <div className="w-full flex flex-col sm:flex-row gap-3 sm:gap-4">
             <div
@@ -55,7 +60,7 @@ function Layout() {
             <div
               className="group/item w-full sm:w-1/3 h-[30vh] sm:h-[35vh] md:h-[40vh] rounded-2xl sm:rounded-3xl blackgradient relative z-10 flex items-center justify-center cursor-pointer transition-all duration-300 group-hover/sections:brightness-50 group-hover/sections:opacity-70 hover:!brightness-100 hover:!opacity-100 hover:scale-105 hover:z-20"
               onClick={() => {
-                window.location.href = "/spacescraft";
+                window.location.href = "/spacecraft";
               }}
             >
               <img

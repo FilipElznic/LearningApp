@@ -84,6 +84,7 @@ function App() {
               <Route path="/signup" element={<SignupForm />} />
               <Route path="/" element={<MainPage />} />
             </Route>
+            
             <Route path="/astronauts" element={<AstronautsPage />} />
             <Route path="/moon" element={<MoonPage />} />
             <Route path="/earth" element={<EarthPage />} />
