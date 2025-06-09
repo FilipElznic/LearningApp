@@ -2,7 +2,7 @@ import planet from "../assets/planetearth.jpg";
 import spaceship from "../assets/rocketship.jpg";
 import astronaut from "../assets/astronaut.png";
 import fullmoon from "../assets/fullmoon.jpg";
-import { Link } from "react-router-dom";
+
 
 function Layout() {
   return (
