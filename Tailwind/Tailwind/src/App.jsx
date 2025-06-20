@@ -16,6 +16,10 @@ import AstronautsPage from "./pages/AstronautsPage";
 import MoonPage from "./pages/MoonPage";
 import EarthPage from "./pages/EarthPage";
 import HomePage from "./pages/HomePage";
+import Tasks from "./Components/Tasks";
+import MoonTasks from "./Components/MoonTasks";
+import EarthTasks from "./Components/EarthTasks";
+import SpacecraftTasks from "./Components/SpacecraftTasks";
 
 import Footer from "./Components/Footer";
 // Correct implementation of ProtectedRoute for React Router v6
@@ -94,7 +98,10 @@ function App() {
             <Route element={<ProtectedRoute />}>
               <Route path="/profile" element={<Profile />} />
               <Route path="/main" element={<HomePage />} />
-
+              <Route path="/tasks" element={<Tasks />} />
+              <Route path="/moon-tasks" element={<MoonTasks />} />
+              <Route path="/earth-tasks" element={<EarthTasks />} />
+              <Route path="/spacecraft-tasks" element={<SpacecraftTasks />} />
               {/* Add more protected routes here */}
             </Route>
 
