@@ -55,9 +55,9 @@ const AuthRoute = () => {
     );
   }
 
-  // If already logged in, redirect to profile
+  // If already logged in, redirect to /main (not /profile)
   if (user) {
-    return <Navigate to="/profile" replace />;
+    return <Navigate to="/main" replace />;
   }
 
   // If not logged in, render the login/signup page
@@ -97,8 +97,9 @@ function App() {
 
             {/* Protected routes - require authentication */}
             <Route element={<ProtectedRoute />}>
-              <Route path="/profile" element={<Profile />} />
               <Route path="/main" element={<HomePage />} />
+              <Route path="/profile" element={<Profile />} />
+
               <Route path="/tasks" element={<Tasks />} />
               <Route path="/moon-tasks" element={<MoonTasks />} />
               <Route path="/earth-tasks" element={<EarthTasks />} />
