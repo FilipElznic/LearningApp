@@ -123,19 +123,159 @@ function MainPage() {
       <div className="w-full h-screen bg-slate-50 flex flex-col items-center justify-center pt-20 z-30">
         <div className="w-2/3 h-full flex items-center flex-col">
           <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-start">
-            Unmatched experience.
+            Sign up and explore.
           </h2>
-          <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-start">
-            Unmatched experience.
+          <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-start mt-2">
+            Unlock quick learning.
           </h2>
-          <p className="text-2xl w-1/2 mt-2 font-light text-gray-900">
+          <p className="text-2xl w-1/2 mt-2 font-light text-gray-900 text-center">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deserunt
             accusantium dolor minus tenetur eligendi!
           </p>
-          <div className=" w-full h-full flex flex-row items-center justify-center mt-10 gap-2">
-            <div className="w-1/3 h-4/6 bg-zinc-800  "></div>
-            <div className="w-1/3 h-full bg-zinc-800"></div>
-            <div className="w-1/3 h-4/6 bg-zinc-800  "></div>
+          <div className="w-full h-full flex flex-row items-center justify-center mt-10 gap-6">
+            {/* Card 1 */}
+            <div className="w-1/3 h-4/6 bg-gradient-to-b from-zinc-900 to-zinc-800 rounded-3xl relative overflow-hidden shadow-2xl group hover:scale-105 transition-transform duration-300">
+              <div className="absolute inset-0 bg-white/5"></div>
+              <div className="relative z-10 p-8 h-full flex flex-col justify-between">
+                <div>
+                  <div className="w-16 h-16 bg-zinc-700 rounded-full mb-4 shadow-lg flex items-center justify-center">
+                    <svg
+                      className="w-8 h-8 text-white opacity-80"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="white"
+                        strokeWidth="2"
+                        fill="none"
+                      />
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="4"
+                        fill="white"
+                        className="opacity-30"
+                      />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-2">
+                    Start Your Journey
+                  </h3>
+                  <p className="text-zinc-200 text-sm">
+                    Create your free account and unlock the universe of
+                    knowledge.
+                  </p>
+                </div>
+                <div className="flex justify-center mt-6">
+                  <a
+                    href="/signup"
+                    className="bg-white text-black font-semibold px-6 py-2 rounded-full shadow hover:bg-zinc-200 transition"
+                  >
+                    Sign Up
+                  </a>
+                </div>
+              </div>
+              <div className="absolute top-4 right-4 w-2 h-2 bg-white rounded-full opacity-30 animate-pulse"></div>
+              <div className="absolute bottom-8 left-6 w-1 h-1 bg-white rounded-full opacity-10"></div>
+            </div>
+
+            {/* Card 2 */}
+            <div className="w-1/3 h-full bg-gradient-to-b from-zinc-800 to-zinc-700 rounded-3xl relative overflow-hidden shadow-2xl group hover:scale-105 transition-transform duration-300">
+              <div className="absolute inset-0 bg-white/5"></div>
+              <div className="relative z-10 p-8 h-full flex flex-col justify-between">
+                <div>
+                  <div className="w-20 h-20 bg-zinc-600 rounded-full mb-4 shadow-lg flex items-center justify-center">
+                    <svg
+                      className="w-12 h-12 text-white opacity-60"
+                      fill="none"
+                      viewBox="0 0 32 32"
+                      stroke="currentColor"
+                    >
+                      <ellipse
+                        cx="16"
+                        cy="16"
+                        rx="13"
+                        ry="6"
+                        stroke="white"
+                        strokeWidth="2"
+                        fill="none"
+                      />
+                      <ellipse
+                        cx="16"
+                        cy="16"
+                        rx="4"
+                        ry="2"
+                        fill="white"
+                        className="opacity-20"
+                      />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-2">
+                    Why Join us?
+                  </h3>
+                  <p className="text-zinc-200 text-sm">
+                    Track your progress, earn xp, and access exclusive space
+                    knowledge.
+                  </p>
+                </div>
+                <div className="flex justify-center mt-6">
+                  <a
+                    href="/signup"
+                    className="bg-white text-black font-semibold px-6 py-2 rounded-full shadow hover:bg-zinc-200 transition"
+                  >
+                    Create Account
+                  </a>
+                </div>
+              </div>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 border-2 border-white/10 rounded-full"></div>
+              <div className="absolute top-6 right-8 w-2 h-2 bg-white rounded-full opacity-20"></div>
+            </div>
+
+            {/* Card 3 */}
+            <div className="w-1/3 h-4/6 bg-gradient-to-b from-zinc-900 to-zinc-700 rounded-3xl relative overflow-hidden shadow-2xl group hover:scale-105 transition-transform duration-300">
+              <div className="absolute inset-0 bg-white/5"></div>
+              <div className="relative z-10 p-8 h-full flex flex-col justify-between">
+                <div>
+                  <div className="w-16 h-16 bg-zinc-800 rounded-full mb-4 shadow-lg flex items-center justify-center">
+                    <svg
+                      className="w-10 h-10 text-white opacity-50"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        d="M2 12h20M12 2v20"
+                        stroke="white"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-2">
+                    Already a member?
+                  </h3>
+                  <p className="text-zinc-200 text-sm">
+                    Sign in and continue your cosmic adventure with interactive
+                    tasks!
+                  </p>
+                </div>
+                <div className="flex justify-center mt-6">
+                  <a
+                    href="/signup"
+                    className="bg-white text-black font-semibold px-6 py-2 rounded-full shadow hover:bg-zinc-200 transition"
+                  >
+                    Get Started
+                  </a>
+                </div>
+              </div>
+              <div className="absolute top-2 left-4 w-1 h-1 bg-white rounded-full opacity-10"></div>
+              <div className="absolute top-8 right-2 w-1 h-1 bg-white rounded-full opacity-10"></div>
+              <div className="absolute bottom-12 right-8 w-1 h-1 bg-white rounded-full opacity-10"></div>
+            </div>
           </div>
         </div>
       </div>

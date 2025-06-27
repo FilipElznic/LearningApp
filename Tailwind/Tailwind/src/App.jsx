@@ -93,6 +93,7 @@ function App() {
             <Route path="/moon" element={<MoonPage />} />
             <Route path="/earth" element={<EarthPage />} />
             <Route path="/spacecraft" element={<SpacecraftPage />} />
+            <Route path="/astronaut" element={<AstronautsPage />} />
 
             {/* Protected routes - require authentication */}
             <Route element={<ProtectedRoute />}>
