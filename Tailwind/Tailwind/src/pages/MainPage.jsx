@@ -265,7 +265,7 @@ function MainPage() {
                 </div>
                 <div className="flex justify-center mt-6">
                   <a
-                    href="/signup"
+                    href="/login"
                     className="bg-white text-black font-semibold px-6 py-2 rounded-full shadow hover:bg-zinc-200 transition"
                   >
                     Get Started
