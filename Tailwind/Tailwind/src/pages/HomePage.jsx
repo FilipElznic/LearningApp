@@ -1,5 +1,6 @@
 import { useAuth } from "../AuthContext";
-
+import { Link } from "react-router-dom";
+import Spline from "@splinetool/react-spline";
 function HomePage() {
   const { signOut, user } = useAuth();
 
@@ -20,18 +21,54 @@ function HomePage() {
               </div>
               <div className="flex items-center gap-4">
                 {user && (
-                  <button
-                    onClick={handleLogout}
-                    className="bg-orange-600 hover:bg-orange-700 text-white font-semibold px-5 py-2 rounded-lg transition"
-                  >
-                    Logout
-                  </button>
+                  <>
+                    <Link
+                      to="/profile"
+                      className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2.5 rounded-full transition duration-300 ease-in-out transform hover:scale-105 shadow-lg flex items-center gap-2"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                        />
+                      </svg>
+                      Profile
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2.5 rounded-full transition duration-300 ease-in-out transform hover:scale-105 shadow-lg flex items-center gap-2"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                        />
+                      </svg>
+                      Logout
+                    </button>
+                  </>
                 )}
               </div>
             </nav>
             <div className="flex flex-row w-full">
-              <div className=" m-5 w-1/2 pt-5">
-                <h1 className="text-white text-8xl font-bold  mt-10">
+              <div className=" m-5 w-1/2 pt-5 ml-20">
+                <h1 className="text-white text-8xl font-bold  mt-10 ">
                   Welcome <br></br>aboard
                 </h1>
                 <p className="mt-10 text-white text-lg">
@@ -41,7 +78,12 @@ function HomePage() {
                   adipisci dolores. Repellat ad veniam blanditiis?
                 </p>
               </div>
-              <div className="bg-orange-600 m-5 w-full h-full "></div>
+              <div className="m-5 w-1/2 h-[70vh] overflow-hidden">
+                <Spline
+                  scene="https://prod.spline.design/azadXvKhi40FDGgp/scene.splinecode"
+                  className="w-full h-full object-contain"
+                />
+              </div>
             </div>
           </div>
           <div className="row-start-4 rounded-bl-[50px] bg-black flex items-center justify-center">
