@@ -41,27 +41,13 @@ const Navbar = () => {
           />
         </Link>
       </div>
-      <div className="hidden md:flex justify-center w-72 items-center flex-1 max-w-md mx-4 absolute left-1/2 transform -translate-x-1/2 ">
-        <div className="flex items-center w-full h-10 bg-gray-300 rounded-full px-4">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-4 w-4 text-black"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1010.5 3a7.5 7.5 0 006.15 13.65z"
-            />
-          </svg>
-          <input
-            type="text"
-            placeholder="Search"
-            className="ml-2 bg-transparent outline-none text-sm w-full text-black placeholder:text-black"
-          />
+      <div className="hidden md:flex justify-center items-center flex-1 max-w-md mx-4 absolute left-1/2 transform -translate-x-1/2">
+        <div className="flex items-center gap-3 text-white">
+          <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+          <span className="text-lg font-medium tracking-wide">
+            Explore • Learn • Discover
+          </span>
+          <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
         </div>
       </div>
     </nav>

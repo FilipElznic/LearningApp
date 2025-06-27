@@ -127,22 +127,18 @@ function HomePage() {
               </a>
             </div>
           </div>
-          <div className="col-span-5 row-span-2 col-start-1 row-start-7 rounded-b-[50px] rounded-tl-[50px] bg-black">
-            4
+          <div className="col-span-5 row-span-2 col-start-1 row-start-7 rounded-b-[50px] rounded-tl-[50px] bg-black"></div>
+          <div className="col-start-5 row-start-6 rounded-tr-[50px] bg-black"></div>
+          <div className="row-span-2 col-start-1 row-start-5 bg-black flex items-center justify-start">
+            <div className="w-1/2 h-full bg-white rounded-r-[150px] "></div>
           </div>
-          <div className="col-start-5 row-start-6 rounded-tr-[50px] bg-black">
-            5
-          </div>
-          <div className="row-span-2 col-start-1 row-start-5 bg-black ">
-            <div className="w-full h-full bg-white rounded-r-[50px] "></div>
-          </div>
-          <div className="row-span-2 col-start-5 row-start-4 bg-black">
-            <div className="w-full h-full bg-white rounded-l-[50px] "></div>
+          <div className="row-span-2 col-start-5 row-start-4 bg-black flex items-center justify-end">
+            <div className="w-1/2 h-full bg-white rounded-l-[150px] "></div>
           </div>
         </div>
       </div>
 
-      <div className="w-full h-[20vh]"> </div>
+      <div className="w-full h-[20vh] bg-white"> </div>
     </>
   );
 }

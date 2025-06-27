@@ -14,8 +14,7 @@ const Footer = () => {
               Learning App
             </h3>
             <p className="text-white max-w-xs">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio
-              nihil.
+              This project is created via project shipwreacked by Filip Elznic.
             </p>
           </div>
 
