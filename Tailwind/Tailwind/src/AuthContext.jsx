@@ -45,14 +45,14 @@ export function AuthProvider({ children }) {
   const signUp = async (credentials) => {
     setAuthError(null);
 
-    const { error } = await supabase.auth.signUp(credentials);
+    const { data, error } = await supabase.auth.signUp(credentials);
 
     if (error) {
       setAuthError(error.message);
       return { error };
     }
 
-    return { success: true };
+    return { data, success: true };
   };
 
   // Sign in function with redirect

@@ -1,6 +1,6 @@
 import { useAuth } from "../AuthContext";
 import { Link } from "react-router-dom";
-import Spline from "@splinetool/react-spline";
+import Leaderboard from "../Components/Leaderboard";
 
 function HomePage() {
   const { signOut, user } = useAuth();
@@ -30,13 +30,7 @@ function HomePage() {
             />
           ))}
         </div>
-        {/* Spline 3D Model - larger and more prominent */}
-        <div className="hidden md:block absolute right-0 top-0 h-[80vh] w-[55vw] z-10 pointer-events-none">
-          <Spline
-            scene="https://prod.spline.design/azadXvKhi40FDGgp/scene.splinecode"
-            className="w-full h-full object-contain opacity-80"
-          />
-        </div>
+
         {/* Header/Nav */}
         <nav className="w-full flex items-center justify-between px-10 py-6 bg-transparent text-white z-20 relative">
           <div className="text-2xl font-bold tracking-wide">LearningApp</div>
@@ -87,35 +81,80 @@ function HomePage() {
             )}
           </div>
         </nav>
-        {/* Main Content - Flex, not grid */}
-        <div className="flex flex-col md:flex-row w-full flex-1 z-10 relative">
-          {/* Left Welcome Section */}
-          <div className="flex-1 flex flex-col justify-center pl-10 pt-10 z-20">
-            <h1 className="text-white text-7xl md:text-8xl font-extrabold mt-10 drop-shadow-lg">
-              Welcome, Explorer
-            </h1>
-            <p className="mt-10 text-zinc-200 text-xl max-w-lg">
-              Step into your cosmic command center. Here you can track your
-              progress, view your astronaut profile, and launch into new
-              learning missions. The universe of knowledge awaits—are you ready
-              to discover new worlds?
+        {/* Hero Section */}
+        <div className="flex flex-col items-center justify-center w-full flex-1 text-center px-10 z-20 relative">
+          <div className="max-w-4xl mx-auto">
+            {/* Welcome Message */}
+            <div className="flex items-center justify-center mb-6">
+              <h1 className="text-white text-5xl md:text-7xl font-extrabold tracking-wide">
+                Welcome, {user?.email?.split("@")[0] || "Explorer"}!
+              </h1>
+            </div>
+
+            <p className="text-zinc-200 text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed">
+              🌟 Ready to embark on your cosmic learning journey? Challenge
+              yourself with multiple choice questions, pick the right answer
+              from A, B, or C, and earn XP based on the difficulty level!
             </p>
-            <div className="mt-10 flex gap-4">
+
+            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
               <Link
                 to="/tasks"
-                className="bg-gradient-to-r from-indigo-700 to-indigo-900 hover:from-indigo-600 hover:to-indigo-800 text-white font-bold px-8 py-3 rounded-full shadow-lg transition text-lg border border-indigo-900"
+                className="bg-gradient-to-r from-indigo-700 to-indigo-900 hover:from-indigo-600 hover:to-indigo-800 text-white font-bold px-10 py-4 rounded-full shadow-lg transition text-xl border border-indigo-900 transform hover:scale-105"
               >
                 🚀 Start Your Mission
               </Link>
               <Link
                 to="/profile"
-                className="bg-zinc-800 hover:bg-zinc-700 text-white font-semibold px-8 py-3 rounded-full shadow-lg transition text-lg border border-zinc-700"
+                className="bg-zinc-800 hover:bg-zinc-700 text-white font-semibold px-10 py-4 rounded-full shadow-lg transition text-xl border border-zinc-700 transform hover:scale-105"
               >
                 View Profile
               </Link>
             </div>
+
+            {/* Feature Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              <div className="bg-gradient-to-br from-zinc-900/90 to-zinc-800/80 rounded-3xl shadow-2xl border border-zinc-700 backdrop-blur-md p-8 text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-zinc-700 to-zinc-900 rounded-full flex items-center justify-center shadow-lg mx-auto mb-6">
+                  <span className="text-2xl">🎯</span>
+                </div>
+                <h3 className="text-white font-semibold text-xl mb-4">
+                  Answer Multiple Choice Questions
+                </h3>
+                <p className="text-zinc-300">
+                  Choose the correct answer from A, B, or C options. Each
+                  question has only one right answer, so think carefully before
+                  selecting!
+                </p>
+              </div>
+
+              <div className="bg-gradient-to-br from-zinc-900/90 to-zinc-800/80 rounded-3xl shadow-2xl border border-zinc-700 backdrop-blur-md p-8 text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-zinc-700 to-zinc-900 rounded-full flex items-center justify-center shadow-lg mx-auto mb-6">
+                  <span className="text-2xl">🏆</span>
+                </div>
+                <h3 className="text-white font-semibold text-xl mb-4">
+                  Earn XP Based on Difficulty
+                </h3>
+                <p className="text-zinc-300">
+                  Harder questions reward more XP! Easy questions give 5 XP,
+                  medium questions give 10 XP, and hard questions give 15 XP.
+                </p>
+              </div>
+
+              <div className="bg-gradient-to-br from-zinc-900/90 to-zinc-800/80 rounded-3xl shadow-2xl border border-zinc-700 backdrop-blur-md p-8 text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-zinc-700 to-zinc-900 rounded-full flex items-center justify-center shadow-lg mx-auto mb-6">
+                  <span className="text-2xl">🚀</span>
+                </div>
+                <h3 className="text-white font-semibold text-xl mb-4">
+                  Track Your Progress
+                </h3>
+                <p className="text-zinc-300">
+                  Monitor your achievements, view your astronaut profile, and
+                  see how far you&apos;ve traveled in your learning odyssey.
+                </p>
+              </div>
+            </div>
           </div>
-          {/* Right Spline/Visual Section */}
         </div>
         {/* Star Icon Section */}
         <div className="flex items-center justify-center w-full py-8  rounded-bl-[50px]">
@@ -130,32 +169,123 @@ function HomePage() {
         </div>
         {/* Main Call to Action Section */}
         <div className="flex flex-col items-center justify-center w-full py-20 shadow-lg">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-24 w-24 mb-4 text-indigo-400 drop-shadow-lg"
-            fill="none"
-            viewBox="0 0 64 64"
-          >
-            <circle cx="32" cy="32" r="28" fill="#18181b" />
-            <circle cx="32" cy="32" r="18" fill="#6366f1" />
-            <circle cx="44" cy="24" r="4" fill="#f1f5f9" />
-            <circle cx="24" cy="44" r="2" fill="#f1f5f9" />
-            <circle cx="40" cy="40" r="1.5" fill="#f1f5f9" />
-          </svg>
-          <h2 className="text-4xl font-extrabold text-white mb-2 text-center drop-shadow-lg">
-            Your Next Cosmic Task Awaits!
-          </h2>
-          <p className="text-lg text-zinc-300 mb-6 text-center max-w-md">
-            Dive into interactive challenges, earn stars, and unlock new
-            galaxies of wisdom. Every completed task brings you closer to
-            becoming a true space pioneer.
-          </p>
-          <Link
-            to="/tasks"
-            className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-8 py-3 rounded-full shadow-lg transition text-lg"
-          >
-            Start Your Mission
-          </Link>
+          <div className="bg-gradient-to-br from-zinc-900/90 to-zinc-800/80 rounded-3xl shadow-2xl border border-zinc-700 backdrop-blur-md p-10 max-w-4xl mx-auto text-center">
+            <div className="flex justify-center mb-6">
+              <div className="w-16 h-16 bg-gradient-to-br from-zinc-700 to-zinc-900 rounded-full flex items-center justify-center shadow-lg">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-8 w-8 text-indigo-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  />
+                </svg>
+              </div>
+            </div>
+
+            <h2 className="text-4xl font-extrabold text-white mb-4 tracking-wide">
+              Your Next Cosmic Task Awaits!
+            </h2>
+            <p className="text-lg text-zinc-300 mb-8 max-w-2xl mx-auto">
+              Answer multiple choice questions across different topics! Each
+              question has three options (A, B, C), and the XP you earn depends
+              on how challenging the question is.
+            </p>
+
+            <Link
+              to="/tasks"
+              className="inline-flex items-center bg-gradient-to-r from-indigo-700 to-indigo-900 hover:from-indigo-600 hover:to-indigo-800 text-white font-bold px-8 py-3 rounded-full shadow-lg transition text-lg border border-indigo-900"
+            >
+              <svg
+                className="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                />
+              </svg>
+              Start Your Mission
+            </Link>
+          </div>
+        </div>
+
+        {/* Stats Section */}
+        <div className="w-full py-16 px-10">
+          <div className="max-w-6xl mx-auto">
+            <div className="bg-gradient-to-br from-zinc-900/90 to-zinc-800/80 rounded-3xl shadow-2xl border border-zinc-700 backdrop-blur-md p-8">
+              <h3 className="text-3xl font-extrabold text-white mb-8 text-center tracking-wide">
+                Ready to Join the Cosmic Community?
+              </h3>
+
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-zinc-700 to-zinc-900 rounded-full flex items-center justify-center shadow-lg mx-auto mb-4">
+                    <span className="text-2xl">🎯</span>
+                  </div>
+                  <h4 className="text-white font-semibold text-xl mb-2">
+                    Questions
+                  </h4>
+                  <p className="text-zinc-300 text-sm">
+                    Multiple choice questions with A, B, C options
+                  </p>
+                </div>
+
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-zinc-700 to-zinc-900 rounded-full flex items-center justify-center shadow-lg mx-auto mb-4">
+                    <span className="text-2xl">⭐</span>
+                  </div>
+                  <h4 className="text-white font-semibold text-xl mb-2">
+                    XP Rewards
+                  </h4>
+                  <p className="text-zinc-300 text-sm">
+                    Earn 5, 10, or 15 XP based on question difficulty
+                  </p>
+                </div>
+
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-zinc-700 to-zinc-900 rounded-full flex items-center justify-center shadow-lg mx-auto mb-4">
+                    <span className="text-2xl">🏆</span>
+                  </div>
+                  <h4 className="text-white font-semibold text-xl mb-2">
+                    Progress
+                  </h4>
+                  <p className="text-zinc-300 text-sm">
+                    Track your learning journey and achievements
+                  </p>
+                </div>
+
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-zinc-700 to-zinc-900 rounded-full flex items-center justify-center shadow-lg mx-auto mb-4">
+                    <span className="text-2xl">🚀</span>
+                  </div>
+                  <h4 className="text-white font-semibold text-xl mb-2">
+                    Growth
+                  </h4>
+                  <p className="text-zinc-300 text-sm">
+                    Level up your knowledge and skills
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Leaderboard Section */}
+        <div className="w-full py-16 px-10">
+          <div className="max-w-4xl mx-auto">
+            <Leaderboard />
+          </div>
         </div>
         {/* Decorative bottom section */}
         <div className="w-full h-32 bg-gradient-to-t from-black via-zinc-900 to-transparent rounded-t-[50px] mt-10"></div>

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../AuthContext";
 import { Link } from "react-router-dom";
 import Spline from "@splinetool/react-spline";
+import { supabase } from "../supabaseClient";
 
 export default function SignupForm() {
   const [email, setEmail] = useState("");
@@ -18,8 +19,26 @@ export default function SignupForm() {
     setMessage(null);
 
     try {
-      const { error } = await signUp({ email, password });
+      const { data, error } = await signUp({ email, password });
       if (error) throw error;
+
+      // If signup was successful and we have user data, insert into users table
+      if (data?.user) {
+        const { error: insertError } = await supabase.from("users").insert([
+          {
+            uuid: data.user.id,
+            email: data.user.email,
+            xp: 0,
+            created_at: new Date().toISOString(),
+          },
+        ]);
+
+        if (insertError) {
+          console.error("Error inserting user data:", insertError);
+          // Don't throw here as the auth signup was successful
+        }
+      }
+
       setMessage("Check your email for the confirmation link!");
     } catch (error) {
       setError(error.message);
