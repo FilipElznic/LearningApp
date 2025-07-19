@@ -16,6 +16,11 @@ export default function Tasks() {
   const [error, setError] = useState(null);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [showResults, setShowResults] = useState({});
+  const [visibleCategories, setVisibleCategories] = useState({
+    earth: false,
+    moon: false,
+    space: false,
+  });
   const { user } = useAuth();
   const { toast } = useToast();
 
@@ -167,6 +172,13 @@ export default function Tasks() {
     }));
   };
 
+  const toggleCategoryVisibility = (category) => {
+    setVisibleCategories((prev) => ({
+      ...prev,
+      [category]: !prev[category],
+    }));
+  };
+
   const handleSubmitAnswer = async (question) => {
     const selectedAnswer = selectedAnswers[question.id];
     if (!selectedAnswer) return;
@@ -314,15 +326,17 @@ export default function Tasks() {
     }
   };
 
-  const renderCategory = (category, categoryQuestions) => {
+  const renderCategoryButton = (category) => {
     const categoryInfo = getCategoryInfo(category);
+    const categoryQuestions = questions[category];
+    const isVisible = visibleCategories[category];
 
     return (
       <div
         key={category}
         className="bg-gradient-to-br from-zinc-900/90 to-zinc-800/80 rounded-3xl shadow-2xl border border-zinc-700 backdrop-blur-md p-8 mb-8"
       >
-        <div className="text-center mb-6">
+        <div className="text-center">
           <div className="flex items-center justify-center mb-4">
             <div className="text-4xl mr-3">{categoryInfo.emoji}</div>
             <h3 className="text-3xl font-bold text-white">
@@ -330,14 +344,26 @@ export default function Tasks() {
             </h3>
           </div>
           <p className="text-zinc-300 mb-4">{categoryInfo.description}</p>
-          <p className="text-zinc-400">
+          <p className="text-zinc-400 mb-6">
             {categoryQuestions.length} question
             {categoryQuestions.length !== 1 ? "s" : ""} available
           </p>
+
+          <button
+            onClick={() => toggleCategoryVisibility(category)}
+            className={`px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg ${
+              isVisible
+                ? "bg-red-600 hover:bg-red-700 text-white"
+                : `bg-gradient-to-r ${categoryInfo.color} text-white hover:shadow-xl`
+            }`}
+          >
+            {isVisible ? "Hide Tasks" : "Show Tasks"}
+          </button>
         </div>
 
-        {categoryQuestions.length > 0 ? (
-          <div className="space-y-6">
+        {/* Tasks content - only show if visible */}
+        {isVisible && categoryQuestions.length > 0 && (
+          <div className="mt-8 space-y-6">
             {categoryQuestions.map((question) => {
               const questionResult = showResults[question.id];
               const selectedAnswer = selectedAnswers[question.id];
@@ -414,9 +440,19 @@ export default function Tasks() {
               );
             })}
           </div>
-        ) : (
-          <div className="text-center text-zinc-400 py-8">
-            <p>No questions available for this category yet.</p>
+        )}
+
+        {/* Empty state when no tasks available */}
+        {isVisible && categoryQuestions.length === 0 && (
+          <div className="mt-8 text-center py-12">
+            <div className="text-6xl mb-4">🎉</div>
+            <h3 className="text-2xl font-bold text-white mb-2">
+              All tasks completed!
+            </h3>
+            <p className="text-zinc-400">
+              You&apos;ve mastered all {categoryInfo.name.toLowerCase()}. Great
+              job!
+            </p>
           </div>
         )}
       </div>
@@ -508,8 +544,8 @@ export default function Tasks() {
             </div>
 
             {/* Categories */}
-            {Object.entries(questions).map(([category, categoryQuestions]) =>
-              renderCategory(category, categoryQuestions)
+            {Object.keys(questions).map((category) =>
+              renderCategoryButton(category)
             )}
           </div>
         )}
