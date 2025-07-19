@@ -1,13 +1,37 @@
 import { useAuth } from "../AuthContext";
+import { useToast } from "../ToastContext";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Leaderboard from "../Components/Leaderboard";
 
 function HomePage() {
   const { signOut, user } = useAuth();
+  const { toast } = useToast();
+
+  // Show welcome toast when user first visits the page
+  useEffect(() => {
+    if (user) {
+      const hasShownWelcome = sessionStorage.getItem("welcome-shown");
+      if (!hasShownWelcome) {
+        setTimeout(() => {
+          toast.info(
+            `Welcome back, ${user.email}! Ready to explore the cosmos and learn?`
+          );
+          sessionStorage.setItem("welcome-shown", "true");
+        }, 1000);
+      }
+    }
+  }, [user, toast]);
 
   const handleLogout = async () => {
-    await signOut();
-    // Optionally, redirect or show a message
+    try {
+      await signOut();
+      toast.logout();
+      // Clear welcome toast flag on logout
+      sessionStorage.removeItem("welcome-shown");
+    } catch (error) {
+      toast.error("Logout failed. Please try again.");
+    }
   };
 
   return (

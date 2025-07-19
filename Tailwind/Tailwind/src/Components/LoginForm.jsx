@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useAuth } from "../AuthContext";
+import { useToast } from "../ToastContext";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -7,6 +8,7 @@ export default function LoginForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const { signIn } = useAuth();
+  const { toast } = useToast();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,9 +17,15 @@ export default function LoginForm() {
 
     try {
       const { error } = await signIn({ email, password });
-      if (error) throw error;
+      if (error) {
+        throw error;
+      } else {
+        // Show success login toast
+        toast.login();
+      }
     } catch (error) {
       setError(error.message);
+      toast.error("Login failed. Please check your credentials.");
     } finally {
       setLoading(false);
     }

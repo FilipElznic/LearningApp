@@ -1,4 +1,5 @@
 import { AuthProvider } from "./AuthContext";
+import { ToastProvider } from "./ToastContext";
 import {
   BrowserRouter,
   Routes,
@@ -77,33 +78,35 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <Routes>
-          {/* Wrap all routes with the Layout component */}
-          <Route element={<Layout />}>
-            {/* Auth routes - redirect to profile if already logged in */}
-            <Route element={<AuthRoute />}>
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<SignupForm />} />
-              <Route path="/" element={<MainPage />} />
+        <ToastProvider>
+          <Routes>
+            {/* Wrap all routes with the Layout component */}
+            <Route element={<Layout />}>
+              {/* Auth routes - redirect to profile if already logged in */}
+              <Route element={<AuthRoute />}>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/signup" element={<SignupForm />} />
+                <Route path="/" element={<MainPage />} />
+              </Route>
+
+              <Route path="/moon" element={<MoonPage />} />
+              <Route path="/earth" element={<EarthPage />} />
+              <Route path="/spacecraft" element={<SpacecraftPage />} />
+              <Route path="/astronaut" element={<AstronautsPage />} />
+
+              {/* Protected routes - require authentication */}
+              <Route element={<ProtectedRoute />}>
+                <Route path="/main" element={<HomePage />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/tasks" element={<TasksPage />} />
+                {/* Add more protected routes here */}
+              </Route>
+
+              {/* Default redirect */}
+              <Route path="*" element={<Navigate to="/login" replace />} />
             </Route>
-
-            <Route path="/moon" element={<MoonPage />} />
-            <Route path="/earth" element={<EarthPage />} />
-            <Route path="/spacecraft" element={<SpacecraftPage />} />
-            <Route path="/astronaut" element={<AstronautsPage />} />
-
-            {/* Protected routes - require authentication */}
-            <Route element={<ProtectedRoute />}>
-              <Route path="/main" element={<HomePage />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/tasks" element={<TasksPage />} />
-              {/* Add more protected routes here */}
-            </Route>
-
-            {/* Default redirect */}
-            <Route path="*" element={<Navigate to="/login" replace />} />
-          </Route>
-        </Routes>
+          </Routes>
+        </ToastProvider>
       </AuthProvider>
     </BrowserRouter>
   );

@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../AuthContext";
+import { useToast } from "../ToastContext";
 import { Menu, X, BookOpen } from "lucide-react";
 import img from "../assets/fullmoon.jpg"; // Adjust the path as necessary
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, signOut } = useAuth();
+  const { toast } = useToast();
   const location = useLocation();
 
   const toggleMenu = () => {
@@ -20,9 +22,11 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       await signOut();
+      toast.logout();
       closeMenu();
     } catch (error) {
       console.error("Logout failed:", error);
+      toast.error("Logout failed. Please try again.");
     }
   };
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../AuthContext";
+import { useToast } from "../ToastContext";
 import { Link } from "react-router-dom";
 import Spline from "@splinetool/react-spline";
 import { supabase } from "../supabaseClient";
@@ -11,6 +12,7 @@ export default function SignupForm() {
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
   const { signUp } = useAuth();
+  const { toast } = useToast();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,13 +37,20 @@ export default function SignupForm() {
 
         if (insertError) {
           console.error("Error inserting user data:", insertError);
-          // Don't throw here as the auth signup was successful
+          toast.error(
+            "Account created but there was an issue setting up your profile."
+          );
+        } else {
+          toast.success(
+            "Account created successfully! Check your email for confirmation."
+          );
         }
       }
 
       setMessage("Check your email for the confirmation link!");
     } catch (error) {
       setError(error.message);
+      toast.error("Signup failed. Please try again.");
     } finally {
       setLoading(false);
     }

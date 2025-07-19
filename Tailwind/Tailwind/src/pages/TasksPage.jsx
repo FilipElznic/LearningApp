@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../AuthContext";
+import { useToast } from "../ToastContext";
 import { supabase } from "../supabaseClient";
 
 export default function Tasks() {
@@ -12,11 +14,10 @@ export default function Tasks() {
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [activeQuestion, setActiveQuestion] = useState(null);
-  const [selectedAnswer, setSelectedAnswer] = useState("");
-  const [showResult, setShowResult] = useState(false);
-  const [isAnswering, setIsAnswering] = useState(false);
+  const [selectedAnswers, setSelectedAnswers] = useState({});
+  const [showResults, setShowResults] = useState({});
   const { user } = useAuth();
+  const { toast } = useToast();
 
   // Fetch tasks from database
   useEffect(() => {
@@ -126,14 +127,14 @@ export default function Tasks() {
   }, [user]);
 
   const updateUserXP = async (xpToAdd) => {
-    if (!user) return;
+    if (!user || !userDbId) return;
 
     try {
       const newXP = userXP + xpToAdd;
       const { error } = await supabase
         .from("users")
         .update({ xp: newXP })
-        .eq("email", user.email);
+        .eq("id", userDbId);
 
       if (error) throw error;
       setUserXP(newXP);
@@ -159,40 +160,48 @@ export default function Tasks() {
     }
   };
 
-  const startQuestion = (question) => {
-    setActiveQuestion(question);
-    setSelectedAnswer("");
-    setShowResult(false);
-    setIsAnswering(true);
+  const handleAnswerSelect = (questionId, answer) => {
+    setSelectedAnswers((prev) => ({
+      ...prev,
+      [questionId]: answer,
+    }));
   };
 
-  const handleAnswerSelect = (answer) => {
-    setSelectedAnswer(answer);
-  };
+  const handleSubmitAnswer = async (question) => {
+    const selectedAnswer = selectedAnswers[question.id];
+    if (!selectedAnswer) return;
 
-  const handleSubmitAnswer = async () => {
-    const isCorrect = selectedAnswer === activeQuestion.correct;
+    const isCorrect = selectedAnswer === question.correct;
 
     if (isCorrect) {
-      await updateUserXP(activeQuestion.xp);
-      await markTaskAsCompleted(activeQuestion.id);
+      // Show correct answer toast
+      toast.correctAnswer();
+
+      // Show XP gain toast
+      toast.xp(question.xp);
+
+      await updateUserXP(question.xp);
+      await markTaskAsCompleted(question.id);
+    } else {
+      // Show incorrect answer toast
+      toast.wrongAnswer();
     }
 
-    setShowResult(true);
+    setShowResults((prev) => ({
+      ...prev,
+      [question.id]: {
+        isCorrect,
+        show: true,
+      },
+    }));
 
     setTimeout(() => {
-      setIsAnswering(false);
-      setActiveQuestion(null);
-      setSelectedAnswer("");
-      setShowResult(false);
-
-      // Refresh tasks to hide completed ones
       if (isCorrect) {
+        // Refresh tasks to hide completed ones
         const fetchTasks = async () => {
           if (!user || !userDbId) return;
 
           try {
-            // First get all tasks
             const { data: allTasks, error: tasksError } = await supabase
               .from("tasks")
               .select("*")
@@ -200,7 +209,6 @@ export default function Tasks() {
 
             if (tasksError) throw tasksError;
 
-            // Then get completed tasks for this user
             const { data: completedTasks, error: completedError } =
               await supabase
                 .from("finishedtasks")
@@ -209,17 +217,14 @@ export default function Tasks() {
 
             if (completedError) throw completedError;
 
-            // Create a set of completed task IDs for efficient lookup
             const completedTaskIds = new Set(
               completedTasks.map((task) => task.taskId)
             );
 
-            // Filter out completed tasks
             const availableTasks = allTasks.filter(
               (task) => !completedTaskIds.has(task.id)
             );
 
-            // Group tasks by type
             const groupedTasks = {
               earth: [],
               moon: [],
@@ -227,8 +232,7 @@ export default function Tasks() {
             };
 
             availableTasks.forEach((task) => {
-              // Get the correct answer from the answerr column
-              let correctAnswer = "A"; // Default
+              let correctAnswer = "A";
               if (task.answerr) {
                 const correctValue = task.answerr.toLowerCase();
                 if (correctValue === "answera") correctAnswer = "A";
@@ -265,15 +269,16 @@ export default function Tasks() {
         };
 
         fetchTasks();
+      } else {
+        // Hide result after some time for wrong answers
+        setTimeout(() => {
+          setShowResults((prev) => ({
+            ...prev,
+            [question.id]: { ...prev[question.id], show: false },
+          }));
+        }, 2000);
       }
     }, 2000);
-  };
-
-  const closeQuestion = () => {
-    setIsAnswering(false);
-    setActiveQuestion(null);
-    setSelectedAnswer("");
-    setShowResult(false);
   };
 
   const getCategoryInfo = (category) => {
@@ -332,31 +337,82 @@ export default function Tasks() {
         </div>
 
         {categoryQuestions.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {categoryQuestions.map((question) => (
-              <div
-                key={question.id}
-                className="bg-zinc-800/60 rounded-2xl p-6 border border-zinc-700 hover:border-zinc-600 transition-all"
-              >
-                <h4 className="text-white font-semibold text-lg mb-3 line-clamp-2">
-                  {question.name}
-                </h4>
-                <p className="text-zinc-300 text-sm mb-4 line-clamp-3">
-                  {question.question}
-                </p>
-                <div className="flex items-center justify-between">
-                  <span className="text-zinc-400 text-sm">
-                    {question.xp} XP
-                  </span>
-                  <button
-                    onClick={() => startQuestion(question)}
-                    className="px-4 py-2 bg-gradient-to-r from-indigo-700 to-indigo-900 hover:from-indigo-600 hover:to-indigo-800 text-white text-sm font-semibold rounded-full transition"
-                  >
-                    Start Task
-                  </button>
+          <div className="space-y-6">
+            {categoryQuestions.map((question) => {
+              const questionResult = showResults[question.id];
+              const selectedAnswer = selectedAnswers[question.id];
+
+              return (
+                <div
+                  key={question.id}
+                  className="bg-zinc-800/60 rounded-2xl p-6 border border-zinc-700"
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <h4 className="text-white font-semibold text-lg flex-1">
+                      {question.name}
+                    </h4>
+                    <span className="text-zinc-400 text-sm ml-4">
+                      {question.xp} XP
+                    </span>
+                  </div>
+
+                  <p className="text-zinc-300 text-base mb-6">
+                    {question.question}
+                  </p>
+
+                  {!questionResult?.show ? (
+                    <div>
+                      <div className="space-y-3 mb-6">
+                        {question.options.map((option, index) => (
+                          <button
+                            key={index}
+                            onClick={() =>
+                              handleAnswerSelect(
+                                question.id,
+                                option.split(")")[0]
+                              )
+                            }
+                            className={`w-full p-4 rounded-xl border-2 transition-all text-left ${
+                              selectedAnswer === option.split(")")[0]
+                                ? "border-indigo-400 bg-indigo-900/40"
+                                : "border-zinc-700 bg-zinc-800/60 hover:border-zinc-600"
+                            }`}
+                          >
+                            <span className="text-white font-medium">
+                              {option}
+                            </span>
+                          </button>
+                        ))}
+                      </div>
+
+                      <div className="text-center">
+                        <button
+                          onClick={() => handleSubmitAnswer(question)}
+                          disabled={!selectedAnswer}
+                          className="px-6 py-3 bg-gradient-to-r from-indigo-700 to-indigo-900 hover:from-indigo-600 hover:to-indigo-800 text-white font-bold rounded-full shadow-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          Submit Answer
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="text-center py-4">
+                      <div className="text-4xl mb-3">
+                        {questionResult.isCorrect ? "✅" : "❌"}
+                      </div>
+                      <h5 className="text-xl font-bold text-white mb-2">
+                        {questionResult.isCorrect ? "Correct!" : "Wrong!"}
+                      </h5>
+                      <p className="text-zinc-300">
+                        {questionResult.isCorrect
+                          ? `You earned ${question.xp} XP!`
+                          : `The correct answer was ${question.correct}`}
+                      </p>
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         ) : (
           <div className="text-center text-zinc-400 py-8">
@@ -390,9 +446,30 @@ export default function Tasks() {
       {/* Header */}
       <div className="w-full px-10 py-6 z-20 relative">
         <div className="flex items-center justify-between">
-          <h1 className="text-3xl font-extrabold text-white tracking-wide">
-            Cosmic Tasks
-          </h1>
+          <div className="flex items-center gap-4">
+            <Link
+              to="/"
+              className="inline-flex items-center px-4 py-2 rounded-full bg-zinc-900/80 border border-zinc-700 text-zinc-200 hover:bg-zinc-800 hover:text-white transition font-semibold shadow backdrop-blur"
+            >
+              <svg
+                className="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
+              </svg>
+              Back to Home
+            </Link>
+            <h1 className="text-3xl font-extrabold text-white tracking-wide">
+              Cosmic Tasks
+            </h1>
+          </div>
           <div className="flex items-center gap-4">
             <div className="bg-zinc-800 px-4 py-2 rounded-full border border-zinc-700">
               <span className="text-zinc-300 text-sm">Your XP: </span>
@@ -437,88 +514,6 @@ export default function Tasks() {
           </div>
         )}
       </div>
-
-      {/* Question Modal */}
-      {isAnswering && activeQuestion && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-gradient-to-br from-zinc-900/95 to-zinc-800/95 rounded-3xl shadow-2xl border border-zinc-700 backdrop-blur-md p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto relative">
-            <div className="text-center mb-6">
-              <button
-                onClick={closeQuestion}
-                className="absolute top-4 right-4 text-zinc-400 hover:text-white transition"
-              >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-              <h3 className="text-2xl font-bold text-white mb-2">
-                {activeQuestion.name}
-              </h3>
-              <p className="text-zinc-300 text-sm">{activeQuestion.xp} XP</p>
-            </div>
-
-            {!showResult ? (
-              <div>
-                <h4 className="text-xl font-semibold text-white mb-6 text-center">
-                  {activeQuestion.question}
-                </h4>
-
-                <div className="space-y-4 mb-8">
-                  {activeQuestion.options.map((option, index) => (
-                    <button
-                      key={index}
-                      onClick={() => handleAnswerSelect(option.split(")")[0])}
-                      className={`w-full p-4 rounded-2xl border-2 transition-all text-left ${
-                        selectedAnswer === option.split(")")[0]
-                          ? "border-indigo-400 bg-indigo-900/40"
-                          : "border-zinc-700 bg-zinc-800/60 hover:border-zinc-600"
-                      }`}
-                    >
-                      <span className="text-white font-medium">{option}</span>
-                    </button>
-                  ))}
-                </div>
-
-                <div className="text-center">
-                  <button
-                    onClick={handleSubmitAnswer}
-                    disabled={!selectedAnswer}
-                    className="px-8 py-3 bg-gradient-to-r from-indigo-700 to-indigo-900 hover:from-indigo-600 hover:to-indigo-800 text-white font-bold rounded-full shadow-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    Submit Answer
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <div className="text-center">
-                <div className="text-6xl mb-4">
-                  {selectedAnswer === activeQuestion.correct ? "✅" : "❌"}
-                </div>
-                <h4 className="text-2xl font-bold text-white mb-4">
-                  {selectedAnswer === activeQuestion.correct
-                    ? "Correct!"
-                    : "Wrong!"}
-                </h4>
-                <p className="text-zinc-300 mb-4">
-                  {selectedAnswer === activeQuestion.correct
-                    ? `You earned ${activeQuestion.xp} XP!`
-                    : `The correct answer was ${activeQuestion.correct}`}
-                </p>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
 
       <style>
         {`
