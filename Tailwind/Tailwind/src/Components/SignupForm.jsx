@@ -37,20 +37,49 @@ export default function SignupForm() {
 
         if (insertError) {
           console.error("Error inserting user data:", insertError);
-          toast.error(
-            "Account created but there was an issue setting up your profile."
-          );
+
+          // Check if it's a duplicate email error in the users table
+          if (
+            insertError.message.toLowerCase().includes("duplicate") ||
+            insertError.message.toLowerCase().includes("unique") ||
+            insertError.message.toLowerCase().includes("already exists") ||
+            insertError.code === "23505"
+          ) {
+            // PostgreSQL unique constraint violation code
+            toast.error(
+              "This email is already in use. Please try with a different email or sign in."
+            );
+          } else {
+            toast.error(
+              "Account created but there was an issue setting up your profile."
+            );
+          }
         } else {
           toast.success(
             "Account created successfully! Check your email for confirmation."
           );
+          setMessage("Check your email for the confirmation link!");
         }
       }
-
-      setMessage("Check your email for the confirmation link!");
     } catch (error) {
       setError(error.message);
-      toast.error("Signup failed. Please try again.");
+
+      // Check for specific error types and show appropriate toast messages
+      if (
+        error.message.toLowerCase().includes("already registered") ||
+        error.message.toLowerCase().includes("email already exists") ||
+        error.message.toLowerCase().includes("user already registered")
+      ) {
+        toast.error(
+          "This email is already in use. Please try with a different email or sign in."
+        );
+      } else if (error.message.toLowerCase().includes("password")) {
+        toast.error(
+          "Password requirements not met. Please choose a stronger password."
+        );
+      } else {
+        toast.error("Signup failed. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
