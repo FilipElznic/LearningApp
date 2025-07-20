@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../AuthContext";
-import OAuthLogin from "../Components/OAuthLogin";
+import OAuthLogin from "../Components/OauthLogin";
 import Spline from "@splinetool/react-spline";
 
 export default function LoginPage() {
