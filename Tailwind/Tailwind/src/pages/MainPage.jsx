@@ -41,6 +41,8 @@ function MainPage() {
     let scale = 1 - firstProgress * 0.1;
     let opacity = 1;
     let rotateZ = 0;
+    let zIndex = 5;
+    let pointerEvents = "auto";
 
     // Second phase: Fade in and rotate to the right
     if (scrollY > secondPhaseStart) {
@@ -61,16 +63,24 @@ function MainPage() {
       }
     }
 
-    // Hide spline after second animation ends
+    // Hide spline after second animation ends and disable pointer events
     if (scrollY > secondPhaseEnd) {
       opacity = 0;
+      pointerEvents = "none";
+      zIndex = -1; // Move behind everything when not visible
+    }
+
+    // Disable pointer events when spline is faded or not in focus
+    if (opacity < 0.5 || scrollY > window.innerHeight * 3) {
+      pointerEvents = "none";
     }
 
     return {
       transform: `translateX(${translateX}%) scale(${scale}) rotateZ(${rotateZ}deg)`,
       opacity: opacity,
       transition: "transform 0.3s ease-out, opacity 0.3s ease-out",
-      zIndex: 5,
+      zIndex: zIndex,
+      pointerEvents: pointerEvents,
     };
   };
 
@@ -95,7 +105,7 @@ function MainPage() {
       <LandingPage />
       {/* Spline Canvas Section - Always visible with scroll animation */}
       <div
-        className="w-full md:w-2/3 h-[40vh] md:h-screen fixed top-0 right-0 z-20 flex items-center justify-center overflow-hidden"
+        className="w-full md:w-2/3 h-[40vh] md:h-screen fixed top-0 right-0 flex items-center justify-center overflow-hidden"
         ref={splineRef}
         style={getSplineTransform()}
       >
@@ -280,7 +290,7 @@ function MainPage() {
         </div>
       </div>
       <div className="w-full h-[20vh] bg-slate-50"></div>
-      <div className="min-h-screen bg-white ">
+      <div className="min-h-screen bg-white z-50 relative">
         <Planets />
       </div>
     </div>

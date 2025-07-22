@@ -32,18 +32,10 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/login"
+                  to="/tasks"
                   className="text-white hover:text-blue-600 transition duration-200"
                 >
-                  Login
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/signup"
-                  className="text-white hover:text-blue-600 transition duration-200"
-                >
-                  Sign Up
+                  Missions
                 </Link>
               </li>
               <li>
@@ -52,6 +44,21 @@ const Footer = () => {
                   className="text-white hover:text-blue-600 transition duration-200"
                 >
                   Profile
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/privacy"
+                  className="text-white hover:text-blue-600 transition duration-200 flex items-center"
+                >
+                  <svg
+                    className="w-4 h-4 mr-2"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C14.8,12.4 14.4,13.2 13.7,13.7C14.2,14.1 14.5,14.9 14.5,15.5V16.5C14.5,17.6 13.6,18.5 12.5,18.5H11.5C10.4,18.5 9.5,17.6 9.5,16.5V15.5C9.5,14.9 9.8,14.1 10.3,13.7C9.6,13.2 9.2,12.4 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.9 10.5,9.7V11.5C10.5,12.3 11.2,13 12,13C12.8,13 13.5,12.3 13.5,11.5V9.7C13.5,8.9 12.8,8.2 12,8.2Z" />
+                  </svg>
+                  Privacy Policy
                 </Link>
               </li>
             </ul>
@@ -89,7 +96,31 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="mt-8 pt-4 border-t border-gray-200 text-center text-white text-sm">
-          © {currentYear} Learning App. All rights reserved.
+          <div className="mb-2">
+            © {currentYear} Learning App. All rights reserved.
+          </div>
+          <div className="flex justify-center items-center space-x-6 text-xs">
+            <div className="text-green-400 flex items-center">
+              <svg
+                className="w-3 h-3 mr-1"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z" />
+              </svg>
+              Your data is secure
+            </div>
+            <div className="text-blue-400 flex items-center">
+              <svg
+                className="w-3 h-3 mr-1"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M9,12L11,14L15,10L13.59,8.59L11,11.17L9.41,9.59L9,12M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4Z" />
+              </svg>
+              Never shared with anyone
+            </div>
+          </div>
         </div>
       </div>
     </footer>

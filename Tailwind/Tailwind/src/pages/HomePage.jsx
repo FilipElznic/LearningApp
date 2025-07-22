@@ -3,6 +3,9 @@ import { useToast } from "../ToastContext";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Leaderboard from "../Components/Leaderboard";
+import Footer from "../Components/Footer";
+import planetEarthImg from "../assets/planetearth.jpg";
+import Spacesuit from "../assets/astronaut.png";
 
 function HomePage() {
   const { signOut, user } = useAuth();
@@ -138,50 +141,76 @@ function HomePage() {
 
             {/* Feature Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              <div className="bg-gradient-to-br from-zinc-900/90 to-zinc-800/80 rounded-3xl shadow-2xl border border-zinc-700 backdrop-blur-md p-8 text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-zinc-700 to-zinc-900 rounded-full flex items-center justify-center shadow-lg mx-auto mb-6">
-                  <span className="text-2xl">🎯</span>
+              <div className="bg-gradient-to-br from-zinc-900/90 to-zinc-800/80 rounded-3xl shadow-2xl border border-zinc-700 backdrop-blur-md p-8 text-center hover:scale-105 transition-transform duration-300">
+                <div className="w-16 h-16 bg-gradient-to-br from-indigo-600 to-purple-700 rounded-full flex items-center justify-center shadow-lg mx-auto mb-6">
+                  <svg
+                    className="w-8 h-8 text-white"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                  </svg>
                 </div>
                 <h3 className="text-white font-semibold text-xl mb-4">
-                  Answer Multiple Choice Questions
+                  Multiple Choice Mastery
                 </h3>
                 <p className="text-zinc-300">
-                  Choose the correct answer from A, B, or C options. Each
-                  question has only one right answer, so think carefully before
-                  selecting!
+                  Navigate through carefully crafted questions with A, B, or C
+                  options. Each challenge tests your knowledge and pushes your
+                  cosmic understanding further!
                 </p>
               </div>
 
-              <div className="bg-gradient-to-br from-zinc-900/90 to-zinc-800/80 rounded-3xl shadow-2xl border border-zinc-700 backdrop-blur-md p-8 text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-zinc-700 to-zinc-900 rounded-full flex items-center justify-center shadow-lg mx-auto mb-6">
-                  <span className="text-2xl">🏆</span>
+              <div className="bg-gradient-to-br from-zinc-900/90 to-zinc-800/80 rounded-3xl shadow-2xl border border-zinc-700 backdrop-blur-md p-8 text-center hover:scale-105 transition-transform duration-300">
+                <div className="w-16 h-16 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-full flex items-center justify-center shadow-lg mx-auto mb-6">
+                  <svg
+                    className="w-8 h-8 text-white"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                  </svg>
                 </div>
                 <h3 className="text-white font-semibold text-xl mb-4">
-                  Earn XP Based on Difficulty
+                  XP Constellation System
                 </h3>
                 <p className="text-zinc-300">
-                  Harder questions reward more XP! Easy questions give 5 XP,
-                  medium questions give 10 XP, and hard questions give 15 XP.
+                  Collect experience points based on difficulty levels. Easy
+                  missions grant 5 XP, medium expeditions reward 10 XP, and
+                  expert voyages offer 15 XP!
                 </p>
               </div>
 
-              <div className="bg-gradient-to-br from-zinc-900/90 to-zinc-800/80 rounded-3xl shadow-2xl border border-zinc-700 backdrop-blur-md p-8 text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-zinc-700 to-zinc-900 rounded-full flex items-center justify-center shadow-lg mx-auto mb-6">
-                  <span className="text-2xl">🚀</span>
+              <div className="bg-gradient-to-br from-zinc-900/90 to-zinc-800/80 rounded-3xl shadow-2xl border border-zinc-700 backdrop-blur-md p-8 text-center hover:scale-105 transition-transform duration-300">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-full flex items-center justify-center shadow-lg mx-auto mb-6">
+                  <svg
+                    className="w-8 h-8 text-white"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z" />
+                  </svg>
                 </div>
                 <h3 className="text-white font-semibold text-xl mb-4">
-                  Track Your Progress
+                  Cosmic Progress Tracking
                 </h3>
                 <p className="text-zinc-300">
-                  Monitor your achievements, view your astronaut profile, and
-                  see how far you&apos;ve traveled in your learning odyssey.
+                  Chart your journey through the learning galaxy. Monitor
+                  achievements, unlock new cosmic territories, and witness your
+                  transformation into a space scholar!
                 </p>
               </div>
             </div>
           </div>
         </div>
+
         {/* Star Icon Section */}
         <div className="flex items-center justify-center w-full py-8  rounded-bl-[50px]">
+          <img
+            src={planetEarthImg}
+            alt="earth image"
+            className="z-50 w-[40vw] h-[80vh] absolute left-[-350px] rotate-90 "
+          />
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-16 w-16 text-yellow-400 drop-shadow-xl"
@@ -193,6 +222,7 @@ function HomePage() {
         </div>
         {/* Main Call to Action Section */}
         <div className="flex flex-col items-center justify-center w-full py-20 shadow-lg">
+          ¨
           <div className="bg-gradient-to-br from-zinc-900/90 to-zinc-800/80 rounded-3xl shadow-2xl border border-zinc-700 backdrop-blur-md p-10 max-w-4xl mx-auto text-center">
             <div className="flex justify-center mb-6">
               <div className="w-16 h-16 bg-gradient-to-br from-zinc-700 to-zinc-900 rounded-full flex items-center justify-center shadow-lg">
@@ -306,6 +336,11 @@ function HomePage() {
         </div>
 
         {/* Leaderboard Section */}
+        <img
+          src={Spacesuit}
+          alt="spacesuit"
+          className="z-50 w-[40vw] h-[80vh] absolute bottom-0 right-[-250px] transform rotate-[-160deg]"
+        />
         <div className="w-full py-16 px-10">
           <div className="max-w-4xl mx-auto">
             <Leaderboard />
@@ -313,6 +348,10 @@ function HomePage() {
         </div>
         {/* Decorative bottom section */}
         <div className="w-full h-32 bg-gradient-to-t from-black via-zinc-900 to-transparent rounded-t-[50px] mt-10"></div>
+
+        {/* Footer */}
+        <Footer />
+
         <style>
           {`
             @keyframes twinkle {

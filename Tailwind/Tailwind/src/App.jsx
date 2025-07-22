@@ -18,6 +18,8 @@ import MoonPage from "./pages/MoonPage";
 import EarthPage from "./pages/EarthPage";
 import HomePage from "./pages/HomePage";
 import TasksPage from "./pages/TasksPage";
+import PrivacyPage from "./pages/PrivacyPage";
+import Docs from "./pages/Docs";
 
 import Footer from "./Components/Footer";
 // Correct implementation of ProtectedRoute for React Router v6
@@ -93,12 +95,14 @@ function App() {
               <Route path="/earth" element={<EarthPage />} />
               <Route path="/spacecraft" element={<SpacecraftPage />} />
               <Route path="/astronaut" element={<AstronautsPage />} />
-
+              <Route path="/privacy" element={<PrivacyPage />} />
+              <Route path="/docs" element={<Docs />} />
               {/* Protected routes - require authentication */}
               <Route element={<ProtectedRoute />}>
                 <Route path="/main" element={<HomePage />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/tasks" element={<TasksPage />} />
+
                 {/* Add more protected routes here */}
               </Route>
 
