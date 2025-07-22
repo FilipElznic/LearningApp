@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 import Leaderboard from "../Components/Leaderboard";
 import { supabase } from "../supabaseClient";
 import planetEarthImg from "../assets/planetearth.jpg";
+import Carousel from "../Components/carousel";
 
 // XP Progress Graph Component
 function XPProgressGraph({ userXP }) {
   const [animatedXP, setAnimatedXP] = useState(0);
-  
+
   // XP level thresholds
   const levels = [
     { level: 1, xp: 0, title: "Space Cadet" },
@@ -18,7 +19,7 @@ function XPProgressGraph({ userXP }) {
     { level: 4, xp: 300, title: "Cosmic Navigator" },
     { level: 5, xp: 500, title: "Star Captain" },
     { level: 6, xp: 750, title: "Galaxy Master" },
-    { level: 7, xp: 1000, title: "Universe Legend" }
+    { level: 7, xp: 1000, title: "Universe Legend" },
   ];
 
   // Calculate current level and progress
@@ -32,14 +33,16 @@ function XPProgressGraph({ userXP }) {
   };
 
   const getNextLevel = (currentLevel) => {
-    const nextLevelIndex = levels.findIndex(l => l.level === currentLevel.level) + 1;
+    const nextLevelIndex =
+      levels.findIndex((l) => l.level === currentLevel.level) + 1;
     return nextLevelIndex < levels.length ? levels[nextLevelIndex] : null;
   };
 
   const currentLevel = getCurrentLevel(userXP);
   const nextLevel = getNextLevel(currentLevel);
-  const progressToNext = nextLevel ? 
-    ((userXP - currentLevel.xp) / (nextLevel.xp - currentLevel.xp)) * 100 : 100;
+  const progressToNext = nextLevel
+    ? ((userXP - currentLevel.xp) / (nextLevel.xp - currentLevel.xp)) * 100
+    : 100;
 
   // Animate XP counter
   useEffect(() => {
@@ -51,7 +54,7 @@ function XPProgressGraph({ userXP }) {
     const timer = setInterval(() => {
       step++;
       setAnimatedXP(Math.min(increment * step, userXP));
-      
+
       if (step >= steps) {
         clearInterval(timer);
         setAnimatedXP(userXP);
@@ -87,76 +90,55 @@ function XPProgressGraph({ userXP }) {
         <div className="space-y-3">
           <div className="flex justify-between text-sm text-purple-300">
             <span>Level {currentLevel.level}</span>
-            <span>{userXP}/{nextLevel.xp} XP</span>
+            <span>
+              {userXP}/{nextLevel.xp} XP
+            </span>
             <span>Level {nextLevel.level}</span>
           </div>
-          
+
           <div className="relative h-6 bg-zinc-800/50 rounded-full overflow-hidden border border-purple-500/20">
             {/* Background glow */}
             <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 to-violet-900/20"></div>
-            
+
             {/* Progress fill with animation */}
-            <div 
+            <div
               className="h-full bg-gradient-to-r from-purple-500 via-violet-500 to-purple-400 rounded-full transition-all duration-2000 ease-out relative overflow-hidden"
               style={{ width: `${Math.min(progressToNext, 100)}%` }}
             >
               {/* Shimmer effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"></div>
             </div>
-            
+
             {/* Progress text overlay */}
             <div className="absolute inset-0 flex items-center justify-center text-xs font-semibold text-white drop-shadow-lg">
               {Math.round(progressToNext)}%
             </div>
           </div>
-          
+
           <div className="text-center text-sm text-purple-300">
-            {nextLevel.xp - userXP} XP until <span className="text-purple-200 font-semibold">{nextLevel.title}</span>
+            {nextLevel.xp - userXP} XP until{" "}
+            <span className="text-purple-200 font-semibold">
+              {nextLevel.title}
+            </span>
           </div>
         </div>
       )}
 
       {/* XP Breakdown Chart */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-        <div className="bg-gradient-to-br from-purple-900/30 to-violet-900/30 rounded-xl p-4 border border-purple-500/20 text-center">
-          <div className="text-2xl mb-2">📊</div>
-          <div className="text-xl font-bold text-purple-200">
-            {Math.floor(userXP / 15)} 
-          </div>
-          <div className="text-sm text-purple-300">Expert Tasks</div>
-          <div className="text-xs text-purple-400">15 XP each</div>
-        </div>
-        
-        <div className="bg-gradient-to-br from-purple-900/30 to-violet-900/30 rounded-xl p-4 border border-purple-500/20 text-center">
-          <div className="text-2xl mb-2">🎯</div>
-          <div className="text-xl font-bold text-purple-200">
-            {Math.floor((userXP % 15) / 10)}
-          </div>
-          <div className="text-sm text-purple-300">Medium Tasks</div>
-          <div className="text-xs text-purple-400">10 XP each</div>
-        </div>
-        
-        <div className="bg-gradient-to-br from-purple-900/30 to-violet-900/30 rounded-xl p-4 border border-purple-500/20 text-center">
-          <div className="text-2xl mb-2">⭐</div>
-          <div className="text-xl font-bold text-purple-200">
-            {Math.floor((userXP % 10) / 5)}
-          </div>
-          <div className="text-sm text-purple-300">Easy Tasks</div>
-          <div className="text-xs text-purple-400">5 XP each</div>
-        </div>
-      </div>
 
       {/* Level Milestones */}
       <div className="space-y-3">
-        <h5 className="text-lg font-semibold text-purple-200 text-center">Journey Milestones</h5>
+        <h5 className="text-lg font-semibold text-purple-200 text-center">
+          Journey Milestones
+        </h5>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
           {levels.map((level) => (
-            <div 
+            <div
               key={level.level}
               className={`p-2 rounded-lg border text-center transition-all ${
                 userXP >= level.xp
-                  ? 'bg-gradient-to-br from-purple-600/40 to-violet-600/40 border-purple-400/50 text-purple-100'
-                  : 'bg-zinc-800/30 border-zinc-600/30 text-zinc-400'
+                  ? "bg-gradient-to-br from-purple-600/40 to-violet-600/40 border-purple-400/50 text-purple-100"
+                  : "bg-zinc-800/30 border-zinc-600/30 text-zinc-400"
               }`}
             >
               <div className="font-semibold">Lv.{level.level}</div>
@@ -168,7 +150,6 @@ function XPProgressGraph({ userXP }) {
     </div>
   );
 }
-
 
 function HomePage() {
   const { signOut, user } = useAuth();
@@ -247,7 +228,6 @@ function HomePage() {
             />
           ))}
         </div>
-
         {/* Header/Nav */}
         <nav className="w-full flex items-center justify-between px-10 py-6 bg-transparent text-white z-20 relative">
           <div className="flex items-center gap-4">
@@ -323,12 +303,6 @@ function HomePage() {
               >
                 🚀 Start Your Mission
               </Link>
-              <Link
-                to="/profile"
-                className="bg-zinc-800 hover:bg-zinc-700 text-white font-semibold px-10 py-4 rounded-full shadow-lg transition text-xl border border-zinc-700 transform hover:scale-105"
-              >
-                View Profile
-              </Link>
             </div>
 
             {/* Feature Cards */}
@@ -395,7 +369,6 @@ function HomePage() {
             </div>
           </div>
         </div>
-
         {/* Star Icon Section */}
         <div className="flex items-center justify-center w-full py-8  rounded-bl-[50px]">
           <img
@@ -413,62 +386,8 @@ function HomePage() {
           </svg>
         </div>
         {/* Main Call to Action Section */}
-        <div className="flex flex-col items-center justify-center w-full py-20 ">
-          ¨
-          <div className="bg-gradient-to-br from-zinc-900/90 to-zinc-800/80 rounded-3xl shadow-2xl border border-zinc-700 backdrop-blur-md p-10 max-w-4xl mx-auto text-center">
-            <div className="flex justify-center mb-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-zinc-700 to-zinc-900 rounded-full flex items-center justify-center shadow-lg">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-8 w-8 text-indigo-400"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 10V3L4 14h7v7l9-11h-7z"
-                  />
-                </svg>
-              </div>
-            </div>
+        <Carousel />
 
-            <h2 className="text-4xl font-extrabold text-white mb-4 tracking-wide">
-              Your Next Cosmic Task Awaits!
-            </h2>
-            <p className="text-lg text-zinc-300 mb-8 max-w-2xl mx-auto">
-              Answer multiple choice questions across different topics! Each
-              question has three options (A, B, C), and the XP you earn depends
-              on how challenging the question is.
-            </p>
-
-            <Link
-              to="/tasks"
-              className="inline-flex items-center bg-gradient-to-r from-indigo-700 to-indigo-900 hover:from-indigo-600 hover:to-indigo-800 text-white font-bold px-8 py-3 rounded-full shadow-lg transition text-lg border border-indigo-900"
-            >
-              <svg
-                className="w-5 h-5 mr-2"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M13 10V3L4 14h7v7l9-11h-7z"
-                />
-              </svg>
-              Start Your Mission
-            </Link>
-          </div>
-        </div>
-
-        <div className="w-full h-14 "></div>
-
-        {/* Stats Section */}
         <div className="w-full py-16 px-10">
           <div className="max-w-6xl mx-auto">
             <div className="bg-gradient-to-br from-zinc-900/90 to-zinc-800/80 rounded-3xl shadow-2xl border border-zinc-700 backdrop-blur-md p-8">
@@ -480,9 +399,8 @@ function HomePage() {
             </div>
           </div>
         </div>
-
+        <div className="h-screen"></div>
         {/* Leaderboard Section */}
-
         <div className="w-full py-16 px-10">
           <div className="max-w-4xl mx-auto">
             <Leaderboard />
@@ -490,12 +408,29 @@ function HomePage() {
         </div>
         {/* Decorative bottom section */}
         <div className="w-full h-32 bg-gradient-to-t from-black via-zinc-900 to-transparent rounded-t-[50px] mt-10"></div>
-
         <style>
           {`
             @keyframes twinkle {
               0% { opacity: 0.1; }
               100% { opacity: 0.4; }
+            }
+            
+            @keyframes slide {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            
+            @keyframes slide-reverse {
+              0% { transform: translateX(-50%); }
+              100% { transform: translateX(0); }
+            }
+            
+            .animate-slide {
+              animation: slide 20s linear infinite;
+            }
+            
+            .animate-slide-reverse {
+              animation: slide-reverse 20s linear infinite;
             }
           `}
         </style>
