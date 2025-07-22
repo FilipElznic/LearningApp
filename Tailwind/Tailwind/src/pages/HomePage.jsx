@@ -1,15 +1,205 @@
 import { useAuth } from "../AuthContext";
 import { useToast } from "../ToastContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Leaderboard from "../Components/Leaderboard";
-import Footer from "../Components/Footer";
+import { supabase } from "../supabaseClient";
 import planetEarthImg from "../assets/planetearth.jpg";
-import Spacesuit from "../assets/astronaut.png";
+
+// XP Progress Graph Component
+function XPProgressGraph({ userXP }) {
+  const [animatedXP, setAnimatedXP] = useState(0);
+  
+  // XP level thresholds
+  const levels = [
+    { level: 1, xp: 0, title: "Space Cadet" },
+    { level: 2, xp: 50, title: "Astronaut Trainee" },
+    { level: 3, xp: 150, title: "Space Explorer" },
+    { level: 4, xp: 300, title: "Cosmic Navigator" },
+    { level: 5, xp: 500, title: "Star Captain" },
+    { level: 6, xp: 750, title: "Galaxy Master" },
+    { level: 7, xp: 1000, title: "Universe Legend" }
+  ];
+
+  // Calculate current level and progress
+  const getCurrentLevel = (xp) => {
+    for (let i = levels.length - 1; i >= 0; i--) {
+      if (xp >= levels[i].xp) {
+        return levels[i];
+      }
+    }
+    return levels[0];
+  };
+
+  const getNextLevel = (currentLevel) => {
+    const nextLevelIndex = levels.findIndex(l => l.level === currentLevel.level) + 1;
+    return nextLevelIndex < levels.length ? levels[nextLevelIndex] : null;
+  };
+
+  const currentLevel = getCurrentLevel(userXP);
+  const nextLevel = getNextLevel(currentLevel);
+  const progressToNext = nextLevel ? 
+    ((userXP - currentLevel.xp) / (nextLevel.xp - currentLevel.xp)) * 100 : 100;
+
+  // Animate XP counter
+  useEffect(() => {
+    const duration = 2000; // 2 seconds
+    const steps = 60;
+    const increment = userXP / steps;
+    let step = 0;
+
+    const timer = setInterval(() => {
+      step++;
+      setAnimatedXP(Math.min(increment * step, userXP));
+      
+      if (step >= steps) {
+        clearInterval(timer);
+        setAnimatedXP(userXP);
+      }
+    }, duration / steps);
+
+    return () => clearInterval(timer);
+  }, [userXP]);
+
+  return (
+    <div className="w-full space-y-8">
+      {/* Current Level & XP Display */}
+      <div className="text-center space-y-4">
+        <div className="inline-flex items-center space-x-4 bg-gradient-to-r from-purple-900/40 to-violet-900/40 rounded-2xl px-8 py-4 border border-purple-500/30">
+          <div className="text-4xl">🚀</div>
+          <div>
+            <h4 className="text-2xl font-bold text-transparent bg-gradient-to-r from-purple-300 to-violet-300 bg-clip-text">
+              {currentLevel.title}
+            </h4>
+            <p className="text-purple-200">Level {currentLevel.level}</p>
+          </div>
+          <div className="text-right">
+            <div className="text-3xl font-bold text-white">
+              {Math.floor(animatedXP).toLocaleString()}
+            </div>
+            <p className="text-purple-300 text-sm">Total XP</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Progress Bar */}
+      {nextLevel && (
+        <div className="space-y-3">
+          <div className="flex justify-between text-sm text-purple-300">
+            <span>Level {currentLevel.level}</span>
+            <span>{userXP}/{nextLevel.xp} XP</span>
+            <span>Level {nextLevel.level}</span>
+          </div>
+          
+          <div className="relative h-6 bg-zinc-800/50 rounded-full overflow-hidden border border-purple-500/20">
+            {/* Background glow */}
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 to-violet-900/20"></div>
+            
+            {/* Progress fill with animation */}
+            <div 
+              className="h-full bg-gradient-to-r from-purple-500 via-violet-500 to-purple-400 rounded-full transition-all duration-2000 ease-out relative overflow-hidden"
+              style={{ width: `${Math.min(progressToNext, 100)}%` }}
+            >
+              {/* Shimmer effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"></div>
+            </div>
+            
+            {/* Progress text overlay */}
+            <div className="absolute inset-0 flex items-center justify-center text-xs font-semibold text-white drop-shadow-lg">
+              {Math.round(progressToNext)}%
+            </div>
+          </div>
+          
+          <div className="text-center text-sm text-purple-300">
+            {nextLevel.xp - userXP} XP until <span className="text-purple-200 font-semibold">{nextLevel.title}</span>
+          </div>
+        </div>
+      )}
+
+      {/* XP Breakdown Chart */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+        <div className="bg-gradient-to-br from-purple-900/30 to-violet-900/30 rounded-xl p-4 border border-purple-500/20 text-center">
+          <div className="text-2xl mb-2">📊</div>
+          <div className="text-xl font-bold text-purple-200">
+            {Math.floor(userXP / 15)} 
+          </div>
+          <div className="text-sm text-purple-300">Expert Tasks</div>
+          <div className="text-xs text-purple-400">15 XP each</div>
+        </div>
+        
+        <div className="bg-gradient-to-br from-purple-900/30 to-violet-900/30 rounded-xl p-4 border border-purple-500/20 text-center">
+          <div className="text-2xl mb-2">🎯</div>
+          <div className="text-xl font-bold text-purple-200">
+            {Math.floor((userXP % 15) / 10)}
+          </div>
+          <div className="text-sm text-purple-300">Medium Tasks</div>
+          <div className="text-xs text-purple-400">10 XP each</div>
+        </div>
+        
+        <div className="bg-gradient-to-br from-purple-900/30 to-violet-900/30 rounded-xl p-4 border border-purple-500/20 text-center">
+          <div className="text-2xl mb-2">⭐</div>
+          <div className="text-xl font-bold text-purple-200">
+            {Math.floor((userXP % 10) / 5)}
+          </div>
+          <div className="text-sm text-purple-300">Easy Tasks</div>
+          <div className="text-xs text-purple-400">5 XP each</div>
+        </div>
+      </div>
+
+      {/* Level Milestones */}
+      <div className="space-y-3">
+        <h5 className="text-lg font-semibold text-purple-200 text-center">Journey Milestones</h5>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+          {levels.map((level) => (
+            <div 
+              key={level.level}
+              className={`p-2 rounded-lg border text-center transition-all ${
+                userXP >= level.xp
+                  ? 'bg-gradient-to-br from-purple-600/40 to-violet-600/40 border-purple-400/50 text-purple-100'
+                  : 'bg-zinc-800/30 border-zinc-600/30 text-zinc-400'
+              }`}
+            >
+              <div className="font-semibold">Lv.{level.level}</div>
+              <div className="text-xs opacity-80">{level.xp} XP</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 
 function HomePage() {
   const { signOut, user } = useAuth();
   const { toast } = useToast();
+  const [userXP, setUserXP] = useState(0);
+
+  // Fetch user XP from database
+  useEffect(() => {
+    const fetchUserXP = async () => {
+      if (user?.email) {
+        try {
+          const { data, error } = await supabase
+            .from("users")
+            .select("xp")
+            .eq("email", user.email)
+            .single();
+
+          if (error) {
+            console.error("Error fetching user XP:", error);
+            return;
+          }
+
+          setUserXP(data?.xp || 0);
+        } catch (error) {
+          console.error("Error fetching user XP:", error);
+        }
+      }
+    };
+
+    fetchUserXP();
+  }, [user?.email]);
 
   // Show welcome toast when user first visits the page
   useEffect(() => {
@@ -223,7 +413,7 @@ function HomePage() {
           </svg>
         </div>
         {/* Main Call to Action Section */}
-        <div className="flex flex-col items-center justify-center w-full py-20 shadow-lg">
+        <div className="flex flex-col items-center justify-center w-full py-20 ">
           ¨
           <div className="bg-gradient-to-br from-zinc-900/90 to-zinc-800/80 rounded-3xl shadow-2xl border border-zinc-700 backdrop-blur-md p-10 max-w-4xl mx-auto text-center">
             <div className="flex justify-center mb-6">
@@ -276,73 +466,23 @@ function HomePage() {
           </div>
         </div>
 
+        <div className="w-full h-14 "></div>
+
         {/* Stats Section */}
         <div className="w-full py-16 px-10">
           <div className="max-w-6xl mx-auto">
             <div className="bg-gradient-to-br from-zinc-900/90 to-zinc-800/80 rounded-3xl shadow-2xl border border-zinc-700 backdrop-blur-md p-8">
               <h3 className="text-3xl font-extrabold text-white mb-8 text-center tracking-wide">
-                Ready to Join the Cosmic Community?
+                Start the progression of your space journey!
               </h3>
-
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-zinc-700 to-zinc-900 rounded-full flex items-center justify-center shadow-lg mx-auto mb-4">
-                    <span className="text-2xl">🎯</span>
-                  </div>
-                  <h4 className="text-white font-semibold text-xl mb-2">
-                    Questions
-                  </h4>
-                  <p className="text-zinc-300 text-sm">
-                    Multiple choice questions with A, B, C options
-                  </p>
-                </div>
-
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-zinc-700 to-zinc-900 rounded-full flex items-center justify-center shadow-lg mx-auto mb-4">
-                    <span className="text-2xl">⭐</span>
-                  </div>
-                  <h4 className="text-white font-semibold text-xl mb-2">
-                    XP Rewards
-                  </h4>
-                  <p className="text-zinc-300 text-sm">
-                    Earn 5, 10, or 15 XP based on question difficulty
-                  </p>
-                </div>
-
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-zinc-700 to-zinc-900 rounded-full flex items-center justify-center shadow-lg mx-auto mb-4">
-                    <span className="text-2xl">🏆</span>
-                  </div>
-                  <h4 className="text-white font-semibold text-xl mb-2">
-                    Progress
-                  </h4>
-                  <p className="text-zinc-300 text-sm">
-                    Track your learning journey and achievements
-                  </p>
-                </div>
-
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-zinc-700 to-zinc-900 rounded-full flex items-center justify-center shadow-lg mx-auto mb-4">
-                    <span className="text-2xl">🚀</span>
-                  </div>
-                  <h4 className="text-white font-semibold text-xl mb-2">
-                    Growth
-                  </h4>
-                  <p className="text-zinc-300 text-sm">
-                    Level up your knowledge and skills
-                  </p>
-                </div>
-              </div>
+              {/* XP Progress Graph */}
+              <XPProgressGraph userXP={userXP} />
             </div>
           </div>
         </div>
 
         {/* Leaderboard Section */}
-        <img
-          src={Spacesuit}
-          alt="spacesuit"
-          className="z-50 w-[40vw] h-[80vh] absolute bottom-0 right-[-250px] transform rotate-[-160deg]"
-        />
+
         <div className="w-full py-16 px-10">
           <div className="max-w-4xl mx-auto">
             <Leaderboard />

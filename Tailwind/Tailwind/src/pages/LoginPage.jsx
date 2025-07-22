@@ -199,15 +199,6 @@ export default function LoginPage() {
             </Link>
           </div>
         </form>
-
-        <div className="mt-8 flex justify-center">
-          <Link
-            to="/"
-            className="inline-block px-6 py-2 rounded-full bg-zinc-800 border border-zinc-600 text-zinc-200 hover:bg-zinc-700 hover:text-white transition font-semibold shadow"
-          >
-            ← Back to Home
-          </Link>
-        </div>
       </div>
 
       {/* Twinkle animation keyframes */}

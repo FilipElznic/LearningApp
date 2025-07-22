@@ -31,20 +31,19 @@ function PrivacyPage() {
         </Link>
         <Link
           to="/"
-          className="bg-zinc-800 hover:bg-zinc-700 text-white font-semibold px-6 py-2.5 rounded-full transition duration-300 ease-in-out transform hover:scale-105 shadow-lg flex items-center gap-2 border border-zinc-700"
+          className="inline-flex items-center px-4 py-2 rounded-full bg-zinc-900/80 border border-zinc-700 text-zinc-200 hover:bg-zinc-800 hover:text-white transition-all duration-300 font-semibold shadow backdrop-blur"
         >
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
+            className="w-5 h-5 mr-2"
             fill="none"
-            viewBox="0 0 24 24"
             stroke="currentColor"
+            strokeWidth={2}
+            viewBox="0 0 24 24"
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth={2}
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              d="M15 19l-7-7 7-7"
             />
           </svg>
           Back to Home
@@ -133,8 +132,8 @@ function PrivacyPage() {
                   </p>
                   <ul className="list-disc list-inside space-y-2 ml-4">
                     <li>
-                      <strong>Secure Authentication:</strong> We use Supabase's
-                      secure authentication system
+                      <strong>Secure Authentication:</strong> We use
+                      Supabase&apos;s secure authentication system
                     </li>
                     <li>
                       <strong>Encrypted Storage:</strong> All data is encrypted
@@ -146,7 +145,7 @@ function PrivacyPage() {
                     </li>
                     <li>
                       <strong>Minimal Data Collection:</strong> We only collect
-                      what's necessary for the app to function
+                      what&apos;s necessary for the app to function
                     </li>
                   </ul>
                 </div>
@@ -237,7 +236,8 @@ function PrivacyPage() {
                 </h2>
                 <p className="mb-4">
                   If you have any questions about this privacy policy or how we
-                  handle your data, please don't hesitate to reach out to us.
+                  handle your data, please don&apos;t hesitate to reach out to
+                  us.
                 </p>
                 <p className="text-cyan-200 font-semibold">
                   Remember: Your data stays with us and is never shared with

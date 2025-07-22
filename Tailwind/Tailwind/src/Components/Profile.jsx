@@ -34,7 +34,7 @@ export default function Profile() {
       <div className="absolute top-6 left-6 z-30">
         <Link
           to="/"
-          className="inline-flex items-center px-4 py-2 rounded-full bg-zinc-900/80 border border-zinc-700 text-zinc-200 hover:bg-zinc-800 hover:text-white transition font-semibold shadow backdrop-blur"
+          className="inline-flex items-center px-4 py-2 rounded-full bg-zinc-900/80 border border-zinc-700 text-zinc-200 hover:bg-zinc-800 hover:text-white transition-all duration-300 font-semibold shadow backdrop-blur"
         >
           <svg
             className="w-5 h-5 mr-2"
@@ -49,7 +49,7 @@ export default function Profile() {
               d="M15 19l-7-7 7-7"
             />
           </svg>
-          Home
+          Back to Home
         </Link>
       </div>
 
