@@ -1,103 +1,188 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LearningApp Docs</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="background-stars"></div>
+# 🚀 Cosmic Learning App
 
-  <nav class="navbar">
-    <div class="logo">LearningApp</div>
-  </nav>
+> Complete setup guide for the Cosmic Learning App. Follow these steps to get your space academy up and running!
 
-  <main class="container">
-    <section class="hero">
-      <div class="hero-icon">
-        <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M19,19H5V5H19V19Z" />
-        </svg>
-      </div>
-      <h1>Project Documentation</h1>
-      <p>Complete setup guide for the Cosmic Learning App. Follow these steps to get your space academy up and running!</p>
-    </section>
+## ⚠️ Prerequisites
 
-    <section class="card">
-      <h2><span class="icon-circle yellow">!</span>Prerequisites</h2>
-      <div class="prerequisites">
-        <div class="prereq">
-          <div class="prereq-icon green"></div>
-          <h3>Node.js</h3>
-          <p>Version 18+ required for running the development server</p>
-        </div>
-        <div class="prereq">
-          <div class="prereq-icon blue"></div>
-          <h3>Git</h3>
-          <p>For cloning the repository and version control</p>
-        </div>
-        <div class="prereq">
-          <div class="prereq-icon purple"></div>
-          <h3>Code Editor</h3>
-          <p>VS Code recommended with React extensions</p>
-        </div>
-      </div>
-    </section>
+Before you begin, ensure you have the following installed:
 
-    <section class="card">
-      <h2><span class="icon-circle">1</span> Supabase Database Setup</h2>
-      <p>This project requires a Supabase database to handle user authentication, store learning progress, track XP points, and manage task completion.</p>
-      <ol>
-        <li>Go to <a href="https://supabase.com">supabase.com</a> and create a free account</li>
-        <li>Create a new project and choose a region close to your users</li>
-        <li>Copy your project URL and anon key from Settings → API</li>
-        <li>Insert the database schema:</li>
-      </ol>
-      <img src="assets/database.webp" alt="Database Schema" class="schema-img" />
-    </section>
+| Requirement     | Version | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| **Node.js**     | 18+     | Required for running the development server    |
+| **Git**         | Latest  | For cloning the repository and version control |
+| **Code Editor** | Any     | VS Code recommended with React extensions      |
 
-    <section class="card">
-      <h2><span class="icon-circle">2</span> Clone & Install</h2>
-      <p>Run the following in terminal:</p>
-      <pre><code>git clone https://github.com/FilipElznic/LearningApp.git
+---
 
+## 🗄️ Step 1: Supabase Database Setup
+
+### Why Supabase?
+
+This project requires a Supabase database to handle:
+
+- User authentication
+- Store learning progress
+- Track XP points
+- Manage task completion
+
+Supabase provides a powerful PostgreSQL database with real-time capabilities and built-in authentication.
+
+### Setup Steps:
+
+1. **Create Account**: Go to [supabase.com](https://supabase.com) and create a free account
+2. **New Project**: Create a new project and choose a region close to your users
+3. **Get Credentials**: Copy your project URL and anon key from Settings → API
+4. **Database Schema**: Insert the required database schema (see database.webp reference)
+
+> **⚠️ Important Note**: You'll need to turn off RLS policies which is not recommended for production. Create your own policies for select, insert, update operations.
+
+---
+
+## 📦 Step 2: Clone Repository & Install Dependencies
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/FilipElznic/LearningApp.git
 cd LearningApp
-npm install</code></pre>
-</section>
+```
 
-    <section class="card">
-      <h2><span class="icon-circle">3</span> Environment Setup</h2>
-      <p>Create a <code>.env</code> file in the root:</p>
-      <pre><code>VITE_SUPABASE_URL=your_supabase_url
+### Install Required Libraries
 
-VITE_SUPABASE_ANON_KEY=your_anon_key</code></pre>
-<p><strong>Warning:</strong> Never commit `.env` to GitHub!</p>
-</section>
+#### Core Dependencies:
 
-    <section class="card">
-      <h2><span class="icon-circle">4</span> Launch</h2>
-      <p>Start development server:</p>
-      <pre><code>npm run dev</code></pre>
-      <p>Build for production:</p>
-      <pre><code>npm run build</code></pre>
-    </section>
+```bash
+npm install react react-dom react-router-dom
+npm install @supabase/supabase-js
+npm install lucide-react
+```
 
-  </main>
+#### Styling & UI:
 
-  <script>
-    // Create starfield
-    const stars = document.querySelector(".background-stars");
-    for (let i = 0; i < 30; i++) {
-      const star = document.createElement("div");
-      star.className = "star";
-      star.style.width = `${Math.random() * 2 + 1}px`;
-      star.style.height = star.style.width;
-      star.style.top = `${Math.random() * 100}%`;
-      star.style.left = `${Math.random() * 100}%`;
-      star.style.animationDelay = `${Math.random() * 2}s`;
-      stars.appendChild(star);
-    }
-  </script>
-</body>
-</html>
+```bash
+npm install tailwindcss postcss autoprefixer
+npm install @splinetool/react-spline
+```
+
+#### Development Tools:
+
+```bash
+npm install -D vite @vitejs/plugin-react
+npm install -D eslint eslint-plugin-react
+```
+
+#### Or install everything at once:
+
+```bash
+npm install
+```
+
+---
+
+## ⚙️ Step 3: Environment Configuration
+
+Create a `.env` file in the root directory:
+
+```env
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+> **🔒 Security Warning**: Never commit your .env file to version control. Add it to .gitignore!
+
+---
+
+## 🚀 Step 4: Launch Your Cosmic Academy
+
+### Start Development Server
+
+```bash
+npm run dev
+```
+
+_This will start the development server at http://localhost:5173_
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+_Creates an optimized production build in the dist folder_
+
+---
+
+## ✨ Features Overview
+
+### 🔐 User Authentication
+
+- Secure login/signup with Supabase Auth
+
+### ⭐ XP System
+
+- Earn points based on difficulty levels
+
+### 📈 Progress Tracking
+
+- Monitor learning journey and achievements
+
+### 🎮 Interactive UI
+
+- Engaging space-themed interface
+
+### 🌍 Multiple Realms
+
+- Earth, Moon, and Deep Space challenges
+
+### 🏆 Leaderboards
+
+- Compete with fellow space explorers
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React, Vite
+- **Styling**: Tailwind CSS
+- **Database**: Supabase (PostgreSQL)
+- **Authentication**: Supabase Auth
+- **3D Elements**: Spline
+- **Icons**: Lucide React
+- **Routing**: React Router DOM
+
+---
+
+## 📁 Project Structure
+
+```
+LearningApp/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── pages/
+│   └── App.css
+│   └── App.jsx
+│   └── AuthContext.jsx
+│   └── index.css
+│   └── main.jsx
+│   └── supabaseClient.js
+│   └── ToastContext.jsx
+├── public/
+├── .env
+├── package.json
+├── tailwind.config.js
+└── vite.config.js
+```
+
+---
+
+<div align="center">
+  <a href="https://shipwrecked.hackclub.com/?t=ghrm" target="_blank">
+    <img src="https://hc-cdn.hel1.your-objectstorage.com/s/v3/739361f1d440b17fc9e2f74e49fc185d86cbec14_badge.png" 
+         alt="This project is part of Shipwrecked, the world's first hackathon on an island!" 
+         style="width: 35%;">
+  </a>
+</div>
+---
+
+**Ready to explore the cosmos of learning? 🌌**
