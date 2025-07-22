@@ -116,9 +116,12 @@ function MainPage() {
         />
       </div>
       {/* Spacer to allow scrolling */}
-      <div className="w-full h-screen flex items-end" id="intro">
-        <div className="w-1/2  h-full"></div>
-        <div className="w-1/2  h-full flex items-center justify-center z-50">
+      <div
+        className="w-full h-screen flex flex-col md:flex-row items-end"
+        id="intro"
+      >
+        <div className="w-full md:w-1/2 h-1/2 md:h-full"></div>
+        <div className="w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center z-50">
           <IntroText />
         </div>
       </div>
@@ -130,27 +133,27 @@ function MainPage() {
         <Layout />
       </div>
       <div className="w-full h-[20vh] bg-white"></div>
-      <div className="w-full h-screen bg-slate-50 flex flex-col items-center justify-center pt-20 z-30">
-        <div className="w-2/3 h-full flex items-center flex-col">
-          <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-start">
+      <div className="w-full h-screen bg-slate-50 flex flex-col items-center justify-center pt-10 md:pt-20 z-30 px-4 md:px-0">
+        <div className="w-full md:w-2/3 h-full flex items-center flex-col">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-center md:text-start">
             Sign up and explore.
           </h2>
-          <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-start mt-2">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-center md:text-start mt-2">
             Unlock quick learning.
           </h2>
-          <p className="text-2xl w-1/2 mt-2 font-light text-gray-900 text-center">
+          <p className="text-base md:text-2xl w-full md:w-1/2 mt-4 md:mt-2 font-light text-gray-900 text-center px-4 md:px-0">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deserunt
             accusantium dolor minus tenetur eligendi!
           </p>
-          <div className="w-full h-full flex flex-row items-center justify-center mt-10 gap-6">
+          <div className="w-full h-full flex flex-col md:flex-row items-center justify-center mt-6 md:mt-10 gap-4 md:gap-6 px-4 md:px-0 pb-8 md:pb-0">
             {/* Card 1 */}
-            <div className="w-1/3 h-4/6 bg-gradient-to-b from-zinc-900 to-zinc-800 rounded-3xl relative overflow-hidden shadow-2xl group hover:scale-105 transition-transform duration-300">
+            <div className="w-full md:w-1/3 h-64 md:h-4/6 bg-gradient-to-b from-zinc-900 to-zinc-800 rounded-3xl relative overflow-hidden shadow-2xl group hover:scale-105 transition-transform duration-300">
               <div className="absolute inset-0 bg-white/5"></div>
-              <div className="relative z-10 p-8 h-full flex flex-col justify-between">
+              <div className="relative z-10 p-6 md:p-8 h-full flex flex-col justify-between">
                 <div>
-                  <div className="w-16 h-16 bg-zinc-700 rounded-full mb-4 shadow-lg flex items-center justify-center">
+                  <div className="w-12 h-12 md:w-16 md:h-16 bg-zinc-700 rounded-full mb-4 shadow-lg flex items-center justify-center">
                     <svg
-                      className="w-8 h-8 text-white opacity-80"
+                      className="w-6 h-6 md:w-8 md:h-8 text-white opacity-80"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -172,7 +175,7 @@ function MainPage() {
                       />
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
                     Start Your Journey
                   </h3>
                   <p className="text-zinc-200 text-sm">
@@ -180,10 +183,10 @@ function MainPage() {
                     knowledge.
                   </p>
                 </div>
-                <div className="flex justify-center mt-6">
+                <div className="flex justify-center mt-4 md:mt-6">
                   <a
                     href="/signup"
-                    className="bg-white text-black font-semibold px-6 py-2 rounded-full shadow hover:bg-zinc-200 transition"
+                    className="bg-white text-black font-semibold px-4 md:px-6 py-2 rounded-full shadow hover:bg-zinc-200 transition text-sm md:text-base"
                   >
                     Sign Up
                   </a>
@@ -194,13 +197,13 @@ function MainPage() {
             </div>
 
             {/* Card 2 */}
-            <div className="w-1/3 h-full bg-gradient-to-b from-zinc-800 to-zinc-700 rounded-3xl relative overflow-hidden shadow-2xl group hover:scale-105 transition-transform duration-300">
+            <div className="w-full md:w-1/3 h-80 md:h-full bg-gradient-to-b from-zinc-800 to-zinc-700 rounded-3xl relative overflow-hidden shadow-2xl group hover:scale-105 transition-transform duration-300">
               <div className="absolute inset-0 bg-white/5"></div>
-              <div className="relative z-10 p-8 h-full flex flex-col justify-between">
+              <div className="relative z-10 p-6 md:p-8 h-full flex flex-col justify-between">
                 <div>
-                  <div className="w-20 h-20 bg-zinc-600 rounded-full mb-4 shadow-lg flex items-center justify-center">
+                  <div className="w-16 h-16 md:w-20 md:h-20 bg-zinc-600 rounded-full mb-4 shadow-lg flex items-center justify-center">
                     <svg
-                      className="w-12 h-12 text-white opacity-60"
+                      className="w-8 h-8 md:w-12 md:h-12 text-white opacity-60"
                       fill="none"
                       viewBox="0 0 32 32"
                       stroke="currentColor"
@@ -224,7 +227,7 @@ function MainPage() {
                       />
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
                     Why Join us?
                   </h3>
                   <p className="text-zinc-200 text-sm">
@@ -232,27 +235,27 @@ function MainPage() {
                     knowledge.
                   </p>
                 </div>
-                <div className="flex justify-center mt-6">
+                <div className="flex justify-center mt-4 md:mt-6">
                   <a
                     href="/signup"
-                    className="bg-white text-black font-semibold px-6 py-2 rounded-full shadow hover:bg-zinc-200 transition"
+                    className="bg-white text-black font-semibold px-4 md:px-6 py-2 rounded-full shadow hover:bg-zinc-200 transition text-sm md:text-base"
                   >
                     Create Account
                   </a>
                 </div>
               </div>
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 border-2 border-white/10 rounded-full"></div>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 md:w-24 md:h-24 border-2 border-white/10 rounded-full"></div>
               <div className="absolute top-6 right-8 w-2 h-2 bg-white rounded-full opacity-20"></div>
             </div>
 
             {/* Card 3 */}
-            <div className="w-1/3 h-4/6 bg-gradient-to-b from-zinc-900 to-zinc-700 rounded-3xl relative overflow-hidden shadow-2xl group hover:scale-105 transition-transform duration-300">
+            <div className="w-full md:w-1/3 h-64 md:h-4/6 bg-gradient-to-b from-zinc-900 to-zinc-700 rounded-3xl relative overflow-hidden shadow-2xl group hover:scale-105 transition-transform duration-300">
               <div className="absolute inset-0 bg-white/5"></div>
-              <div className="relative z-10 p-8 h-full flex flex-col justify-between">
+              <div className="relative z-10 p-6 md:p-8 h-full flex flex-col justify-between">
                 <div>
-                  <div className="w-16 h-16 bg-zinc-800 rounded-full mb-4 shadow-lg flex items-center justify-center">
+                  <div className="w-12 h-12 md:w-16 md:h-16 bg-zinc-800 rounded-full mb-4 shadow-lg flex items-center justify-center">
                     <svg
-                      className="w-10 h-10 text-white opacity-50"
+                      className="w-8 h-8 md:w-10 md:h-10 text-white opacity-50"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -265,7 +268,7 @@ function MainPage() {
                       />
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
                     Already a member?
                   </h3>
                   <p className="text-zinc-200 text-sm">
@@ -273,10 +276,10 @@ function MainPage() {
                     tasks!
                   </p>
                 </div>
-                <div className="flex justify-center mt-6">
+                <div className="flex justify-center mt-4 md:mt-6">
                   <a
                     href="/login"
-                    className="bg-white text-black font-semibold px-6 py-2 rounded-full shadow hover:bg-zinc-200 transition"
+                    className="bg-white text-black font-semibold px-4 md:px-6 py-2 rounded-full shadow hover:bg-zinc-200 transition text-sm md:text-base"
                   >
                     Get Started
                   </a>

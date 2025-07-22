@@ -95,7 +95,58 @@ function IntroText() {
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8 "
       }`}
     >
-      <div className="w-2/3 h-[50vh] bg-black flex flex-col items-center justify-center text-white px-8 relative">
+      {/* Mobile Layout */}
+      <div className="md:hidden w-full h-full bg-black flex flex-col items-center justify-center text-white px-4 py-8 relative">
+        <div
+          className={`text-lg sm:text-xl text-center min-h-[8rem] flex items-center transition-all duration-1000 delay-500 ease-out leading-relaxed ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
+          <span className="inline-block font-medium text-gray-100 tracking-wide">
+            {displayedText}
+            <span
+              className={`inline-block w-1 h-6 bg-gradient-to-b from-blue-400 to-purple-500 ml-2 ${
+                isTyping && isVisible ? "animate-pulse" : "opacity-0"
+              }`}
+            />
+          </span>
+        </div>
+
+        <div className="absolute bottom-6 flex justify-between w-full px-6">
+          <button
+            onClick={handlePrevPart}
+            className={`p-3 rounded-full bg-white/20 hover:bg-white/30 transition-colors text-lg ${
+              currentPartIndex === 0 ? "invisible" : ""
+            }`}
+          >
+            ←
+          </button>
+          <button
+            onClick={handleNextPart}
+            className={`p-3 rounded-full bg-white/20 hover:bg-white/30 transition-colors text-lg ${
+              currentPartIndex === storyParts.length - 1 ? "invisible" : ""
+            }`}
+          >
+            →
+          </button>
+        </div>
+
+        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2">
+          <div className="flex gap-2">
+            {storyParts.map((_, index) => (
+              <div
+                key={index}
+                className={`w-2.5 h-2.5 rounded-full ${
+                  index === currentPartIndex ? "bg-white" : "bg-white/30"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop/Tablet Layout */}
+      <div className="hidden md:flex w-2/3 h-[50vh] bg-black flex-col items-center justify-center text-white px-8 relative">
         <div
           className={`text-2xl text-center min-h-[10rem] flex items-center transition-all duration-1000 delay-500 ease-out leading-relaxed ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
