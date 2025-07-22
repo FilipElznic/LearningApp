@@ -1,8 +1,11 @@
 import PropTypes from "prop-types";
 
 // Carousel Item Component
-const CarouselItem = ({ text, className = "" }) => (
-  <span className={`text-2xl text-zinc-700 font-semibold ${className}`}>
+const CarouselItem = ({ text, className = "", spacing = 8 }) => (
+  <span
+    className={`text-2xl text-zinc-700 font-semibold ${className}`}
+    style={{ marginRight: `${spacing}rem` }}
+  >
     {text}
   </span>
 );
@@ -10,6 +13,7 @@ const CarouselItem = ({ text, className = "" }) => (
 CarouselItem.propTypes = {
   text: PropTypes.string.isRequired,
   className: PropTypes.string,
+  spacing: PropTypes.number,
 };
 
 // Single Carousel Row Component
@@ -17,28 +21,35 @@ const CarouselRow = ({
   words,
   direction = "left",
   speed = 20,
-  spacing = 16,
+  spacing = 8,
   className = "",
 }) => {
   const animationClass =
     direction === "left" ? "animate-slide" : "animate-slide-reverse";
-  const spacingClass = `space-x-${spacing}`;
 
   return (
     <div className={`relative w-full h-16 flex items-center ${className}`}>
       <div className="absolute inset-0 flex items-center">
         <div
-          className={`flex ${animationClass} ${spacingClass} whitespace-nowrap`}
+          className={`flex ${animationClass} whitespace-nowrap`}
           style={{ "--animation-duration": `${speed}s` }}
         >
           {/* First set of words */}
           {words.map((word, index) => (
-            <CarouselItem key={`first-${index}`} text={word} />
+            <CarouselItem
+              key={`first-${index}`}
+              text={word}
+              spacing={spacing / 4}
+            />
           ))}
 
           {/* Duplicate set for seamless loop */}
           {words.map((word, index) => (
-            <CarouselItem key={`second-${index}`} text={word} />
+            <CarouselItem
+              key={`second-${index}`}
+              text={word}
+              spacing={spacing / 4}
+            />
           ))}
         </div>
       </div>
