@@ -32,7 +32,7 @@ Supabase provides a powerful PostgreSQL database with real-time capabilities and
 1. **Create Account**: Go to [supabase.com](https://supabase.com) and create a free account
 2. **New Project**: Create a new project and choose a region close to your users
 3. **Get Credentials**: Copy your project URL and anon key from Settings → API
-4. **Database Schema**: Insert the required database schema (see database.webp reference)
+4. **Database Schema**: Insert the required database schema (see database.webp reference in assets folder)
 
 > **⚠️ Important Note**: You'll need to turn off RLS policies which is not recommended for production. Create your own policies for select, insert, update operations.
 
