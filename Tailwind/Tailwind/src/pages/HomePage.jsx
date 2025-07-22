@@ -60,7 +60,29 @@ function HomePage() {
 
         {/* Header/Nav */}
         <nav className="w-full flex items-center justify-between px-10 py-6 bg-transparent text-white z-20 relative">
-          <div className="text-2xl font-bold tracking-wide">LearningApp</div>
+          <div className="flex items-center gap-4">
+            <div className="text-2xl font-bold tracking-wide">LearningApp</div>
+            <Link
+              to="/"
+              className="bg-zinc-800 hover:bg-zinc-700 text-white font-semibold px-4 py-2 rounded-full transition duration-300 ease-in-out transform hover:scale-105 shadow-lg flex items-center gap-2 border border-zinc-700 text-sm"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
+              </svg>
+              Main Page
+            </Link>
+          </div>
           <div className="flex items-center gap-4">
             {user && (
               <>

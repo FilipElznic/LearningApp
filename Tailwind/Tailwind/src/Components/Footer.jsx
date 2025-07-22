@@ -99,28 +99,6 @@ const Footer = () => {
           <div className="mb-2">
             © {currentYear} Learning App. All rights reserved.
           </div>
-          <div className="flex justify-center items-center space-x-6 text-xs">
-            <div className="text-green-400 flex items-center">
-              <svg
-                className="w-3 h-3 mr-1"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z" />
-              </svg>
-              Your data is secure
-            </div>
-            <div className="text-blue-400 flex items-center">
-              <svg
-                className="w-3 h-3 mr-1"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M9,12L11,14L15,10L13.59,8.59L11,11.17L9.41,9.59L9,12M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4Z" />
-              </svg>
-              Never shared with anyone
-            </div>
-          </div>
         </div>
       </div>
     </footer>

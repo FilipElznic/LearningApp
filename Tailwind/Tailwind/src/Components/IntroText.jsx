@@ -3,10 +3,9 @@ import { useState, useEffect, useRef } from "react";
 function IntroText() {
   const storyParts = [
     {
-      title: "Hi, I’m Orbi",
       content: [
-        "Greetings, Earthling!",
-        "I'm Orbi — your cosmic guide through this digital galaxy.",
+        "Hello, Space Explorer!",
+        "I'm Orbi, the official mascot of this web app!",
       ],
     },
     {
@@ -15,10 +14,7 @@ function IntroText() {
       ],
     },
     {
-      content: [
-        "Now, my mission is clear:",
-        "Help explorers like you uncover space secrets and stellar stories.",
-      ],
+      content: ["Now, I’m here to improve your learning journey!"],
     },
     {
       content: [
@@ -100,13 +96,6 @@ function IntroText() {
       }`}
     >
       <div className="w-2/3 h-[50vh] bg-black flex flex-col items-center justify-center text-white px-8 relative">
-        <h1
-          className={`text-5xl font-bold mb-12 text-center transition-all duration-1000 delay-300 ease-out bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}
-        >
-          {storyParts[currentPartIndex].title}
-        </h1>
         <div
           className={`text-2xl text-center min-h-[10rem] flex items-center transition-all duration-1000 delay-500 ease-out leading-relaxed ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
