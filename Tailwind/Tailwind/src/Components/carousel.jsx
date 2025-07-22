@@ -56,7 +56,6 @@ CarouselRow.propTypes = {
 
 // Main Carousel Component
 function Carousel({
-  title = "Our Community",
   carousels = [],
   className = "",
   titleClassName = "text-3xl font-bold text-white text-center pt-12 mb-12",
@@ -100,9 +99,7 @@ function Carousel({
   const carouselData = carousels.length > 0 ? carousels : defaultCarousels;
 
   return (
-    <div className={`w-full relative overflow-hidden ${className}`}>
-      {title && <h3 className={titleClassName}>{title}</h3>}
-
+    <div className={`w-full relative overflow-hidden my-20 ${className}`}>
       <div className="space-y-6">
         {carouselData.map((carousel, index) => (
           <CarouselRow

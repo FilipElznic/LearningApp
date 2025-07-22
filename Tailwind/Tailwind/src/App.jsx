@@ -20,8 +20,8 @@ import HomePage from "./pages/HomePage";
 import TasksPage from "./pages/TasksPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import Docs from "./pages/Docs";
-
 import Footer from "./Components/Footer";
+import PageTransition from "./Components/PageTransition";
 // Correct implementation of ProtectedRoute for React Router v6
 const ProtectedRoute = () => {
   const { user, loading } = useAuth();
@@ -69,7 +69,9 @@ const Layout = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow">
-        <Outlet />
+        <PageTransition>
+          <Outlet />
+        </PageTransition>
       </main>
       <Footer />
     </div>

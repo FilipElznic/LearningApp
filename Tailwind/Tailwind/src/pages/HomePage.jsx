@@ -14,12 +14,12 @@ function XPProgressGraph({ userXP }) {
   // XP level thresholds
   const levels = [
     { level: 1, xp: 0, title: "Space Cadet" },
-    { level: 2, xp: 50, title: "Astronaut Trainee" },
-    { level: 3, xp: 150, title: "Space Explorer" },
-    { level: 4, xp: 300, title: "Cosmic Navigator" },
-    { level: 5, xp: 500, title: "Star Captain" },
-    { level: 6, xp: 750, title: "Galaxy Master" },
-    { level: 7, xp: 1000, title: "Universe Legend" },
+    { level: 2, xp: 20, title: "Astronaut Trainee" },
+    { level: 3, xp: 30, title: "Space Explorer" },
+    { level: 4, xp: 50, title: "Cosmic Navigator" },
+    { level: 5, xp: 75, title: "Star Captain" },
+    { level: 6, xp: 100, title: "Galaxy Master" },
+    { level: 7, xp: 200, title: "Universe Legend" },
   ];
 
   // Calculate current level and progress
@@ -388,18 +388,32 @@ function HomePage() {
         {/* Main Call to Action Section */}
         <Carousel />
 
-        <div className="w-full py-16 px-10">
-          <div className="max-w-6xl mx-auto">
+        <div className="w-full py-16 px-10 ">
+          <div className="flex  flex-col items-center">
+            <h3 className="text-5xl font-extrabold text-white mb-8 text-center tracking-wide">
+              Level up the progression of your space journey!
+            </h3>
+
+            <p className="text-center text-lg text-zinc-600 w-1/4">
+              Join us as we explore the cosmos of knowledge and unlock new
+              levels of learning!
+            </p>
+          </div>
+          <div className="max-w-6xl mt-24 mx-auto">
             <div className="bg-gradient-to-br from-zinc-900/90 to-zinc-800/80 rounded-3xl shadow-2xl border border-zinc-700 backdrop-blur-md p-8">
-              <h3 className="text-3xl font-extrabold text-white mb-8 text-center tracking-wide">
-                Start the progression of your space journey!
-              </h3>
               {/* XP Progress Graph */}
               <XPProgressGraph userXP={userXP} />
             </div>
           </div>
         </div>
-        <div className="h-screen"></div>
+        <div className="w-full h-[40vh]"></div>
+        <div className="h-screen gap-5 flex items-center  flex-col w-full">
+          <h3 className="text-4xl font-extrabold text-white mb-8 text-center tracking-wide">
+            Level up the progression of your space journey!
+          </h3>
+          <div className="w-2/3 h-full bg-gradient-to-br from-zinc-800 to-zinc-500 rounded-3xl shadow-2xl border border-zinc-700 backdrop-blur-md p-8"></div>
+          <div className="w-2/3 h-full bg-gradient-to-br from-zinc-500 to-zinc-800 rounded-3xl shadow-2xl border border-zinc-700 backdrop-blur-md p-8"></div>
+        </div>
         {/* Leaderboard Section */}
         <div className="w-full py-16 px-10">
           <div className="max-w-4xl mx-auto">
