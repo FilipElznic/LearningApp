@@ -6,6 +6,7 @@ import Leaderboard from "../Components/Leaderboard";
 import { supabase } from "../supabaseClient";
 import planetEarthImg from "../assets/planetearth.jpg";
 import Carousel from "../Components/carousel";
+import Shipwrecked from "../Components/Shipwrecked";
 
 // XP Progress Graph Component
 function XPProgressGraph({ userXP }) {
@@ -406,17 +407,12 @@ function HomePage() {
             </div>
           </div>
         </div>
-        <div className="w-full h-[40vh]"></div>
-        <div className="h-screen gap-5 flex items-center  flex-col w-full">
-          <h3 className="text-4xl font-extrabold text-white mb-8 text-center tracking-wide">
-            Level up the progression of your space journey!
-          </h3>
-          <div className="w-2/3 h-full bg-gradient-to-br from-zinc-800 to-zinc-500 rounded-3xl shadow-2xl border border-zinc-700 backdrop-blur-md p-8"></div>
-          <div className="w-2/3 h-full bg-gradient-to-br from-zinc-500 to-zinc-800 rounded-3xl shadow-2xl border border-zinc-700 backdrop-blur-md p-8"></div>
-        </div>
+        <div className="w-full h-[20vh] hidden md:block"></div>
+        <Shipwrecked />
+        <div className="w-full h-[20vh] hidden md:block"></div>
         {/* Leaderboard Section */}
         <div className="w-full py-16 px-10">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             <Leaderboard />
           </div>
         </div>

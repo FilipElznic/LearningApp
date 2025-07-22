@@ -14,7 +14,7 @@ const Footer = () => {
               Learning App
             </h3>
             <p className="text-white max-w-xs">
-              This project is created via project shipwreacked by Filip Elznic.
+              This project is created via project shipwrecked by Filip Elznic.
             </p>
           </div>
 
