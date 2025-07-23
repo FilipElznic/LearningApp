@@ -167,8 +167,8 @@ function MainPage() {
               Unlock quick learning.
             </h2>
             <p className="text-base md:text-2xl w-full md:w-1/2 mt-4 md:mt-2 font-light text-gray-900 text-center px-4 md:px-0">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deserunt
-              accusantium dolor minus tenetur eligendi!
+              This app is a free learning platform designed to help you explore
+              the universe of knowledge through interactive questions.
             </p>
             <div className="w-full h-full flex flex-col md:flex-row items-center justify-center mt-6 md:mt-10 gap-4 md:gap-6 px-4 md:px-0 pb-8 md:pb-0">
               {/* Card 1 */}
