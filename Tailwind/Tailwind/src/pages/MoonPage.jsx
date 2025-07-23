@@ -1,6 +1,5 @@
 import LearningPageTemplate from "../Components/LearningPageTemplate";
 import moonImage from "../assets/arrowmoon.png";
-
 import Moonland from "../assets/moonland.png";
 import Moonphases from "../assets/moonphases.png";
 import Moontheory from "../assets/moonteory.png";
@@ -31,7 +30,7 @@ function MoonPage() {
     {
       title: "No Atmosphere",
       content:
-        "The Moon has a very thin atmosphere, called an exosphere, which is not capable of supporting human life. This lack of atmosphere means there is no weather, and temperatures can vary dramatically.",
+        "The Moon has an extremely tenuous exosphere, not a true atmosphere. It cannot support human life, and there is no weather. Temperatures vary dramatically between day and night.",
       bgColor: "bg-black",
       textColor: "text-white",
     },
@@ -45,7 +44,7 @@ function MoonPage() {
     {
       title: "Lunar Gravity",
       content:
-        "The Moon's gravity is only 1/6th of Earth's, allowing astronauts to jump higher and move differently. This low gravity affects how dust settles and how objects behave on the surface.",
+        "The Moon's gravity is about 1/6th of Earth's, allowing astronauts to jump higher and move differently. This low gravity affects how dust settles and how objects behave on the surface.",
       bgColor: "bg-black",
       textColor: "text-white",
     },
@@ -83,10 +82,11 @@ function MoonPage() {
                     Impact Craters
                   </h4>
                   <p className="text-gray-300 leading-relaxed">
-                    The Moon&apos;s surface is covered with over 300,000 craters
-                    larger than 1km. Major craters like Tycho and Copernicus
-                    showcase the Moon&apos;s violent past, with some impacts
-                    creating massive basins hundreds of kilometers across.
+                    The Moon&apos;s surface is covered with hundreds of
+                    thousands of craters larger than 1km (estimates vary). Major
+                    craters like Tycho and Copernicus showcase the Moon&apos;s
+                    violent past, with some impacts creating massive basins
+                    hundreds of kilometers across.
                   </p>
                 </div>
                 <div className="bg-gray-800/50 backdrop-blur-sm border border-amber-400/20 rounded-xl p-6 hover:border-amber-400/50 transition-all duration-300">
@@ -169,7 +169,7 @@ function MoonPage() {
         <div className="max-w-7xl mx-auto mb-20">
           <div className="text-center mb-12">
             <h3 className="text-2xl md:text-4xl font-bold text-white mb-6">
-              FORMATION THEORY
+              MOON FORMATION THEORY
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="bg-gradient-to-b from-red-800/30 to-red-900/30 border border-red-400/20 rounded-xl p-6 hover:scale-105 transition-all duration-300">
@@ -182,8 +182,8 @@ function MoonPage() {
                   </h4>
                 </div>
                 <p className="text-gray-300 text-sm">
-                  Mars-sized object called Theia collided with early Earth 4.5
-                  billion years ago
+                  Leading hypothesis: A Mars-sized object called Theia collided
+                  with early Earth about 4.5 billion years ago.
                 </p>
               </div>
               <div className="bg-gradient-to-b from-orange-800/30 to-orange-900/30 border border-orange-400/20 rounded-xl p-6 hover:scale-105 transition-all duration-300">
@@ -196,8 +196,8 @@ function MoonPage() {
                   </h4>
                 </div>
                 <p className="text-gray-300 text-sm">
-                  Impact ejected massive amounts of material into orbit around
-                  Earth
+                  The impact ejected massive amounts of material into orbit
+                  around Earth.
                 </p>
               </div>
               <div className="bg-gradient-to-b from-yellow-800/30 to-yellow-900/30 border border-yellow-400/20 rounded-xl p-6 hover:scale-105 transition-all duration-300">
@@ -211,7 +211,7 @@ function MoonPage() {
                 </div>
                 <p className="text-gray-300 text-sm">
                   Debris gradually coalesced to form the Moon over millions of
-                  years
+                  years.
                 </p>
               </div>
             </div>

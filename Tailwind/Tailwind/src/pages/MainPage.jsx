@@ -168,7 +168,9 @@ function MainPage() {
             </h2>
             <p className="text-base md:text-2xl w-full md:w-1/2 mt-4 md:mt-2 font-light text-gray-900 text-center px-4 md:px-0">
               This app is a free learning platform designed to help you explore
-              the universe of knowledge through interactive questions.
+              a universe of knowledge through interactive questions. (All XP and
+              achievements are for fun and learning, not real astronaut
+              training.)
             </p>
             <div className="w-full h-full flex flex-col md:flex-row items-center justify-center mt-6 md:mt-10 gap-4 md:gap-6 px-4 md:px-0 pb-8 md:pb-0">
               {/* Card 1 */}
@@ -256,8 +258,8 @@ function MainPage() {
                       Why Join us?
                     </h3>
                     <p className="text-zinc-200 text-sm">
-                      Track your progress, earn xp, and access exclusive space
-                      knowledge.
+                      Track your progress, earn XP, and access exclusive
+                      space-themed learning content.
                     </p>
                   </div>
                   <div className="flex justify-center mt-4 md:mt-6">
@@ -297,8 +299,8 @@ function MainPage() {
                       Already a member?
                     </h3>
                     <p className="text-zinc-200 text-sm">
-                      Sign in and continue your cosmic adventure with
-                      interactive tasks!
+                      Sign in and continue your cosmic adventure
+                      (metaphorically!) with interactive tasks and quizzes.
                     </p>
                   </div>
                   <div className="flex justify-center mt-4 md:mt-6">

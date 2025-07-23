@@ -294,7 +294,8 @@ function HomePage() {
             <p className="text-zinc-200 text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed">
               🌟 Ready to embark on your cosmic learning journey? Challenge
               yourself with multiple choice questions, pick the right answer
-              from A, B, or C, and earn XP based on the difficulty level!
+              from A, B, or C, and earn XP based on the difficulty level. (XP
+              and levels are for fun and learning, not real astronaut ranks!)
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
@@ -342,9 +343,9 @@ function HomePage() {
                   XP Constellation System
                 </h3>
                 <p className="text-zinc-300">
-                  Collect experience points based on difficulty levels. Easy
-                  missions grant 5 XP, medium expeditions reward 10 XP, and
-                  expert voyages offer 15 XP!
+                  Collect experience points based on quiz difficulty. Easy
+                  questions grant 5 XP, medium questions reward 10 XP, and
+                  expert questions offer 15 XP!
                 </p>
               </div>
 
@@ -363,8 +364,8 @@ function HomePage() {
                 </h3>
                 <p className="text-zinc-300">
                   Chart your journey through the learning galaxy. Monitor
-                  achievements, unlock new cosmic territories, and witness your
-                  transformation into a space scholar!
+                  achievements, unlock new learning milestones, and see your
+                  progress as you become a space knowledge expert!
                 </p>
               </div>
             </div>
