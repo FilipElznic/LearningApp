@@ -6,9 +6,6 @@ export default {
       dropShadow: {
         "white-glow": "0px 0px 8px white",
       },
-      fontFamily: {
-        blocky: ["Orbitron", "monospace"],
-      },
     },
   },
   plugins: [],
