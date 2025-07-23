@@ -1,6 +1,6 @@
 import LearningPageTemplate from "../Components/LearningPageTemplate";
 import moonImage from "../assets/arrowmoon.png";
-import Mooncrust from "../assets/mooncrust.png";
+
 import Moonland from "../assets/moonland.png";
 import Moonphases from "../assets/moonphases.png";
 import Moontheory from "../assets/moonteory.png";

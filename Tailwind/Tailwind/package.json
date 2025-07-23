@@ -1,7 +1,17 @@
 {
-  "name": "tailwind",
+  "name": "space-learning-app",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "An interactive educational platform for learning about space exploration, planets, spacecraft, and astronauts",
+  "author": "SpaceLearning Team",
+  "keywords": [
+    "space education",
+    "astronomy",
+    "space exploration",
+    "interactive learning",
+    "react",
+    "educational app"
+  ],
   "type": "module",
   "scripts": {
     "dev": "vite",
