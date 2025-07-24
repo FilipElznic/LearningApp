@@ -1,12 +1,14 @@
 import { useAuth } from "../AuthContext";
 import { useToast } from "../ToastContext";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense, lazy } from "react";
 import { Link } from "react-router-dom";
-import Leaderboard from "../Components/Leaderboard";
 import { supabase } from "../supabaseClient";
 import planetEarthImg from "../assets/planetearth.jpg";
-import Carousel from "../Components/carousel";
-import Shipwrecked from "../Components/Shipwrecked";
+
+// Lazy load heavy components
+const Leaderboard = lazy(() => import("../Components/Leaderboard"));
+const Carousel = lazy(() => import("../Components/carousel"));
+const Shipwrecked = lazy(() => import("../Components/Shipwrecked"));
 
 // XP Progress Graph Component
 function XPProgressGraph({ userXP }) {
@@ -388,7 +390,20 @@ function HomePage() {
           </svg>
         </div>
         {/* Main Call to Action Section */}
-        <Carousel />
+        <Suspense
+          fallback={
+            <div className="w-full py-16 px-10 flex items-center justify-center">
+              <div className="text-center">
+                <div className="w-12 h-12 border-4 border-yellow-400/30 border-t-yellow-400 rounded-full animate-spin mx-auto"></div>
+                <p className="mt-4 text-yellow-400/80 text-sm">
+                  Loading content...
+                </p>
+              </div>
+            </div>
+          }
+        >
+          <Carousel />
+        </Suspense>
 
         <div className="w-full py-16 px-10 ">
           <div className="flex  flex-col items-center">
@@ -409,12 +424,38 @@ function HomePage() {
           </div>
         </div>
         <div className="w-full h-[20vh] hidden md:block"></div>
-        <Shipwrecked />
+        <Suspense
+          fallback={
+            <div className="w-full py-16 px-10 flex items-center justify-center">
+              <div className="text-center">
+                <div className="w-12 h-12 border-4 border-cyan-400/30 border-t-cyan-400 rounded-full animate-spin mx-auto"></div>
+                <p className="mt-4 text-cyan-400/80 text-sm">
+                  Loading project info...
+                </p>
+              </div>
+            </div>
+          }
+        >
+          <Shipwrecked />
+        </Suspense>
         <div className="w-full h-[20vh] hidden md:block"></div>
         {/* Leaderboard Section */}
         <div className="w-full py-16 px-10">
           <div className="max-w-7xl mx-auto">
-            <Leaderboard />
+            <Suspense
+              fallback={
+                <div className="w-full py-16 px-10 flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="w-12 h-12 border-4 border-purple-400/30 border-t-purple-400 rounded-full animate-spin mx-auto"></div>
+                    <p className="mt-4 text-purple-400/80 text-sm">
+                      Loading leaderboard...
+                    </p>
+                  </div>
+                </div>
+              }
+            >
+              <Leaderboard />
+            </Suspense>
           </div>
         </div>
         {/* Decorative bottom section */}

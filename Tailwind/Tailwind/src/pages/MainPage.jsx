@@ -1,11 +1,13 @@
 import "../App.css";
 import Spline from "@splinetool/react-spline";
-import { useState, useEffect, useRef } from "react";
-import Planets from "../Components/Planets";
+import { useState, useEffect, useRef, Suspense, lazy } from "react";
 import IntroText from "../Components/IntroText";
 import Layout from "../Components/Layout";
 import LandingPage from "./LandingPage";
 import { webGLManager } from "../Components/Planet";
+
+// Lazy load heavy components
+const Planets = lazy(() => import("../Components/Planets"));
 
 function MainPage() {
   const [scrollY, setScrollY] = useState(0);
@@ -321,7 +323,25 @@ function MainPage() {
         </div>
         <div className="w-full h-[20vh] bg-slate-50"></div>
         <div className="min-h-screen bg-white z-50 relative">
-          <Planets />
+          <Suspense
+            fallback={
+              <div className="flex items-center justify-center h-screen bg-white">
+                <div className="text-center">
+                  <div className="relative">
+                    <div className="w-16 h-16 border-4 border-blue-600/30 border-t-blue-600 rounded-full animate-spin mx-auto"></div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-8 h-8 bg-blue-600/20 rounded-full animate-pulse"></div>
+                    </div>
+                  </div>
+                  <p className="mt-4 text-blue-600/80 text-lg font-medium">
+                    Loading planetary system...
+                  </p>
+                </div>
+              </div>
+            }
+          >
+            <Planets />
+          </Suspense>
         </div>
       </div>
     </>

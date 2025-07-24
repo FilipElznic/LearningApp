@@ -7,21 +7,41 @@ import {
   Navigate,
   Outlet,
 } from "react-router-dom";
-import LoginPage from "./pages/LoginPage";
-import SignupForm from "./Components/SignupForm";
-import Profile from "./Components/Profile";
 import { useAuth } from "./AuthContext";
-import MainPage from "./pages/MainPage";
-import SpacecraftPage from "./pages/SpacecraftPage";
-import AstronautsPage from "./pages/AstronautsPage";
-import MoonPage from "./pages/MoonPage";
-import EarthPage from "./pages/EarthPage";
-import HomePage from "./pages/HomePage";
-import TasksPage from "./pages/TasksPage";
-import PrivacyPage from "./pages/PrivacyPage";
-import Docs from "./pages/Docs";
-import Footer from "./Components/Footer";
-import PageTransition from "./Components/PageTransition";
+import { Suspense, lazy } from "react";
+
+// Lazy load all pages for better performance
+const LoginPage = lazy(() => import("./pages/LoginPage"));
+const SignupForm = lazy(() => import("./Components/SignupForm"));
+const Profile = lazy(() => import("./Components/Profile"));
+const MainPage = lazy(() => import("./pages/MainPage"));
+const SpacecraftPage = lazy(() => import("./pages/SpacecraftPage"));
+const AstronautsPage = lazy(() => import("./pages/AstronautsPage"));
+const MoonPage = lazy(() => import("./pages/MoonPage"));
+const EarthPage = lazy(() => import("./pages/EarthPage"));
+const HomePage = lazy(() => import("./pages/HomePage"));
+const TasksPage = lazy(() => import("./pages/TasksPage"));
+const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
+const Docs = lazy(() => import("./pages/Docs"));
+const Footer = lazy(() => import("./Components/Footer"));
+const PageTransition = lazy(() => import("./Components/PageTransition"));
+// Loading component for Suspense fallback
+const LoadingSpinner = () => (
+  <div className="flex items-center justify-center h-screen bg-gradient-to-br from-black via-zinc-900 to-zinc-800">
+    <div className="text-center">
+      <div className="relative">
+        <div className="w-16 h-16 border-4 border-blue-300/30 border-t-blue-300 rounded-full animate-spin mx-auto"></div>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-8 h-8 bg-blue-300/20 rounded-full animate-pulse"></div>
+        </div>
+      </div>
+      <p className="mt-4 text-blue-300/80 text-lg font-medium">
+        Loading cosmic content...
+      </p>
+    </div>
+  </div>
+);
+
 // Correct implementation of ProtectedRoute for React Router v6
 const ProtectedRoute = () => {
   const { user, loading } = useAuth();
@@ -69,11 +89,15 @@ const Layout = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow">
-        <PageTransition>
-          <Outlet />
-        </PageTransition>
+        <Suspense fallback={<LoadingSpinner />}>
+          <PageTransition>
+            <Outlet />
+          </PageTransition>
+        </Suspense>
       </main>
-      <Footer />
+      <Suspense fallback={<LoadingSpinner />}>
+        <Footer />
+      </Suspense>
     </div>
   );
 };
@@ -83,35 +107,37 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <ToastProvider>
-          <Routes>
-            {/* Wrap all routes with the Layout component */}
-            <Route element={<Layout />}>
-              {/* Auth routes - redirect to profile if already logged in */}
-              <Route element={<AuthRoute />}>
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/signup" element={<SignupForm />} />
-                <Route path="/" element={<MainPage />} />
+          <Suspense fallback={<LoadingSpinner />}>
+            <Routes>
+              {/* Wrap all routes with the Layout component */}
+              <Route element={<Layout />}>
+                {/* Auth routes - redirect to profile if already logged in */}
+                <Route element={<AuthRoute />}>
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/signup" element={<SignupForm />} />
+                  <Route path="/" element={<MainPage />} />
+                </Route>
+
+                <Route path="/moon" element={<MoonPage />} />
+                <Route path="/earth" element={<EarthPage />} />
+                <Route path="/spacecraft" element={<SpacecraftPage />} />
+                <Route path="/astronaut" element={<AstronautsPage />} />
+                <Route path="/privacy" element={<PrivacyPage />} />
+                <Route path="/docs" element={<Docs />} />
+                {/* Protected routes - require authentication */}
+                <Route element={<ProtectedRoute />}>
+                  <Route path="/main" element={<HomePage />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/tasks" element={<TasksPage />} />
+
+                  {/* Add more protected routes here */}
+                </Route>
+
+                {/* Default redirect */}
+                <Route path="*" element={<Navigate to="/login" replace />} />
               </Route>
-
-              <Route path="/moon" element={<MoonPage />} />
-              <Route path="/earth" element={<EarthPage />} />
-              <Route path="/spacecraft" element={<SpacecraftPage />} />
-              <Route path="/astronaut" element={<AstronautsPage />} />
-              <Route path="/privacy" element={<PrivacyPage />} />
-              <Route path="/docs" element={<Docs />} />
-              {/* Protected routes - require authentication */}
-              <Route element={<ProtectedRoute />}>
-                <Route path="/main" element={<HomePage />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/tasks" element={<TasksPage />} />
-
-                {/* Add more protected routes here */}
-              </Route>
-
-              {/* Default redirect */}
-              <Route path="*" element={<Navigate to="/login" replace />} />
-            </Route>
-          </Routes>
+            </Routes>
+          </Suspense>
         </ToastProvider>
       </AuthProvider>
     </BrowserRouter>
