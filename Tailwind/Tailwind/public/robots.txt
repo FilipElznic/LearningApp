@@ -1,0 +1,35 @@
+User-agent: *
+Allow: /
+
+# Allow crawling of all public pages
+Allow: /
+Allow: /moon
+Allow: /earth
+Allow: /spacecraft
+Allow: /astronaut
+Allow: /privacy
+Allow: /docs
+
+# Disallow user-specific and authenticated pages
+Disallow: /main
+Disallow: /profile
+Disallow: /tasks
+Disallow: /login
+Disallow: /signup
+
+# Allow access to static assets
+Allow: /assets/
+Allow: *.css
+Allow: *.js
+Allow: *.png
+Allow: *.jpg
+Allow: *.jpeg
+Allow: *.gif
+Allow: *.svg
+Allow: *.webp
+
+# Sitemap location
+Sitemap: https://yourdomain.com/sitemap.xml
+
+# Crawl delay (optional - helps prevent server overload)
+Crawl-delay: 1

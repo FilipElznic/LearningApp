@@ -4,12 +4,44 @@ import { useState, useEffect, useRef, Suspense, lazy } from "react";
 import IntroText from "../Components/IntroText";
 import Layout from "../Components/Layout";
 import LandingPage from "./LandingPage";
+import SEOHead from "../Components/SEOHead";
 import { webGLManager } from "../Components/Planet";
 
 // Lazy load heavy components
 const Planets = lazy(() => import("../Components/Planets"));
 
 function MainPage() {
+  const seoData = {
+    title: "SpaceLearning Main Hub | Explore Our Solar System",
+    description:
+      "Navigate through our interactive 3D solar system and access comprehensive space education modules. Explore planets, spacecraft, and astronaut training in an immersive experience.",
+    keywords:
+      "3D solar system, interactive space education, planet exploration, space navigation, educational space simulation, virtual space experience, astronomy education",
+    canonical: "https://yourdomain.com/main",
+    ogImage: "https://yourdomain.com/main-og.jpg",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      name: "SpaceLearning Main Hub",
+      description:
+        "Interactive 3D space education navigation hub with immersive planetary exploration",
+      applicationCategory: "EducationalApplication",
+      about: [
+        {
+          "@type": "Thing",
+          name: "3D Solar System",
+        },
+        {
+          "@type": "Thing",
+          name: "Interactive Space Education",
+        },
+        {
+          "@type": "Thing",
+          name: "Virtual Reality Learning",
+        },
+      ],
+    },
+  };
   const [scrollY, setScrollY] = useState(0);
   const splineRef = useRef(null);
   const containerRef = useRef(null);
@@ -116,6 +148,7 @@ function MainPage() {
 
   return (
     <>
+      <SEOHead {...seoData} />
       <style>
         {`
           html, body {

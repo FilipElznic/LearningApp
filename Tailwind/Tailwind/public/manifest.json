@@ -1,0 +1,67 @@
+{
+  "name": "SpaceLearning - Explore the Cosmos",
+  "short_name": "SpaceLearning",
+  "description": "Interactive space education platform for learning about Earth, Moon, Spacecraft, and Astronauts",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["education", "science", "reference"],
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot1.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "SpaceLearning Homepage"
+    },
+    {
+      "src": "/screenshot2.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "Interactive Moon Learning"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Moon Learning",
+      "short_name": "Moon",
+      "description": "Learn about the Moon",
+      "url": "/moon",
+      "icons": [
+        {
+          "src": "/moon-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Earth Learning",
+      "short_name": "Earth",
+      "description": "Learn about Earth",
+      "url": "/earth",
+      "icons": [
+        {
+          "src": "/earth-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}

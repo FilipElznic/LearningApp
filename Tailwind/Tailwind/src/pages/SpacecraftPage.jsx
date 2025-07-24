@@ -1,10 +1,43 @@
 import LearningPageTemplate from "../Components/LearningPageTemplate";
+import SEOHead from "../Components/SEOHead";
 import rocketImage from "../assets/arrowrocket.png";
 import rEngine from "../assets/rocketengine.png";
 import rOrbit from "../assets/rocketorbit.png";
 import rStage from "../assets/rocketstage.png";
 
 function SpacecraftPage() {
+  const seoData = {
+    title: "Spacecraft & Rockets | Space Vehicle Engineering | SpaceLearning",
+    description:
+      "Learn about spacecraft design, rocket engines, orbital mechanics, and space vehicle technology. Discover how humans reach space through advanced engineering.",
+    keywords:
+      "spacecraft, rockets, space shuttle, rocket engines, orbital mechanics, space technology, space vehicles, rocket boosters, space engineering, launch systems",
+    canonical: "https://yourdomain.com/spacecraft",
+    ogImage: "https://yourdomain.com/spacecraft-og.jpg",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "LearningResource",
+      name: "Spacecraft & Rockets",
+      description:
+        "Educational content about spacecraft design, rocket technology, and space vehicle engineering",
+      educationalLevel: "beginner",
+      learningResourceType: "Interactive Content",
+      about: [
+        {
+          "@type": "Thing",
+          name: "Spacecraft",
+        },
+        {
+          "@type": "Thing",
+          name: "Rocket Technology",
+        },
+        {
+          "@type": "Thing",
+          name: "Space Engineering",
+        },
+      ],
+    },
+  };
   const equipmentParts = [
     {
       title: "Solid Rocket Boosters",
@@ -52,6 +85,7 @@ function SpacecraftPage() {
 
   return (
     <div className="min-h-screen bg-black">
+      <SEOHead {...seoData} />
       <LearningPageTemplate
         pageTitle="SPACECRAFT"
         imageSrc={rocketImage}

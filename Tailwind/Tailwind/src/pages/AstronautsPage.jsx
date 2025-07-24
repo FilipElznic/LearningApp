@@ -1,4 +1,5 @@
 import LearningPageTemplate from "../Components/LearningPageTemplate";
+import SEOHead from "../Components/SEOHead";
 import astronaut from "../assets/arrowastronout.png";
 import spacesuit from "../assets/aspacesuit.png";
 import spacetrain from "../assets/aspacetraining.jpg";
@@ -6,6 +7,38 @@ import spacetrain from "../assets/aspacetraining.jpg";
 import famous from "../assets/afamous.png";
 
 function AstronautsPage() {
+  const seoData = {
+    title: "Astronauts & Space Medicine | Human Spaceflight | SpaceLearning",
+    description:
+      "Learn about astronaut training, space medicine, spacesuit technology, and the challenges of human spaceflight. Discover what it takes to become an astronaut.",
+    keywords:
+      "astronauts, space medicine, spacesuits, astronaut training, human spaceflight, space exploration, EVA, life support systems, space physiology, NASA astronauts",
+    canonical: "https://yourdomain.com/astronauts",
+    ogImage: "https://yourdomain.com/astronauts-og.jpg",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "LearningResource",
+      name: "Astronauts & Space Medicine",
+      description:
+        "Educational content about astronaut training, space medicine, and human spaceflight challenges",
+      educationalLevel: "beginner",
+      learningResourceType: "Interactive Content",
+      about: [
+        {
+          "@type": "Thing",
+          name: "Astronauts",
+        },
+        {
+          "@type": "Thing",
+          name: "Space Medicine",
+        },
+        {
+          "@type": "Thing",
+          name: "Human Spaceflight",
+        },
+      ],
+    },
+  };
   const equipmentParts = [
     {
       title: "Primary Life Support System",
@@ -53,6 +86,7 @@ function AstronautsPage() {
 
   return (
     <div className="min-h-screen bg-black">
+      <SEOHead {...seoData} />
       <LearningPageTemplate
         pageTitle="ASTRONAUTS"
         imageSrc={astronaut}

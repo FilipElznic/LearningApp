@@ -7,37 +7,140 @@
       type="image/svg+xml"
       href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><radialGradient id='moonGrad' cx='30%25' cy='30%25'><stop offset='0%25' style='stop-color:%23f8f9fa'/><stop offset='100%25' style='stop-color:%23adb5bd'/></radialGradient></defs><circle cx='50' cy='50' r='45' fill='url(%23moonGrad)'/><circle cx='35' cy='25' r='4' fill='%23868e96'/><circle cx='65' cy='35' r='3' fill='%23868e96'/><circle cx='25' cy='60' r='5' fill='%23868e96'/><circle cx='70' cy='65' r='3' fill='%23868e96'/><circle cx='45' cy='70' r='2' fill='%23868e96'/></svg>"
     />
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+    <!-- Microsoft Tile -->
+    <meta name="msapplication-TileColor" content="#000000" />
+    <meta name="msapplication-config" content="/browserconfig.xml" />
+
+    <!-- Essential Meta Tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="bingbot" content="index, follow" />
+
+    <!-- Primary Meta Tags -->
     <meta
       name="description"
       content="Explore the cosmos with SpaceLearning - An interactive educational platform for learning about Earth, Moon, Spacecraft, and Astronauts. Discover the wonders of space exploration through immersive content and stunning visuals."
     />
     <meta
       name="keywords"
-      content="space education, astronomy, space exploration, moon, earth, spacecraft, astronauts, learning app, interactive education"
+      content="space education, astronomy, space exploration, moon, earth, spacecraft, astronauts, learning app, interactive education, space science, cosmos, solar system, NASA, educational games, STEM learning"
     />
     <meta name="author" content="SpaceLearning Team" />
     <meta name="theme-color" content="#000000" />
+    <meta name="application-name" content="SpaceLearning" />
+    <meta name="apple-mobile-web-app-title" content="SpaceLearning" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://yourdomain.com/" />
+
+    <!-- Language -->
+    <meta name="language" content="English" />
+    <meta name="geo.region" content="US" />
+    <meta name="geo.placename" content="United States" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="SpaceLearning - Explore the Cosmos" />
+    <meta property="og:url" content="https://yourdomain.com/" />
+    <meta
+      property="og:title"
+      content="SpaceLearning - Explore the Cosmos | Interactive Space Education"
+    />
     <meta
       property="og:description"
-      content="An interactive educational platform for learning about space exploration, planets, spacecraft, and astronauts."
+      content="An interactive educational platform for learning about space exploration, planets, spacecraft, and astronauts. Join thousands of space enthusiasts in exploring the universe!"
     />
-    <meta property="og:image" content="/og-image.jpg" />
+    <meta property="og:image" content="https://yourdomain.com/og-image.jpg" />
+    <meta
+      property="og:image:alt"
+      content="SpaceLearning - Interactive Space Education Platform"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="SpaceLearning" />
+    <meta property="og:locale" content="en_US" />
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://yourdomain.com/" />
     <meta
-      property="twitter:title"
-      content="SpaceLearning - Explore the Cosmos"
+      name="twitter:title"
+      content="SpaceLearning - Explore the Cosmos | Interactive Space Education"
     />
     <meta
-      property="twitter:description"
-      content="An interactive educational platform for learning about space exploration, planets, spacecraft, and astronauts."
+      name="twitter:description"
+      content="An interactive educational platform for learning about space exploration, planets, spacecraft, and astronauts. Join thousands of space enthusiasts!"
     />
+    <meta name="twitter:image" content="https://yourdomain.com/og-image.jpg" />
+    <meta
+      name="twitter:image:alt"
+      content="SpaceLearning - Interactive Space Education Platform"
+    />
+    <meta name="twitter:creator" content="@SpaceLearning" />
+    <meta name="twitter:site" content="@SpaceLearning" />
+
+    <!-- Additional SEO -->
+    <meta name="rating" content="General" />
+    <meta name="distribution" content="Global" />
+    <meta name="category" content="Education, Science, Astronomy" />
+    <meta name="coverage" content="Worldwide" />
+    <meta name="target" content="students, educators, space enthusiasts" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "SpaceLearning",
+        "description": "Interactive space education platform for learning about Earth, Moon, Spacecraft, and Astronauts",
+        "url": "https://yourdomain.com",
+        "logo": "https://yourdomain.com/logo.png",
+        "sameAs": [
+          "https://twitter.com/SpaceLearning",
+          "https://facebook.com/SpaceLearning"
+        ],
+        "educationalLevel": "All Levels",
+        "educationalUse": "Learning",
+        "learningResourceType": "Interactive Media",
+        "audience": {
+          "@type": "EducationalAudience",
+          "educationalRole": "student"
+        },
+        "about": [
+          {
+            "@type": "Thing",
+            "name": "Space Exploration"
+          },
+          {
+            "@type": "Thing",
+            "name": "Astronomy"
+          },
+          {
+            "@type": "Thing",
+            "name": "STEM Education"
+          }
+        ]
+      }
+    </script>
 
     <title>
       🚀 SpaceLearning - Explore the Cosmos | Interactive Space Education

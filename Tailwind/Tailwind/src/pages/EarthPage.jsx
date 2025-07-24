@@ -1,4 +1,5 @@
 import LearningPageTemplate from "../Components/LearningPageTemplate";
+import SEOHead from "../Components/SEOHead";
 import earthImage from "../assets/arrowearth.png";
 import watercycleImage from "../assets/watercycle.jpg";
 import ContinetsImage from "../assets/continents.png";
@@ -6,6 +7,38 @@ import earthImageCore from "../assets/crust.png";
 import earthAtmosphereImage from "../assets/atmosphere.png";
 
 function EarthPage() {
+  const seoData = {
+    title: "Earth - Our Blue Planet | SpaceLearning",
+    description:
+      "Discover Earth's atmosphere, continents, water cycle, and core structure. Learn about our planet's unique features that make life possible through interactive content.",
+    keywords:
+      "Earth, planet Earth, atmosphere, continents, water cycle, geology, climate zones, terrestrial planet, blue planet, home planet",
+    canonical: "https://yourdomain.com/earth",
+    ogImage: "https://yourdomain.com/earth-og.jpg",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "LearningResource",
+      name: "Earth - Our Blue Planet",
+      description:
+        "Comprehensive educational content about Earth's structure, atmosphere, and systems",
+      educationalLevel: "beginner",
+      learningResourceType: "Interactive Content",
+      about: [
+        {
+          "@type": "Thing",
+          name: "Earth",
+        },
+        {
+          "@type": "Thing",
+          name: "Planetary Science",
+        },
+        {
+          "@type": "Thing",
+          name: "Geology",
+        },
+      ],
+    },
+  };
   const equipmentParts = [
     {
       title: "Polar Ice & Climate Zones",
@@ -53,6 +86,7 @@ function EarthPage() {
 
   return (
     <div className="min-h-screen bg-black">
+      <SEOHead {...seoData} />
       <LearningPageTemplate
         pageTitle="EARTH"
         imageSrc={earthImage}
@@ -83,10 +117,10 @@ function EarthPage() {
                     Seven Continents
                   </h4>
                   <p className="text-gray-300 leading-relaxed">
-                    Earth's landmasses are divided into seven continents: Asia
-                    (largest), Africa, North America, South America, Antarctica,
-                    Europe, and Australia. These massive formations resulted
-                    from continental drift over millions of years.
+                    Earth&apos;s landmasses are divided into seven continents:
+                    Asia (largest), Africa, North America, South America,
+                    Antarctica, Europe, and Australia. These massive formations
+                    resulted from continental drift over millions of years.
                   </p>
                 </div>
                 <div className="bg-gray-800/50 backdrop-blur-sm border border-blue-400/20 rounded-xl p-6 hover:border-blue-400/50 transition-all duration-300">
@@ -95,9 +129,9 @@ function EarthPage() {
                   </h4>
                   <p className="text-gray-300 leading-relaxed">
                     The continents sit on massive tectonic plates that slowly
-                    move across Earth's mantle, creating mountains, valleys, and
-                    causing earthquakes. This process continues to reshape our
-                    planet's surface.
+                    move across Earth&apos;s mantle, creating mountains,
+                    valleys, and causing earthquakes. This process continues to
+                    reshape our planet&apos;s surface.
                   </p>
                 </div>
               </div>
@@ -155,10 +189,10 @@ function EarthPage() {
                     Core
                   </h4>
                   <p className="text-gray-300 leading-relaxed">
-                    Earth's innermost layer made of iron and nickel. The liquid
-                    outer core generates our magnetic field, while the solid
-                    inner core reaches temperatures of 5,700°C - hotter than the
-                    Sun's surface.
+                    Earth&apos;s innermost layer made of iron and nickel. The
+                    liquid outer core generates our magnetic field, while the
+                    solid inner core reaches temperatures of 5,700°C - hotter
+                    than the Sun&apos;s surface.
                   </p>
                 </div>
               </div>
@@ -257,7 +291,7 @@ function EarthPage() {
                 </div>
                 <p className="text-gray-300 text-sm">
                   71% of surface covered by salt water, containing 97% of
-                  Earth's water
+                  Earth&apos;s water
                 </p>
               </div>
               <div className="bg-gradient-to-b from-cyan-800/30 to-cyan-900/30 border border-cyan-400/20 rounded-xl p-6 hover:scale-105 transition-all duration-300">

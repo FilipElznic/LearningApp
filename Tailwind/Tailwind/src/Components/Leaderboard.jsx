@@ -69,7 +69,7 @@ export default function Leaderboard() {
       <div className="bg-gradient-to-br from-zinc-900/90 to-zinc-800/80 rounded-3xl shadow-2xl border border-zinc-700 backdrop-blur-md p-8">
         <div className="flex justify-center items-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-400"></div>
-          <span className="ml-2 text-zinc-300">Loading leaderboard...</span>
+          <span className="ml-2 text-zinc-400">Loading leaderboard...</span>
         </div>
       </div>
     );

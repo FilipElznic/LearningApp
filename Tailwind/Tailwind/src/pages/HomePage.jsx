@@ -3,6 +3,7 @@ import { useToast } from "../ToastContext";
 import { useEffect, useState, Suspense, lazy } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../supabaseClient";
+import SEOHead from "../Components/SEOHead";
 import planetEarthImg from "../assets/planetearth.jpg";
 
 // Lazy load heavy components
@@ -159,6 +160,39 @@ function HomePage() {
   const { toast } = useToast();
   const [userXP, setUserXP] = useState(0);
 
+  const seoData = {
+    title: "SpaceLearning Dashboard | Track Your Space Education Progress",
+    description:
+      "Access your personalized space learning dashboard. Track XP progress, view achievements, compete on leaderboards, and continue your cosmic education journey.",
+    keywords:
+      "space learning dashboard, XP progress, space education achievements, learning leaderboard, space training progress, educational gaming, space knowledge tracking",
+    canonical: "https://yourdomain.com/home",
+    ogImage: "https://yourdomain.com/dashboard-og.jpg",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      name: "SpaceLearning Dashboard",
+      description:
+        "Personalized dashboard for tracking space education progress and achievements",
+      applicationCategory: "EducationalApplication",
+      operatingSystem: "Web Browser",
+      about: [
+        {
+          "@type": "Thing",
+          name: "Space Education",
+        },
+        {
+          "@type": "Thing",
+          name: "Learning Progress Tracking",
+        },
+        {
+          "@type": "Thing",
+          name: "Educational Gaming",
+        },
+      ],
+    },
+  };
+
   // Fetch user XP from database
   useEffect(() => {
     const fetchUserXP = async () => {
@@ -213,6 +247,7 @@ function HomePage() {
 
   return (
     <>
+      <SEOHead {...seoData} />
       <div className="min-h-screen w-full flex flex-col bg-gradient-to-br from-black via-zinc-900 to-zinc-800 overflow-hidden relative">
         {/* Decorative Stars */}
         <div className="pointer-events-none absolute inset-0 z-0">

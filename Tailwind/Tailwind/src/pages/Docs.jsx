@@ -1,9 +1,42 @@
 import { Link } from "react-router-dom";
+import SEOHead from "../Components/SEOHead";
 import Database from "../assets/database.webp";
 
 function Docs() {
+  const seoData = {
+    title: "Documentation | SpaceLearning API & Features Guide",
+    description:
+      "Complete documentation for SpaceLearning platform features, API endpoints, XP system, and leaderboard functionality. Learn how to integrate and use our space education tools.",
+    keywords:
+      "SpaceLearning documentation, API documentation, space education API, XP system guide, leaderboard API, educational platform docs, space learning integration",
+    canonical: "https://yourdomain.com/docs",
+    ogImage: "https://yourdomain.com/docs-og.jpg",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      headline: "SpaceLearning Documentation",
+      description:
+        "Complete technical documentation for the SpaceLearning educational platform",
+      about: [
+        {
+          "@type": "Thing",
+          name: "API Documentation",
+        },
+        {
+          "@type": "Thing",
+          name: "Educational Platform",
+        },
+        {
+          "@type": "Thing",
+          name: "Space Learning Tools",
+        },
+      ],
+    },
+  };
+
   return (
     <div className="min-h-screen w-full flex flex-col bg-gradient-to-br from-black via-zinc-900 to-zinc-800 overflow-hidden relative">
+      <SEOHead {...seoData} />
       {/* Decorative Stars */}
       <div className="pointer-events-none absolute inset-0 z-0">
         {[...Array(30)].map((_, i) => (

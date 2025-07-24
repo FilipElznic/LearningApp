@@ -35,9 +35,13 @@ function MoonTasks() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-black via-gray-900 to-gray-800 relative overflow-hidden">
       <div className="z-10 w-full max-w-xl px-8 py-10 bg-gray-900 bg-opacity-80 rounded-2xl shadow-2xl border border-gray-700 backdrop-blur-md">
-        <h1 className="text-2xl font-bold text-white mb-6 text-center">🌙 Moon Tasks</h1>
+        <h1 className="text-2xl font-bold text-white mb-6 text-center">
+          🌙 Moon Tasks
+        </h1>
         {message && (
-          <div className="mb-4 text-center text-green-400 font-semibold">{message}</div>
+          <div className="mb-4 text-center text-green-400 font-semibold">
+            {message}
+          </div>
         )}
         <ul className="space-y-4">
           {moonTasksList.map((task) => (
@@ -53,7 +57,9 @@ function MoonTasks() {
                 disabled={completed.includes(task.id)}
                 onClick={() => handleComplete(task)}
               >
-                {completed.includes(task.id) ? "Completed" : `Complete (+${task.xp} XP)`}
+                {completed.includes(task.id)
+                  ? "Completed"
+                  : `Complete (+${task.xp} XP)`}
               </button>
             </li>
           ))}

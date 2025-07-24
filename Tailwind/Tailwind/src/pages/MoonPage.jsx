@@ -1,10 +1,45 @@
 import LearningPageTemplate from "../Components/LearningPageTemplate";
+import SEOHead from "../Components/SEOHead";
 import moonImage from "../assets/arrowmoon.png";
 import Moonland from "../assets/moonland.png";
 import Moonphases from "../assets/moonphases.png";
 import Moontheory from "../assets/moonteory.png";
 
 function MoonPage() {
+  // SEO data for Moon page
+  const seoData = {
+    title: "🌙 Moon - Lunar Science & Exploration | SpaceLearning",
+    description:
+      "Discover the Moon's mysteries! Learn about lunar phases, surface features, formation theory, and space exploration. Interactive content about Earth's natural satellite.",
+    keywords:
+      "moon, lunar science, moon phases, lunar surface, space exploration, moon facts, lunar missions, Apollo, astronomy education",
+    canonicalUrl: "https://yourdomain.com/moon",
+    ogImage: "https://yourdomain.com/moon-og-image.jpg",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "LearningResource",
+      name: "Moon - Lunar Science & Exploration",
+      description:
+        "Interactive learning content about the Moon, lunar phases, surface features, and space exploration",
+      educationalLevel: "All Levels",
+      learningResourceType: "Interactive Media",
+      about: [
+        {
+          "@type": "Thing",
+          name: "Moon",
+        },
+        {
+          "@type": "Thing",
+          name: "Lunar Science",
+        },
+        {
+          "@type": "Thing",
+          name: "Space Exploration",
+        },
+      ],
+    },
+  };
+
   const equipmentParts = [
     {
       title: "Craters & Impact Basins",
@@ -52,6 +87,7 @@ function MoonPage() {
 
   return (
     <div className="min-h-screen bg-black">
+      <SEOHead {...seoData} />
       <LearningPageTemplate
         pageTitle="MOON"
         imageSrc={moonImage}

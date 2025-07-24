@@ -1,8 +1,41 @@
 import { Link } from "react-router-dom";
+import SEOHead from "../Components/SEOHead";
 
 function PrivacyPage() {
+  const seoData = {
+    title: "Privacy Policy | SpaceLearning Data Protection & User Rights",
+    description:
+      "Read SpaceLearning's privacy policy to understand how we collect, use, and protect your personal data. Learn about your rights and our commitment to data security.",
+    keywords:
+      "privacy policy, data protection, GDPR compliance, user privacy, data security, SpaceLearning privacy, educational platform privacy, user rights, data collection",
+    canonical: "https://yourdomain.com/privacy",
+    ogImage: "https://yourdomain.com/privacy-og.jpg",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: "Privacy Policy",
+      description:
+        "SpaceLearning privacy policy and data protection information",
+      about: [
+        {
+          "@type": "Thing",
+          name: "Privacy Policy",
+        },
+        {
+          "@type": "Thing",
+          name: "Data Protection",
+        },
+        {
+          "@type": "Thing",
+          name: "User Rights",
+        },
+      ],
+    },
+  };
+
   return (
     <div className="min-h-screen w-full flex flex-col bg-gradient-to-br from-black via-zinc-900 to-zinc-800 overflow-hidden relative">
+      <SEOHead {...seoData} />
       {/* Decorative Stars */}
       <div className="pointer-events-none absolute inset-0 z-0">
         {[...Array(30)].map((_, i) => (
