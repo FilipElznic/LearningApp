@@ -7,12 +7,12 @@ class WebGLContextManager {
     this.activeContexts = 0;
     this.maxContexts = 8;
     this.contexts = new Map();
-    this.mainContextId = 'main-model';
+    this.mainContextId = "main-model";
   }
 
   canCreateContext(id) {
     if (id === this.mainContextId) return true;
-    return this.activeContexts < (this.maxContexts - 1);
+    return this.activeContexts < this.maxContexts - 1;
   }
 
   addContext(id) {
@@ -36,15 +36,17 @@ class WebGLContextManager {
   forceCleanup(keepLast = 2) {
     // Keep the main context and the specified number of most recent contexts
     const contextsToKeep = Array.from(this.contexts.keys())
-      .filter(id => id === this.mainContextId)
-      .concat(Array.from(this.contexts.keys())
-        .filter(id => id !== this.mainContextId)
-        .slice(-keepLast));
+      .filter((id) => id === this.mainContextId)
+      .concat(
+        Array.from(this.contexts.keys())
+          .filter((id) => id !== this.mainContextId)
+          .slice(-keepLast)
+      );
 
     // Remove other contexts
     Array.from(this.contexts.keys())
-      .filter(id => !contextsToKeep.includes(id))
-      .forEach(id => this.removeContext(id));
+      .filter((id) => !contextsToKeep.includes(id))
+      .forEach((id) => this.removeContext(id));
   }
 }
 
@@ -228,7 +230,11 @@ const SmartSpline = ({
   const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
-    if (isVisible && hasIntersected && webGLManager.canCreateContext(contextId)) {
+    if (
+      isVisible &&
+      hasIntersected &&
+      webGLManager.canCreateContext(contextId)
+    ) {
       setShouldRender(true);
     } else if (!isVisible && hasExited) {
       setShouldRender(false);
@@ -247,11 +253,13 @@ const SmartSpline = ({
           onContextDestroyed={onContextDestroyed}
         />
       ) : (
-        <LoadingSpinner message={
-          !webGLManager.canCreateContext(contextId) 
-            ? "Too many 3D models loaded. Scroll away from other models first."
-            : "Scroll to load..."
-        } />
+        <LoadingSpinner
+          message={
+            !webGLManager.canCreateContext(contextId)
+              ? "Too many 3D models loaded. Scroll away from other models first."
+              : "Scroll to load..."
+          }
+        />
       )}
     </div>
   );
@@ -269,12 +277,6 @@ const PlanetMessage = ({ planetModel, heading, text }) => {
           scene={planetModel}
           className="w-full h-full"
           contextId={contextId}
-          onContextCreated={() =>
-            console.log(`✅ Context created for ${heading}`)
-          }
-          onContextDestroyed={() =>
-            console.log(`❌ Context destroyed for ${heading}`)
-          }
         />
       </div>
 
@@ -319,12 +321,8 @@ const PlanetMessageMirrored = ({ planetModel, heading, text }) => {
           scene={planetModel}
           className="w-full h-full"
           contextId={contextId}
-          onContextCreated={() =>
-            console.log(`✅ Context created for ${heading}`)
-          }
-          onContextDestroyed={() =>
-            console.log(`❌ Context destroyed for ${heading}`)
-          }
+          onContextCreated={() => {}}
+          onContextDestroyed={() => {}}
         />
       </div>
     </div>
